@@ -6,11 +6,11 @@ const BOOKING_URL = "#";
 // Each stat row reads: inputs joined by "+"  →  outputs. Set `main: true` on the headline output.
 const COMPARISONS = [
   {
-    title: "From Organic To 12x ROAS In 30 Days",
+    title: "Bleeding Cash To 12x ROAS",
     tags: ["B2C coaching offer", "Music niche", "$4k–$8k ticket", "100% cold traffic"],
     before: { label: "Organic", img: "assets/compare/1-organic.jpg", caption: "Screenshot: organic month (DMs, calendar or Stripe)" },
     after: { label: "Paid", img: "assets/compare/1-paid.png", caption: "Amount Won $97.29K · ROAS 12" },
-    body: "A B2C coaching offer in the music niche, selling at $4k–$8k, running on 100% cold traffic. We adapted the offer for paid, scripted the ads and VSL, and built the funnel. In 30 days, $8,000 of ad spend turned into $97K in cash collected. A 12x return on every dollar.",
+    body: "A B2C coaching offer in the music niche, selling at $4k–$8k, running on 100% cold traffic. We rebuilt the funnel, scripted the ads and VSL, and built the backend selling systems. In 30 days, $8,000 of ad spend turned into $97K in cash collected. A 12x return on every dollar.",
     inputs: [["$8,000", "Ad spend"], ["30", "Days"]],
     outputs: [["$97K", "Cash collected"], ["12x", "ROAS", true]],
   },
