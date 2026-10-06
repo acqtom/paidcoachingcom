@@ -21,6 +21,14 @@ const COMPARISONS = [
     inputs: [["[$X]", "Ad spend"], ["[X]", "PIF sales"]],
     outputs: [["[$X]", "Cash collected"], ["[X]x", "ROAS", true]],
   },
+  {
+    title: "Stop Letting The Algorithm Decide Your Income",
+    before: { label: "Organic", img: "assets/compare/3-organic.jpg", caption: "Screenshot: organic results" },
+    after: { label: "Paid", img: "assets/compare/3-paid.jpg", caption: "Screenshot: paid results" },
+    body: "[Client] had great months and empty months, and no way of knowing which was coming. One post would go viral, the next ten wouldn't, and their revenue followed. We built a paid funnel that runs every day regardless of reach. Within 30 days they were booking [X] calls a week from ads alone, and the swings were gone.",
+    inputs: [["[$X]", "Ad spend"], ["[X]", "Calls / week"]],
+    outputs: [["[$X]", "Cash collected"], ["[X]x", "ROAS", true]],
+  },
 ];
 
 // First-30-days chart. `roas` sets the height of each point (0–5x). Use \n in a label to wrap it.
