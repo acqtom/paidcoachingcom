@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paidcoaching.com</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon-192.png" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="confirmation.css" />
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="../">
+        <img class="brand__logo" src="../assets/logo.png" alt="Paidcoaching.com" width="776" height="120" />
+      </a>
+      <div class="rating">
+        <span class="stars-row" aria-label="5 out of 5 stars">★★★★★</span>
+        <span>5.0 · 100+ students coached</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero + Step 1 -->
+    <section class="section conf-hero">
+      <div class="container container--wide center">
+        <div class="confirmed">
+          <span class="confirmed__check" aria-hidden="true">✓</span>
+          <div class="confirmed__text">
+            <span class="confirmed__eyebrow">Confirmed</span>
+            <strong>Your Call Is Scheduled</strong>
+            <span class="confirmed__sub">Reply To The Text / Email To Confirm</span>
+          </div>
+          <span class="confirmed__cal" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+          </span>
+        </div>
+
+        <h1 class="conf-title">
+          You're About To Get A Phone Call Or Text From A <mark class="hl"><span id="call-number">+XXX</span> Number</mark>.
+          If You Do Not Pick Up, We May Cancel Your Call
+        </h1>
+
+        <h2 class="step"><span class="step__n">Step 1:</span> Watch This Video (It Explains This Page)</h2>
+        <div class="vsl" id="vsl">
+          <video id="vsl-video" src="../assets/confirmation-vsl.mp4" poster="../assets/confirmation-vsl-poster.jpg" autoplay muted loop playsinline preload="auto"></video>
+          <button class="vsl__overlay" id="vsl-unmute" type="button">
+            <span class="vsl__overlay-title">Your video has already started</span>
+            <svg class="vsl__icon" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M8 24h10l14-12v40L18 40H8z" fill="currentColor"/>
+              <path d="M40 22c4 3 6 6 6 10s-2 7-6 10M46 16c6 4 9 10 9 16s-3 12-9 16M52 10c8 6 11 13 11 22s-3 16-11 22" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              <path d="M6 8l52 50" stroke="#0050e6" stroke-width="9" stroke-linecap="round"/>
+              <path d="M6 8l52 50" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <span class="vsl__overlay-cta">Click to listen</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="section">
+      <div class="container container--wide center">
+        <h2 class="step"><span class="step__n">Step 2:</span> Confirm Your Strategy Call Via<br />Email So We Know You Plan To Show Up</h2>
+        <div class="invite">
+          <div class="invite__note">
+            <p class="invite__important">Important:</p>
+            <p class="invite__click">Click “<u>Add to Calendar</u>”</p>
+            <p>If you don't confirm the event, we don't know if you intend on showing so your call may be cancelled or rescheduled.</p>
+            <svg class="invite__arrow" viewBox="0 0 200 90" aria-hidden="true">
+              <path d="M10 8 C 20 70, 110 85, 180 60" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+              <path d="M160 44 L182 59 L158 74" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="invite__mail">
+            <p class="invite__subject">Invitation from an unknown sender: Strategy Session with <b>You</b> and <b>Us</b> @ <b>Date &amp; Time You Chose</b></p>
+            <div class="invite__event">
+              <p class="invite__event-title">Strategy Session with <b>You</b> and <b>Us</b></p>
+              <p class="invite__meta">📍 <i>Zoom link here</i></p>
+              <p class="invite__meta invite__meta--small">No events on this date</p>
+              <div class="invite__rsvp"><span>Yes</span><span>No</span><span>Maybe</span><span class="ghost">Directions</span></div>
+            </div>
+            <p class="invite__from"><span class="invite__avatar">P</span><span><b>Paidcoaching.com</b> <small>team@paidcoaching.com</small><br /><small>to me ▾</small></span></p>
+            <div class="invite__bar">
+              <p>This event isn't in your calendar yet. You haven't interacted with this sender before. Do you want to automatically add this and future invitations?</p>
+              <div class="invite__actions"><span class="invite__add">Add to calendar</span><span>Report spam</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="section">
+      <div class="container center">
+        <h2 class="step"><span class="step__n">Step 3:</span> Get Your Questions Answered Before The Call</h2>
+        <div class="grid-2 faq" id="faq"></div>
+      </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="section">
+      <div class="container center">
+        <h2 class="step"><span class="step__n">Step 4:</span> See The Funnels We've Built For Coaches Like You</h2>
+        <div class="cases" id="cases"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container container--wide footer__inner">
+      <a class="brand" href="../">
+        <img class="brand__logo" src="../assets/logo.png" alt="Paidcoaching.com" width="776" height="120" />
+      </a>
+      <nav class="footer__links">
+        <a href="../terms.html">Terms Of Service</a>
+        <a href="../privacy.html">Privacy Policy</a>
+      </nav>
+    </div>
+    <p class="container container--wide footer__copy">© <span id="year">2026</span> Paidcoaching.com. All rights reserved.</p>
+  </footer>
+
+  <script src="confirmation.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* Confirmation page – builds on ../styles.css tokens */
+
+.conf-hero { padding-top: 44px; }
+
+/* "Confirmed" pill */
+.confirmed { display: inline-flex; align-items: center; gap: 14px; padding: 14px 16px; background: var(--white); border: 1px solid var(--line-2); border-radius: 14px; text-align: left; box-shadow: 0 10px 30px rgba(17, 17, 17, 0.06); }
+.confirmed__check { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--blue); color: var(--white); display: grid; place-items: center; font-size: 15px; font-weight: 800; }
+.confirmed__text { display: grid; gap: 2px; }
+.confirmed__eyebrow { color: var(--blue); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.confirmed__text strong { font-family: var(--heading); font-size: 16px; }
+.confirmed__sub { color: var(--muted); font-size: 12px; }
+.confirmed__cal { flex: none; padding-left: 14px; margin-left: 6px; border-left: 1px solid var(--line-2); color: var(--blue); }
+.confirmed__cal svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+/* Headline */
+.conf-title { margin: 36px auto 0; max-width: 1060px; font-size: clamp(28px, 4.2vw, 50px); font-weight: 800; line-height: 1.25; text-wrap: balance; }
+.hl { background: var(--blue); color: var(--white); padding: 0 10px; border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+/* Step headings */
+.step { font-size: clamp(22px, 3vw, 34px); font-weight: 800; line-height: 1.25; margin-top: 52px; }
+.section .step:first-child { margin-top: 0; }
+.step__n { color: var(--blue); }
+.conf-hero .vsl { max-width: 836px; margin-top: 32px; }
+
+/* Step 2 – calendar invite mock */
+.invite { position: relative; margin: 40px auto 0; max-width: 900px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: end; padding: 40px; text-align: left; background: var(--mist); border: 1px solid var(--line-2); border-radius: 20px; }
+.invite__note { position: relative; padding: 14px; border: 3px solid var(--blue); background: var(--white); font-size: 14px; line-height: 1.45; margin-bottom: 30px; }
+.invite__important { color: var(--blue); font-weight: 800; text-transform: uppercase; }
+.invite__click { font-family: var(--heading); font-weight: 800; font-size: 18px; margin: 4px 0 6px; }
+.invite__arrow { position: absolute; left: 40px; bottom: -86px; width: 180px; color: var(--blue); }
+.invite__mail { background: var(--white); border: 1px solid var(--line-2); border-radius: 10px; padding: 18px; font-size: 13px; color: #333; box-shadow: 0 16px 40px rgba(17, 17, 17, 0.08); }
+.invite__subject { font-size: 14px; }
+.invite__event { margin-top: 12px; padding: 16px; border-radius: 8px; background: #eef3ff; }
+.invite__event-title { font-size: 15px; margin-bottom: 10px; }
+.invite__meta { margin-top: 6px; }
+.invite__meta--small { font-size: 11px; color: var(--muted); }
+.invite__rsvp { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.invite__rsvp span { padding: 6px 16px; border-radius: 999px; background: var(--blue); color: var(--white); font-weight: 600; font-size: 12px; }
+.invite__rsvp .ghost { background: #d6e3ff; color: var(--black); }
+.invite__from { display: flex; gap: 10px; align-items: center; margin-top: 16px; }
+.invite__avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: var(--white); display: grid; place-items: center; font-weight: 800; font-size: 13px; }
+.invite__from small { color: var(--muted); }
+.invite__bar { margin-top: 14px; padding: 12px; border-radius: 6px; background: var(--platinum); font-size: 12px; }
+.invite__actions { display: flex; align-items: center; gap: 18px; margin-top: 10px; }
+.invite__add { position: relative; padding: 6px 12px; border: 1px solid #555; border-radius: 4px; background: var(--white); font-weight: 600; }
+.invite__add::after { content: ""; position: absolute; inset: -10px -14px; border: 3px solid var(--blue); border-radius: 50%; }
+
+/* Step 3 – FAQ video cards */
+.faq { margin-top: 44px; }
+.faq__card { text-align: left; background: var(--mist); border: 1px solid var(--line-2); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.faq__head { display: flex; align-items: center; gap: 12px; min-height: 44px; }
+.faq__head h3 { font-size: 17px; font-weight: 700; line-height: 1.3; }
+.icon-box { flex: none; width: 36px; height: 36px; border-radius: 9px; background: var(--blue); color: var(--white); display: grid; place-items: center; }
+.icon-box svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.player { position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: linear-gradient(135deg, var(--platinum), var(--white)); border: 1px solid var(--line); }
+.player img, .player iframe, .player video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
+.player__play { position: absolute; inset: 0; display: grid; place-items: center; border: 0; background: transparent; cursor: pointer; }
+.player__play span { width: 68px; height: 68px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 80, 230, 0.35); transition: transform 0.15s ease; }
+.player__play:hover span { transform: scale(1.06); }
+.player__play:disabled { cursor: default; }
+.player__play:disabled span { opacity: 0.35; transform: none; box-shadow: none; }
+.player__play svg { width: 26px; height: 26px; fill: var(--white); margin-left: 4px; }
+.player__soon { position: absolute; left: 12px; bottom: 10px; font-size: 12px; color: var(--muted); }
+.player--tall { aspect-ratio: 9 / 16; max-height: 560px; width: auto; margin-left: auto; }
+
+/* Step 4 – case studies */
+.cases { display: grid; gap: 24px; margin-top: 44px; }
+.case { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; text-align: left; background: var(--mist); border: 1px solid var(--line-2); border-radius: 20px; padding: 30px; }
+.case__title { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
+.case__title h3 { font-size: 22px; font-weight: 800; }
+.case__tag { padding: 4px 10px; border: 1px solid var(--blue); border-radius: 999px; color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.case__desc { color: var(--muted); margin-top: 10px; }
+.case__result { color: var(--blue); font-family: var(--heading); font-size: 22px; font-weight: 800; margin-top: 8px; }
+.case details { margin-top: 18px; }
+.case summary { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border: 1px solid var(--blue); border-radius: 8px; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; list-style: none; }
+.case summary::-webkit-details-marker { display: none; }
+.case summary::after { content: "⌄"; transform: translateY(-3px); }
+.case details[open] summary::after { transform: rotate(180deg) translateY(-3px); }
+.case dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; margin: 16px 0 0; padding: 16px; background: var(--white); border: 1px solid var(--line); border-radius: 10px; font-size: 14px; }
+.case dt { color: var(--muted); }
+.case dd { margin: 0; font-weight: 600; text-align: right; }
+
+@media (max-width: 760px) {
+  .invite { grid-template-columns: 1fr; padding: 22px; gap: 24px; }
+  .invite__note { margin-bottom: 0; }
+  .invite__arrow { display: none; }
+  .case { grid-template-columns: 1fr; padding: 22px; gap: 22px; }
+  .player--tall { margin: 0 auto; max-height: 480px; }
+}
