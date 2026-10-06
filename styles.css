@@ -97,27 +97,32 @@ main, .footer { position: relative; z-index: 1; }
 .vsl__icon { width: clamp(56px, 13vw, 100px); height: auto; color: var(--white); }
 .vsl.is-unmuted .vsl__overlay { display: none; }
 
-/* Proof carousel */
-.proof__title { font-size: clamp(22px, 3vw, 25px); font-weight: 700; line-height: 1.55; color: var(--muted); }
-.proof__title strong { color: var(--black); }
-.proof__title mark { background: var(--blue); color: var(--white); padding: 0 6px; }
-.carousel { margin-top: 14px; }
-.carousel__track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 2px; }
-.carousel__track::-webkit-scrollbar { display: none; }
-.slide { flex: 0 0 min(340px, 85%); scroll-snap-align: start; background: var(--platinum); border: 1px solid var(--line-2); border-radius: 16px; padding: 14px; }
-.slide__head { font-size: 15px; color: var(--muted); margin-bottom: 12px; }
-.slide__head b { color: var(--black); font-weight: 600; }
-.slide__media { position: relative; aspect-ratio: 31 / 23; border-radius: 10px; overflow: hidden; background: linear-gradient(135deg, var(--mist), var(--white)); border: 1px solid var(--line); display: grid; place-items: center; }
-.slide__media img { width: 100%; height: 100%; object-fit: cover; }
-.slide__ph { color: var(--muted); font-size: 13px; padding: 16px; text-align: center; }
-.slide__ph strong { display: block; color: var(--blue); font-family: var(--heading); font-size: 26px; margin-bottom: 6px; }
-.slide__zoom { position: absolute; right: 10px; bottom: 10px; width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--black); background: var(--white); color: var(--black); cursor: pointer; font-size: 16px; }
-.carousel__progress { height: 4px; background: var(--platinum); border-radius: 4px; margin-top: 16px; overflow: hidden; }
-.carousel__progress span { display: block; height: 100%; width: 10%; background: var(--blue); border-radius: 4px; transition: width 0.25s ease; }
-.carousel__nav { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 16px; }
-.carousel__count { color: var(--muted); font-size: 14px; margin-right: 12px; }
-.carousel__btn { width: 44px; height: 44px; border-radius: 10px; border: 1px solid var(--black); background: var(--white); color: var(--black); font-size: 22px; cursor: pointer; }
-.carousel__btn:disabled { opacity: 0.35; cursor: default; }
+/* Paid vs organic results */
+.results { display: grid; gap: 28px; margin: 52px auto 0; max-width: 1040px; }
+.result { padding: 40px; }
+.result__pill { display: inline-block; padding: 12px 24px; border: 1.5px solid var(--blue); border-radius: 999px; color: var(--blue); background: var(--white); font-size: 19px; font-weight: 800; }
+.result__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 30px; }
+.result__img { position: relative; margin: 0; aspect-ratio: 16 / 10; border-radius: 12px; overflow: hidden; background: linear-gradient(135deg, var(--platinum), var(--white)); border: 1px solid var(--line-2); display: grid; place-items: center; }
+.result__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.result__img figcaption { color: var(--muted); font-size: 13px; padding: 0 24px; }
+.result__img img + figcaption { display: none; }
+.result__label { position: absolute; top: 12px; left: 12px; z-index: 1; padding: 5px 11px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.result__label--organic { background: var(--black); color: var(--white); }
+.result__label--paid { background: var(--blue); color: var(--white); }
+.result__body { max-width: 760px; margin: 30px auto 0; color: var(--muted-2); font-size: 17px; line-height: 1.75; }
+.equation { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; margin-top: 30px; }
+.equation__op { color: var(--muted); font-size: 22px; font-weight: 700; }
+.equation__arrow { color: var(--blue); font-size: 28px; margin: 0 4px; }
+.stat { display: grid; gap: 4px; padding: 14px 22px; border-radius: 12px; min-width: 140px; }
+.stat strong { font-family: var(--heading); font-size: 22px; font-weight: 800; }
+.stat span { font-size: 13px; }
+.stat--in { background: var(--black); color: var(--white); }
+.stat--in span { color: rgba(255, 255, 255, 0.7); }
+.stat--out { background: var(--white); border: 1.5px solid var(--blue); color: var(--blue); padding: 18px 26px; }
+.stat--out strong { font-size: 30px; }
+.stat--out span { color: var(--muted); }
+.stat--main { background: var(--blue); color: var(--white); box-shadow: 0 12px 30px rgba(0, 80, 230, 0.3); }
+.stat--main span { color: rgba(255, 255, 255, 0.85); }
 
 /* Panels & cards */
 .panel { background: var(--mist); border: 1px solid var(--line-2); border-radius: 22px; }
@@ -191,12 +196,6 @@ main, .footer { position: relative; z-index: 1; }
 .footer__links a:hover { color: var(--blue); }
 .footer__copy { color: var(--muted); font-size: 13px; margin-top: 34px; }
 
-/* Lightbox */
-.lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(17, 17, 17, 0.88); display: grid; place-items: center; padding: 24px; }
-.lightbox[hidden] { display: none; }
-.lightbox img { max-height: 90vh; border-radius: 12px; }
-.lightbox__close { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--white); color: var(--black); font-size: 18px; cursor: pointer; }
-
 /* Responsive */
 @media (max-width: 900px) {
   .compare { grid-template-columns: 1fr; gap: 0; }
@@ -209,6 +208,10 @@ main, .footer { position: relative; z-index: 1; }
   .ticks { gap: 12px 24px; font-size: 15px; }
   .cta { padding: 18px 22px; font-size: 16px; }
   .coach { padding: 26px 22px; }
+  .result { padding: 24px 18px; }
+  .result__pair { grid-template-columns: 1fr; }
+  .result__pill { font-size: 16px; padding: 10px 18px; }
+  .equation__arrow { flex-basis: 100%; transform: rotate(90deg); }
   .coach__avatar { width: 76px; height: 76px; font-size: 22px; }
   .rating span:last-child { display: none; }
   .brand__logo { height: 26px; }

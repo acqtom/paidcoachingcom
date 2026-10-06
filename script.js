@@ -2,18 +2,25 @@
 // Where every "Schedule My Free Strategy Session" button goes (Calendly, typeform, etc.)
 const BOOKING_URL = "#";
 
-// Result screenshots for the carousel. Drop images into assets/results/.
-const RESULTS = [
-  { name: "Felix", meta: "$12k USD / month", img: "assets/results/felix.jpg", stat: "$12k/mo" },
-  { name: "Ali", meta: "Monetized in 45 days", img: "assets/results/ali.jpg", stat: "45 days" },
-  { name: "Jax", meta: "$8,083 in one month", img: "assets/results/jax.jpg", stat: "$8,083" },
-  { name: "Lucas", meta: "21.6M views on one Short", img: "assets/results/lucas.jpg", stat: "21.6M" },
-  { name: "Shani", meta: "$6,691 in a single day", img: "assets/results/shani.jpg", stat: "$6,691" },
-  { name: "Ethan", meta: "84M views in one month", img: "assets/results/ethan.jpg", stat: "84M" },
-  { name: "Jibrail", meta: "29.3M views in 90 days", img: "assets/results/jibrail.jpg", stat: "29.3M" },
-  { name: "Gulbil", meta: "$7,900 in 28 days", img: "assets/results/gulbil.jpg", stat: "$7,900" },
-  { name: "Caleb", meta: "$1,408 in 7 days", img: "assets/results/caleb.jpg", stat: "$1,408" },
-  { name: "Felix", meta: "100.7M views in June", img: "assets/results/felix-views.jpg", stat: "100.7M" },
+// Paid vs organic results. Put screenshots in assets/compare/ (anything in [brackets] is a placeholder).
+// Each stat row reads: inputs joined by "+"  →  outputs. Set `main: true` on the headline output.
+const COMPARISONS = [
+  {
+    title: "From Posting Every Day To A Predictable Paid Funnel",
+    before: { label: "Organic", img: "assets/compare/1-organic.jpg", caption: "Screenshot: organic month (DMs, calendar or Stripe)" },
+    after: { label: "Paid", img: "assets/compare/1-paid.jpg", caption: "Screenshot: paid month (Ads Manager or Stripe)" },
+    body: "[Client] was posting every day and closing [X] clients a month off DMs, when the content hit. We adapted the offer for cold traffic, scripted 20 ads and a VSL, built the funnel and had it live in [X] days. In the first 30 days they spent [$X] on ads and collected [$X]. No extra posting required.",
+    inputs: [["[$X]", "Ad spend"], ["[X]", "Calls booked"]],
+    outputs: [["[$X]", "Cash collected"], ["[X]x", "ROAS", true]],
+  },
+  {
+    title: "You Don't Have To Post More To Grow",
+    before: { label: "Organic", img: "assets/compare/2-organic.jpg", caption: "Screenshot: organic results" },
+    after: { label: "Paid", img: "assets/compare/2-paid.jpg", caption: "Screenshot: paid results" },
+    body: "[Client] had hit the ceiling of their content. More posts weren't bringing more calls, and every slow week showed up in their revenue. We turned their best organic angles into paid ads and pointed them at a PIF offer built for cold traffic. Same offer, same coach. [$X] in, [$X] out, and a calendar that fills whether they post or not.",
+    inputs: [["[$X]", "Ad spend"], ["[X]", "PIF sales"]],
+    outputs: [["[$X]", "Cash collected"], ["[X]x", "ROAS", true]],
+  },
 ];
 
 // First-30-days chart. `roas` sets the height of each point (0–5x). Use \n in a label to wrap it.
@@ -61,58 +68,28 @@ document.getElementById("year").textContent = new Date().getFullYear();
   });
 })();
 
-// ---- Results carousel -----------------------------------------------------
-(function carousel() {
-  const track = document.getElementById("carousel-track");
-  const bar = document.getElementById("carousel-bar");
-  const count = document.getElementById("carousel-count");
-  const prev = document.getElementById("carousel-prev");
-  const next = document.getElementById("carousel-next");
+// ---- Paid vs organic results ---------------------------------------------
+(function results() {
+  const media = (side, cls) => `
+    <figure class="result__img">
+      <span class="result__label ${cls}">${side.label}</span>
+      <img src="${side.img}" alt="${side.label} results" loading="lazy" onerror="this.remove()" />
+      <figcaption>${side.caption}</figcaption>
+    </figure>`;
+  const tile = ([value, label, main], cls) =>
+    `<div class="stat ${cls}${main ? " stat--main" : ""}"><strong>${value}</strong><span>${label}</span></div>`;
 
-  track.innerHTML = RESULTS.map((r, i) => `
-    <article class="slide">
-      <div class="slide__head"><b>${r.name}</b> · ${r.meta}</div>
-      <div class="slide__media">
-        <img src="${r.img}" alt="${r.name} result: ${r.meta}" loading="lazy"
-             onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'slide__ph',innerHTML:'<strong>${r.stat}</strong>${r.meta}'}))" />
-        <button class="slide__zoom" type="button" data-i="${i}" aria-label="Enlarge">↗</button>
+  document.getElementById("results").innerHTML = COMPARISONS.map((c) => `
+    <article class="result panel">
+      <h3 class="result__pill">${c.title}</h3>
+      <div class="result__pair">${media(c.before, "result__label--organic")}${media(c.after, "result__label--paid")}</div>
+      <p class="result__body">${c.body}</p>
+      <div class="equation">
+        ${c.inputs.map((i) => tile(i, "stat--in")).join('<span class="equation__op">+</span>')}
+        <span class="equation__op equation__arrow">→</span>
+        ${c.outputs.map((o) => tile(o, "stat--out")).join("")}
       </div>
     </article>`).join("");
-
-  const slides = [...track.children];
-  const total = slides.length;
-  const step = () => slides[0].offsetWidth + 16;
-  const current = () => Math.min(total - 1, Math.round(track.scrollLeft / step()));
-
-  function update() {
-    const i = current();
-    const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-    const shown = atEnd ? total : i + 1;
-    count.textContent = `${shown} / ${total}`;
-    bar.style.width = (shown / total) * 100 + "%";
-    prev.disabled = track.scrollLeft <= 4;
-    next.disabled = atEnd;
-  }
-  prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
-  next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
-  track.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
-  window.addEventListener("resize", update);
-  update();
-
-  // Lightbox
-  const box = document.getElementById("lightbox");
-  const boxImg = box.querySelector("img");
-  track.addEventListener("click", (e) => {
-    const btn = e.target.closest(".slide__zoom");
-    if (!btn) return;
-    const img = btn.parentElement.querySelector("img");
-    if (!img) return;
-    boxImg.src = img.src;
-    boxImg.alt = img.alt;
-    box.hidden = false;
-  });
-  box.addEventListener("click", (e) => { if (e.target !== boxImg) box.hidden = true; });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") box.hidden = true; });
 })();
 
 // ---- Growth chart ---------------------------------------------------------
