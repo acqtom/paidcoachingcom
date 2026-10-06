@@ -159,8 +159,9 @@ main, .footer { position: relative; z-index: 1; }
 .rows--check li::before { content: "✓"; background: var(--blue); color: var(--white); }
 .rows--x li::before { content: "✕"; background: var(--platinum); color: var(--black); font-size: 9px; }
 .compare__col--with .rows li { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.9); }
-.types .rows { margin-top: 40px; }
-.types .card { display: flex; flex-direction: column; justify-content: space-between; }
+
+.types .card { display: flex; flex-direction: column; }
+.types .card .rows { margin-top: auto; padding-top: 40px; }
 
 /* Pain points */
 .num { display: inline-grid; place-items: center; width: 42px; height: 42px; border-radius: 8px; background: var(--blue); color: var(--white); font-weight: 700; margin-bottom: 30px; }
