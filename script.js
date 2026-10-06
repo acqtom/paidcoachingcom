@@ -16,19 +16,6 @@ const RESULTS = [
   { name: "Felix", meta: "100.7M views in June", img: "assets/results/felix-views.jpg", stat: "100.7M" },
 ];
 
-// Listed column by column (CSS columns fill top-to-bottom)
-const REVIEWS = [
-  { name: "Jax", tag: "$8,083 In One Month", quote: "I was stuck in 30k view jail for months and honestly wasn't sure Shorts was ever going to work for me. In October I made $8,083 in a single month off one channel." },
-  { name: "Ethan", tag: "84M Views In One Month", quote: "I couldn't get anything consistent for months. Then one channel did 84 million views in a single month, with the monetization already dialled in behind it." },
-  { name: "Caleb", tag: "$1,408 In 7 Days", quote: "My channel was doing almost nothing a month before. I followed the monetization steps exactly as they were given to me and pulled $1,408 in seven days. I didn't reinvent anything." },
-  { name: "Lucas", tag: "21.6M Views On One Short", quote: "I posted one Short and it did 21.6 million views on its own. Once the pacing and the angle matched what the platform actually wanted, it stopped being random." },
-  { name: "Jibrail", tag: "29.3M Views In 90 Days", quote: "29.3 million views in 90 days, 111,000 new subscribers, and $2,653 climbing. I had 1.5 million views in the last 48 hours alone, and I'm still working my job." },
-  { name: "Gulbil", tag: "$7,900 In 28 Days", quote: "48.4 million views in 28 days, 556,900 new subscribers, and about $7,900. One month, half a million subs. I keep asking myself if this is my prime." },
-  { name: "Shani", tag: "$6,691.42 In A Single Day", quote: "On March 11th I hit my best revenue day so far, $6,691.42 in twenty-four hours. The line on my chart just goes straight vertical." },
-  { name: "Felix", tag: "$12k/Mo · 17M Views", quote: "I crossed 17 million views and I'm at $12k a month now. I've already started putting the same process into a second channel." },
-  { name: "Ali", tag: "Monetized", quote: "I finally got the message I'd been chasing: accepted into the YouTube Partner Program. That's the point where it stopped being a hobby." },
-];
-
 // First-30-days chart. `roas` sets the height of each point (0–5x). Use \n in a label to wrap it.
 const MILESTONES = [
   { when: "Today", roas: 0, label: "Onboarding & Audit" },
@@ -193,12 +180,3 @@ document.getElementById("year").textContent = new Date().getFullYear();
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
   svg.innerHTML = out;
 })();
-
-// ---- Reviews --------------------------------------------------------------
-document.getElementById("reviews").innerHTML = REVIEWS.map((r) => `
-  <figure class="review" style="margin-inline:0">
-    <div class="review__stars" aria-label="5 stars">★★★★★</div>
-    <p class="review__quote">“${r.quote}”</p>
-    <p class="review__name">${r.name}</p>
-    <span class="review__tag">${r.tag}</span>
-  </figure>`).join("");

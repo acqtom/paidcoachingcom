@@ -175,15 +175,6 @@ main, .footer { position: relative; z-index: 1; }
 .coach__stats strong { display: block; font-family: var(--heading); font-size: 30px; font-weight: 800; }
 .coach__stats span { display: block; margin-top: 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
-/* Reviews */
-.reviews { margin-top: 48px; columns: 3; column-gap: 20px; text-align: left; }
-.review { break-inside: avoid; background: var(--mist); border: 1px solid var(--line-2); border-radius: 14px; padding: 26px 24px 24px; margin-bottom: 20px; }
-.review__stars { color: var(--blue); font-size: 20px; letter-spacing: 1px; }
-.review__quote { color: var(--muted-2); font-size: 15px; line-height: 1.6; margin-top: 12px !important; }
-.review__name { font-weight: 600; margin-top: 18px !important; }
-.review__tag { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; padding: 8px 14px; border-radius: 999px; background: var(--white); border: 1px solid var(--blue); color: var(--black); font-size: 13px; font-weight: 600; }
-.review__tag::before { content: "✓"; font-size: 11px; color: var(--blue); }
-
 /* Final CTA */
 .section--final { padding-top: 80px; padding-bottom: 80px; }
 .final { text-align: center; border-radius: 22px; padding: 80px 24px; background: var(--blue); color: var(--white); border: 2px solid var(--black); box-shadow: 8px 8px 0 var(--black); }
@@ -208,7 +199,6 @@ main, .footer { position: relative; z-index: 1; }
 
 /* Responsive */
 @media (max-width: 900px) {
-  .reviews { columns: 2; }
   .compare { grid-template-columns: 1fr; gap: 0; }
   .compare__vs { position: relative; left: auto; top: auto; transform: none; justify-self: center; margin: -20px 0; }
 }
@@ -220,7 +210,6 @@ main, .footer { position: relative; z-index: 1; }
   .cta { padding: 18px 22px; font-size: 16px; }
   .coach { padding: 26px 22px; }
   .coach__avatar { width: 76px; height: 76px; font-size: 22px; }
-  .reviews { columns: 1; }
   .rating span:last-child { display: none; }
   .brand__logo { height: 26px; }
 }
