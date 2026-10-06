@@ -29,14 +29,13 @@ const REVIEWS = [
   { name: "Ali", tag: "Monetized", quote: "I finally got the message I'd been chasing: accepted into the YouTube Partner Program. That's the point where it stopped being a hobby." },
 ];
 
+// First-30-days chart. `roas` sets the height of each point (0–5x). Use \n in a label to wrap it.
 const MILESTONES = [
-  { day: 0, views: 0 },
-  { day: 30, views: 2, label: "Escaped Video Jail" },
-  { day: 60, views: 10, label: "Monetized" },
-  { day: 90, views: 25, label: "$5K / month" },
-  { day: 120, views: 45, label: "$10K / month" },
-  { day: 150, views: 70, label: "Second Channel" },
-  { day: 180, views: 100, label: "$15–20K / month" },
+  { when: "Today", roas: 0, label: "Onboarding & Audit" },
+  { when: "Week 1", roas: 0.3, label: "DFY Setup Complete,\nAds Live" },
+  { when: "Week 2", roas: 1.2, label: "Performance Review\n& Iteration" },
+  { when: "Week 3", roas: 2.8, label: "Double Down" },
+  { when: "Week 4", roas: 5, label: "A Profitable 5x ROAS\nPaid Funnel" },
 ];
 
 // ---- CTAs -----------------------------------------------------------------
@@ -132,18 +131,18 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // ---- Growth chart ---------------------------------------------------------
 (function chart() {
   const svg = document.getElementById("growth-chart");
-  const W = 860, H = 400;
-  const L = 70, R = 825, T = 70, B = 350;
-  const x = (d) => L + (d / 180) * (R - L);
-  const y = (v) => B - (v / 100) * (B - T);
-  const pts = MILESTONES.map((m) => [x(m.day), y(m.views)]);
+  const W = 860, H = 420;
+  const L = 70, R = 815, T = 95, B = 370, MAX = 5;
+  const x = (i) => L + (i / (MILESTONES.length - 1)) * (R - L);
+  const y = (v) => B - (v / MAX) * (B - T);
+  const pts = MILESTONES.map((m, i) => [x(i), y(m.roas)]);
 
   // Smooth curve through points (Catmull-Rom → cubic Bézier)
   let d = `M${pts[0][0]},${pts[0][1]}`;
   for (let i = 0; i < pts.length - 1; i++) {
     const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
-    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
-    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, Math.min(B, p1[1] + (p2[1] - p0[1]) / 6)];
+    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, Math.min(B, p2[1] - (p3[1] - p1[1]) / 6)];
     d += ` C${c1},${c2},${p2}`;
   }
 
@@ -155,38 +154,39 @@ document.getElementById("year").textContent = new Date().getFullYear();
       </linearGradient>
       <radialGradient id="halo"><stop offset="0" stop-color="#0050e6" stop-opacity="0.35"/><stop offset="1" stop-color="#0050e6" stop-opacity="0"/></radialGradient>
     </defs>
-    <text x="${L}" y="${T - 34}" fill="rgba(17,17,17,0.7)" font-size="11" letter-spacing="1.5" font-weight="600">VIEWS</text>`;
+    <text x="${L}" y="${T - 34}" fill="rgba(17,17,17,0.7)" font-size="11" letter-spacing="1.5" font-weight="600">ROAS</text>`;
 
-  [0, 25, 50, 75, 100].forEach((v) => {
+  for (let v = 0; v <= MAX; v++) {
     out += `<line x1="${L}" x2="${R}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(17,17,17,${v === 0 ? 0.35 : 0.12})"/>`;
-    out += `<text x="${L - 14}" y="${y(v) + 4}" fill="rgba(17,17,17,0.75)" font-size="12" text-anchor="end">${v === 0 ? "0" : v + "M"}</text>`;
-  });
-  [0, 30, 60, 90, 120, 150, 180].forEach((day) => {
-    out += `<text x="${x(day)}" y="${B + 24}" fill="rgba(17,17,17,0.75)" font-size="12" text-anchor="middle">Day ${day}</text>`;
+    out += `<text x="${L - 14}" y="${y(v) + 4}" fill="rgba(17,17,17,0.75)" font-size="12" text-anchor="end">${v === 0 ? "0" : v + "x"}</text>`;
+  }
+  MILESTONES.forEach((m, i) => {
+    out += `<text x="${x(i)}" y="${B + 24}" fill="rgba(17,17,17,0.75)" font-size="12" text-anchor="middle">${m.when}</text>`;
   });
 
   out += `<path d="${d} L${R},${B} L${L},${B} Z" fill="url(#area)"/>`;
   out += `<path d="${d}" fill="none" stroke="#0050e6" stroke-width="3" stroke-linecap="round"/>`;
 
   MILESTONES.forEach((m, i) => {
-    if (!m.label) return;
     const [px, py] = pts[i];
     out += `<line x1="${px}" x2="${px}" y1="${py}" y2="${B}" stroke="#0050e6" stroke-opacity="0.5" stroke-dasharray="3 4"/>`;
     out += `<circle cx="${px}" cy="${py}" r="18" fill="url(#halo)"/>`;
     out += `<circle cx="${px}" cy="${py}" r="8" fill="#0050e6" stroke="#ffffff" stroke-width="2.5"/>`;
     out += `<circle cx="${px}" cy="${py}" r="3" fill="#ffffff"/>`;
 
-    // Callout box above the point, kept inside the plot area
-    const w = Math.max(90, m.label.length * 8.6 + 26), h = 46;
+    // Callout box above the point, kept inside the plot area.
+    // Points that sit low on the curve alternate heights so neighbours don't overlap.
+    const lines = m.label.split("\n");
+    const w = Math.max(90, Math.max(...lines.map((l) => l.length)) * 8.6 + 26), h = 28 + lines.length * 18;
     let bx = px - w / 2;
-    if (i === 1) bx = px - w + 4;                     // first callout hangs left
-    if (i === MILESTONES.length - 1) bx = px - w + 4; // last one too
+    if (i === MILESTONES.length - 1) bx = px - w + 4; // last one hangs left
     bx = Math.max(L, Math.min(R - w, bx));
-    const by = py - h - 18;
+    const lift = py > B - 60 && i % 2 === 1 ? 62 : 0;
+    const by = py - h - 18 - lift;
     out += `<g>
       <rect x="${bx}" y="${by}" width="${w}" height="${h}" rx="7" fill="#111111" stroke="#111111"/>
-      <text x="${bx + 13}" y="${by + 18}" fill="#ecf0f1" font-size="10" font-weight="600" letter-spacing="1.2">DAY ${m.day}</text>
-      <text x="${bx + 13}" y="${by + 36}" fill="#ffffff" font-size="14" font-weight="700" font-family="Figtree, sans-serif">${m.label}</text>
+      <text x="${bx + 13}" y="${by + 18}" fill="#ecf0f1" font-size="10" font-weight="600" letter-spacing="1.2">${m.when.toUpperCase()}</text>
+      ${lines.map((l, k) => `<text x="${bx + 13}" y="${by + 36 + k * 18}" fill="#ffffff" font-size="14" font-weight="700" font-family="Figtree, sans-serif">${l}</text>`).join("")}
     </g>`;
   });
 
