@@ -6,12 +6,13 @@ const BOOKING_URL = "#";
 // Each stat row reads: inputs joined by "+"  →  outputs. Set `main: true` on the headline output.
 const COMPARISONS = [
   {
-    title: "From Posting Every Day To A Predictable Paid Funnel",
+    title: "From Organic To 12x ROAS In 30 Days",
+    tags: ["B2C coaching offer", "Music niche", "$4k–$8k ticket", "100% cold traffic"],
     before: { label: "Organic", img: "assets/compare/1-organic.jpg", caption: "Screenshot: organic month (DMs, calendar or Stripe)" },
-    after: { label: "Paid", img: "assets/compare/1-paid.jpg", caption: "Screenshot: paid month (Ads Manager or Stripe)" },
-    body: "[Client] was posting every day and closing [X] clients a month off DMs, when the content hit. We adapted the offer for cold traffic, scripted 20 ads and a VSL, built the funnel and had it live in [X] days. In the first 30 days they spent [$X] on ads and collected [$X]. No extra posting required.",
-    inputs: [["[$X]", "Ad spend"], ["[X]", "Calls booked"]],
-    outputs: [["[$X]", "Cash collected"], ["[X]x", "ROAS", true]],
+    after: { label: "Paid", img: "assets/compare/1-paid.jpg", caption: "Amount Won $97.29K · ROAS 12", fit: "contain" },
+    body: "A B2C coaching offer in the music niche, selling at $4k–$8k, running on 100% cold traffic. We adapted the offer for paid, scripted the ads and VSL, and built the funnel. In 30 days, $8,000 of ad spend turned into $97K in cash collected. A 12x return on every dollar.",
+    inputs: [["$8,000", "Ad spend"], ["30", "Days"]],
+    outputs: [["$97K", "Cash collected"], ["12x", "ROAS", true]],
   },
   {
     title: "You Don't Have To Post More To Grow",
@@ -81,7 +82,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const media = (side, cls) => `
     <figure class="result__img">
       <span class="result__label ${cls}">${side.label}</span>
-      <img src="${side.img}" alt="${side.label} results" loading="lazy" onerror="this.remove()" />
+      <img src="${side.img}" alt="${side.label} results: ${side.caption}" loading="lazy"${side.fit ? ` style="object-fit:${side.fit}"` : ""} onerror="this.remove()" />
       <figcaption>${side.caption}</figcaption>
     </figure>`;
   const tile = ([value, label, main], cls) =>
@@ -90,6 +91,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   document.getElementById("results").innerHTML = COMPARISONS.map((c) => `
     <article class="result panel">
       <h3 class="result__pill">${c.title}</h3>
+      ${c.tags ? `<ul class="result__tags">${c.tags.map((t) => `<li>${t}</li>`).join("")}</ul>` : ""}
       <div class="result__pair">${media(c.before, "result__label--organic")}${media(c.after, "result__label--paid")}</div>
       <p class="result__body">${c.body}</p>
       <div class="equation">
