@@ -3,7 +3,7 @@
 const CALL_NUMBER = "+XXX";
 
 // Step 3 videos. For each one set `youtube` (the video ID, e.g. "dQw4w9WgXcQ")
-// or `mp4` (a path like "../assets/faq/process.mp4"). Leave both empty to show a placeholder.
+// or `mp4` (a path like "/assets/faq/process.mp4"). Leave both empty to show a placeholder.
 const FAQ = [
   { icon: "map", q: "What Is Paidcoaching.com?", youtube: "", mp4: "" },
   { icon: "activity", q: "Our Process", youtube: "", mp4: "" },
