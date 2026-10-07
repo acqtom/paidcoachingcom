@@ -126,6 +126,14 @@ main, .footer { position: relative; z-index: 1; }
 .stat--main { background: var(--blue); color: var(--white); box-shadow: 0 12px 30px rgba(0, 80, 230, 0.3); }
 .stat--main span { color: rgba(255, 255, 255, 0.85); }
 
+/* What we build */
+.build { margin: 44px auto 0; max-width: 640px; padding: 32px; text-align: left; }
+.build__list li { font-size: 16px; font-weight: 600; color: var(--black); }
+.build__list li:has(.build__sub)::before { align-self: flex-start; margin-top: 2px; }
+.build__sub { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 6px; }
+.build .build__list .build__sub li { display: block; padding: 0 0 0 18px; background: none; border: 0; position: relative; font-size: 14px; font-weight: 500; color: var(--muted-2); }
+.build .build__list .build__sub li::before { content: ""; display: block; position: absolute; left: 2px; top: 9px; width: 8px; height: 2px; border-radius: 2px; background: var(--blue); }
+
 /* Panels & cards */
 .panel { background: var(--mist); border: 1px solid var(--line-2); border-radius: 22px; }
 .card { position: relative; text-align: left; background: var(--mist); border: 1px solid var(--line-2); border-radius: var(--radius); padding: 36px; }
@@ -290,6 +298,9 @@ main, .footer { position: relative; z-index: 1; }
   .stat--out strong { font-size: 17px; }
   .stat--main { box-shadow: 0 6px 16px rgba(0, 80, 230, 0.3); }
 
+  .build { margin-top: 28px; padding: 20px 16px; }
+  .build__list li { font-size: 14px; }
+  .build .build__list .build__sub li { font-size: 13px; }
   .chart { margin-top: 28px; padding: 16px 12px 14px; }
   .coaches { margin-top: 28px; }
   .coach__top { gap: 16px; padding-bottom: 18px; margin-bottom: 16px; }
