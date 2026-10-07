@@ -1,7 +1,4 @@
 // ---- Config ---------------------------------------------------------------
-// Where every "Schedule My Free Strategy Session" button goes (Calendly, typeform, etc.)
-const BOOKING_URL = "#";
-
 // Paid vs organic results. Put screenshots in assets/compare/ (anything in [brackets] is a placeholder).
 // Each stat row reads: inputs joined by "+"  →  outputs. Set `main: true` on the headline output.
 const COMPARISONS = [
@@ -41,11 +38,28 @@ const MILESTONES = [
   { when: "Week 4", roas: 5, label: "A Profitable 5x ROAS\nPaid Funnel" },
 ];
 
-// ---- CTAs -----------------------------------------------------------------
-document.querySelectorAll(".js-cta").forEach((a) => {
-  a.href = BOOKING_URL;
-  if (/^https?:/.test(BOOKING_URL)) a.target = "_blank";
-});
+// ---- CTAs: open the application form popup --------------------------------
+(function applyPopup() {
+  const modal = document.getElementById("apply-modal");
+  const open = (e) => {
+    if (e) e.preventDefault();
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+  const close = () => {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (location.hash === "#apply") history.replaceState(null, "", location.pathname + location.search);
+  };
+  document.querySelectorAll(".js-cta").forEach((a) => a.addEventListener("click", open));
+  modal.querySelector(".tf-modal__close").addEventListener("click", close);
+  modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("is-open")) close(); });
+  // Links straight to the form (e.g. from an ad) can use paidcoaching.com/#apply
+  if (location.hash === "#apply") open();
+})();
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // ---- Star field -----------------------------------------------------------
