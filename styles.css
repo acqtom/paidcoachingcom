@@ -308,7 +308,7 @@ main, .footer { position: relative; z-index: 1; }
 /* Phones: compact chart + step list instead of captions under the axis */
 @media (max-width: 600px) {
   .chart svg { min-width: 0; }
-  .chart__steps { display: none; gap: 8px; list-style: none; padding: 0; margin: 16px 0 0; text-align: left; counter-reset: step; }
+  .chart__steps { display: grid; gap: 8px; list-style: none; padding: 0; margin: 16px 0 0; text-align: left; counter-reset: step; }
   .chart__steps li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; font-family: var(--heading); font-weight: 700; font-size: 14px; }
   .chart__steps span { flex: none; width: 58px; color: var(--blue); font-family: var(--body); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
   .chart__steps li.is-goal { background: var(--blue); border-color: var(--blue); color: var(--white); }
