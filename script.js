@@ -131,8 +131,8 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
   function draw() {
     const small = phone.matches;
-    const W = small ? 360 : 880, H = small ? 250 : 400;
-    const L = small ? 38 : 110, R = small ? 336 : 790, T = small ? 26 : 46, B = small ? 206 : 290, MAX = 5;
+    const W = small ? 360 : 880, H = small ? 520 : 400;
+    const L = small ? 44 : 110, R = small ? 330 : 790, T = small ? 60 : 46, B = small ? 480 : 290, MAX = 5;
     const x = (i) => L + (i / last) * (R - L);
     const y = (v) => B - (v / MAX) * (B - T);
     const pts = MILESTONES.map((m, i) => [x(i), y(m.roas)]);
@@ -171,7 +171,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
       out += `<circle cx="${px}" cy="${py}" r="${end ? (small ? 8 : 9) : (small ? 6 : 7)}" fill="#0050e6" stroke="#ffffff" stroke-width="2.5"/>`;
 
       if (small) {
-        // Short axis labels; the full step names are in the list under the chart
         const short = m.when.replace("Week ", "Wk ");
         const anchor = i === 0 ? "start" : i === last ? "end" : "middle";
         const tx = i === 0 ? px - 6 : i === last ? px + 6 : px;
@@ -185,8 +184,33 @@ document.getElementById("year").textContent = new Date().getFullYear();
       }
     });
 
+    if (small) out += callouts(pts, W, L);
+
     svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
     svg.innerHTML = out;
+  }
+
+  // Phones: dark callout boxes beside each point (placed by hand so they never overlap the curve)
+  function callouts(pts, W, L) {
+    let out = "";
+    MILESTONES.forEach((m, i) => {
+      const [px, py] = pts[i];
+      const lines = m.label.split("\n");
+      const w = Math.max(...lines.map((l) => l.length)) * 7 + 24, h = 26 + lines.length * 18;
+      let bx, by, lead = null;
+      if (i === 0) { bx = L + 4; by = py - h - 58; lead = [px + 4, py - 8, bx + 14, by + h]; }            // above the start
+      else if (i === 1) { bx = 200; by = 412; lead = [px + 8, py, bx, by + h / 2]; }                       // below-right, like the reference
+      else if (i === 2) { bx = Math.max(L, px - w + 6); by = py - h - 28; }                                // above-left
+      else { bx = px - w - (i === MILESTONES.length - 1 ? 26 : 14); by = Math.max(4, py - h / 2 - (i === MILESTONES.length - 1 ? 0 : 10)); }   // left
+      bx = Math.min(W - 4 - w, bx);
+      if (lead) out += `<line x1="${lead[0]}" y1="${lead[1]}" x2="${lead[2]}" y2="${lead[3]}" stroke="#0050e6" stroke-opacity="0.6" stroke-dasharray="3 3"/>`;
+      out += `<rect x="${bx}" y="${by}" width="${w}" height="${h}" rx="7" fill="#111111"/>`;
+      out += `<text x="${bx + 12}" y="${by + 18}" fill="#ecf0f1" font-size="10" font-weight="600" letter-spacing="1.2">${m.when.toUpperCase()}</text>`;
+      lines.forEach((l, k) => {
+        out += `<text x="${bx + 12}" y="${by + 36 + k * 18}" fill="#ffffff" font-size="13" font-weight="700" font-family="Figtree, sans-serif">${l}</text>`;
+      });
+    });
+    return out;
   }
 
   draw();
