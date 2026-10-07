@@ -112,7 +112,7 @@ main, .footer { position: relative; z-index: 1; }
 .result__label--organic { background: var(--black); color: var(--white); }
 .result__label--paid { background: var(--blue); color: var(--white); }
 .result__body { max-width: 760px; margin: 30px auto 0; color: var(--muted-2); font-size: 17px; line-height: 1.75; }
-.equation { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; margin-top: 30px; }
+.equation { display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 12px; margin-top: 30px; }
 .equation__op { color: var(--muted); font-size: 22px; font-weight: 700; }
 .equation__arrow { color: var(--blue); font-size: 28px; margin: 0 4px; }
 .stat { display: grid; gap: 4px; padding: 14px 22px; border-radius: 12px; min-width: 140px; }
@@ -237,7 +237,6 @@ main, .footer { position: relative; z-index: 1; }
   .result { padding: 24px 18px; }
   .result__pair { grid-template-columns: 1fr; }
   .result__pill { font-size: 16px; padding: 10px 18px; }
-  .equation__arrow { flex-basis: 100%; transform: rotate(90deg); }
   .coach__avatar { width: 76px; height: 76px; font-size: 22px; }
   .brand__logo { height: 26px; }
 
@@ -280,12 +279,16 @@ main, .footer { position: relative; z-index: 1; }
   .result__tags li { font-size: 12px; padding: 5px 10px; }
   .result__pair { margin-top: 18px; gap: 10px; }
   .result__body { font-size: 15px; line-height: 1.65; margin-top: 18px; }
-  .equation { margin-top: 18px; gap: 8px; }
-  .stat { min-width: 0; padding: 10px 14px; }
-  .stat strong { font-size: 18px; }
-  .stat span { font-size: 12px; }
-  .stat--out { padding: 12px 16px; }
-  .stat--out strong { font-size: 22px; }
+  /* Stat row stays on one line: tiles share the width evenly */
+  .equation { margin-top: 18px; gap: 4px; align-items: stretch; }
+  .equation__op { align-self: center; font-size: 15px; }
+  .equation__arrow { font-size: 18px; margin: 0; }
+  .stat { flex: 1 1 0; min-width: 0; padding: 9px 4px; border-radius: 9px; gap: 2px; text-align: center; align-content: center; }
+  .stat strong { font-size: 15px; white-space: nowrap; }
+  .stat span { font-size: 10px; line-height: 1.25; }
+  .stat--out { padding: 9px 4px; }
+  .stat--out strong { font-size: 17px; }
+  .stat--main { box-shadow: 0 6px 16px rgba(0, 80, 230, 0.3); }
 
   .chart { margin-top: 28px; padding: 16px 12px 14px; }
   .coaches { margin-top: 28px; }
