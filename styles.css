@@ -139,6 +139,7 @@ main, .footer { position: relative; z-index: 1; }
 .chart__scroll { overflow-x: auto; }
 .chart svg { width: 100%; min-width: 620px; height: auto; display: block; font-family: var(--body); }
 .chart__note { color: var(--muted); font-size: 12px; margin-top: 12px; }
+.chart__steps { display: none; }
 
 /* Comparison */
 .compare { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; }
@@ -253,6 +254,65 @@ main, .footer { position: relative; z-index: 1; }
   .hero .vsl { margin-top: 26px; border-radius: 10px; }
   .hero .cta { margin-top: 20px; padding: 14px 20px; font-size: 15px; }
 }
+/* Phones: everything below the hero a notch smaller */
+@media (max-width: 760px) {
+  .section:not(.hero) { padding: 40px 0 32px; }
+  .h2 { font-size: 27px; line-height: 1.12; }
+  .lead { font-size: 15px; margin-top: 12px; }
+  .section:not(.hero) .cta { margin-top: 28px; padding: 15px 20px; font-size: 15px; }
+  .grid-2 { margin-top: 28px; gap: 16px; }
+  .card, .compare__col { padding: 22px 18px; }
+  .card h3, .pains .card h3 { font-size: 18px; }
+  .card p { font-size: 14px; line-height: 1.65; }
+  .num { width: 34px; height: 34px; margin-bottom: 16px; font-size: 14px; }
+  .rows { gap: 8px; }
+  .rows li { padding: 11px 14px; font-size: 14px; gap: 12px; }
+  .types .card .rows { padding-top: 24px; }
+  .compare__head { gap: 12px; padding-bottom: 18px; margin-bottom: 18px; }
+  .compare__head h3 { font-size: 18px; }
+  .compare__icon { width: 40px; height: 40px; font-size: 17px; }
+  .compare__vs { width: 52px; height: 52px; font-size: 15px; }
+
+  .results { margin-top: 32px; gap: 20px; }
+  .result { padding: 20px 16px; }
+  .result__pill { font-size: 15px; padding: 9px 16px; }
+  .result__tags { margin-top: 12px; gap: 6px; }
+  .result__tags li { font-size: 12px; padding: 5px 10px; }
+  .result__pair { margin-top: 18px; gap: 10px; }
+  .result__body { font-size: 15px; line-height: 1.65; margin-top: 18px; }
+  .equation { margin-top: 18px; gap: 8px; }
+  .stat { min-width: 0; padding: 10px 14px; }
+  .stat strong { font-size: 18px; }
+  .stat span { font-size: 12px; }
+  .stat--out { padding: 12px 16px; }
+  .stat--out strong { font-size: 22px; }
+
+  .chart { margin-top: 28px; padding: 16px 12px 14px; }
+  .coaches { margin-top: 28px; }
+  .coach__top { gap: 16px; padding-bottom: 18px; margin-bottom: 16px; }
+  .coach__name { font-size: 20px; }
+  .coach__bio p { font-size: 15px; line-height: 1.65; }
+  .coach__stats { padding-top: 20px; }
+  .coach__stats strong { font-size: 24px; }
+
+  .section--final { padding: 40px 0; }
+  .final { padding: 44px 20px; box-shadow: 5px 5px 0 var(--black); }
+  .final h2 { font-size: 34px; }
+  .final p { font-size: 16px; margin-top: 12px; }
+  .final .cta { padding: 14px 16px; font-size: 14px; gap: 10px; white-space: nowrap; }
+}
+
+/* Phones: compact chart + step list instead of captions under the axis */
+@media (max-width: 600px) {
+  .chart svg { min-width: 0; }
+  .chart__steps { display: grid; gap: 8px; list-style: none; padding: 0; margin: 16px 0 0; text-align: left; counter-reset: step; }
+  .chart__steps li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; font-family: var(--heading); font-weight: 700; font-size: 14px; }
+  .chart__steps span { flex: none; width: 58px; color: var(--blue); font-family: var(--body); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .chart__steps li.is-goal { background: var(--blue); border-color: var(--blue); color: var(--white); }
+  .chart__steps li.is-goal span { color: rgba(255, 255, 255, 0.8); }
+  .chart__note { text-align: left; }
+}
+
 @media (max-width: 370px) {
   .badge { font-size: 11px; }
   .hero__title { font-size: 22px; }
