@@ -29,13 +29,14 @@ const COMPARISONS = [
   },
 ];
 
-// First-30-days chart. `roas` sets the height of each point (0–5x). Use \n in a label to wrap it.
+// First-30-days chart. `roas` sets the height of each point (0–5x).
+// Labels sit under the chart, beneath each point. Use \n to break a label onto two lines.
 const MILESTONES = [
-  { when: "Today", roas: 0, label: "Onboarding & Audit" },
+  { when: "Today", roas: 0, label: "Onboarding\n& Audit" },
   { when: "Week 1", roas: 0.3, label: "DFY Setup Complete,\nAds Live" },
   { when: "Week 2", roas: 1.2, label: "Performance Review\n& Iteration" },
   { when: "Week 3", roas: 2.8, label: "Double Down" },
-  { when: "Week 4", roas: 5, label: "A Profitable 5x ROAS\nPaid Funnel" },
+  { when: "Week 4", roas: 5, label: "A Profitable 5x\nROAS Paid Funnel" },
 ];
 
 // ---- CTAs: open the application form popup --------------------------------
@@ -119,15 +120,16 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // ---- Growth chart ---------------------------------------------------------
 (function chart() {
   const svg = document.getElementById("growth-chart");
-  const W = 860, H = 420;
-  const L = 70, R = 815, T = 95, B = 370, MAX = 5;
-  const x = (i) => L + (i / (MILESTONES.length - 1)) * (R - L);
+  const W = 880, H = 400;
+  const L = 110, R = 790, T = 46, B = 290, MAX = 5;
+  const last = MILESTONES.length - 1;
+  const x = (i) => L + (i / last) * (R - L);
   const y = (v) => B - (v / MAX) * (B - T);
   const pts = MILESTONES.map((m, i) => [x(i), y(m.roas)]);
 
-  // Smooth curve through points (Catmull-Rom → cubic Bézier)
+  // Smooth curve through points (Catmull-Rom → cubic Bézier), never dipping below the axis
   let d = `M${pts[0][0]},${pts[0][1]}`;
-  for (let i = 0; i < pts.length - 1; i++) {
+  for (let i = 0; i < last; i++) {
     const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
     const c1 = [p1[0] + (p2[0] - p0[0]) / 6, Math.min(B, p1[1] + (p2[1] - p0[1]) / 6)];
     const c2 = [p2[0] - (p3[0] - p1[0]) / 6, Math.min(B, p2[1] - (p3[1] - p1[1]) / 6)];
@@ -137,45 +139,34 @@ document.getElementById("year").textContent = new Date().getFullYear();
   let out = `
     <defs>
       <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#0050e6" stop-opacity="0.35"/>
+        <stop offset="0" stop-color="#0050e6" stop-opacity="0.3"/>
         <stop offset="1" stop-color="#0050e6" stop-opacity="0"/>
       </linearGradient>
-      <radialGradient id="halo"><stop offset="0" stop-color="#0050e6" stop-opacity="0.35"/><stop offset="1" stop-color="#0050e6" stop-opacity="0"/></radialGradient>
     </defs>
-    <text x="${L}" y="${T - 34}" fill="rgba(17,17,17,0.7)" font-size="11" letter-spacing="1.5" font-weight="600">ROAS</text>`;
+    <text x="${L - 14}" y="${T - 22}" fill="rgba(17,17,17,0.6)" font-size="11" letter-spacing="1.5" font-weight="600" text-anchor="end">ROAS</text>`;
 
   for (let v = 0; v <= MAX; v++) {
-    out += `<line x1="${L}" x2="${R}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(17,17,17,${v === 0 ? 0.35 : 0.12})"/>`;
-    out += `<text x="${L - 14}" y="${y(v) + 4}" fill="rgba(17,17,17,0.75)" font-size="12" text-anchor="end">${v === 0 ? "0" : v + "x"}</text>`;
+    out += `<line x1="${L}" x2="${R}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(17,17,17,${v === 0 ? 0.3 : 0.08})"/>`;
+    out += `<text x="${L - 14}" y="${y(v) + 4}" fill="rgba(17,17,17,0.6)" font-size="12" text-anchor="end">${v === 0 ? "0" : v + "x"}</text>`;
   }
-  MILESTONES.forEach((m, i) => {
-    out += `<text x="${x(i)}" y="${B + 24}" fill="rgba(17,17,17,0.75)" font-size="12" text-anchor="middle">${m.when}</text>`;
-  });
 
   out += `<path d="${d} L${R},${B} L${L},${B} Z" fill="url(#area)"/>`;
   out += `<path d="${d}" fill="none" stroke="#0050e6" stroke-width="3" stroke-linecap="round"/>`;
 
   MILESTONES.forEach((m, i) => {
     const [px, py] = pts[i];
-    out += `<line x1="${px}" x2="${px}" y1="${py}" y2="${B}" stroke="#0050e6" stroke-opacity="0.5" stroke-dasharray="3 4"/>`;
-    out += `<circle cx="${px}" cy="${py}" r="18" fill="url(#halo)"/>`;
-    out += `<circle cx="${px}" cy="${py}" r="8" fill="#0050e6" stroke="#ffffff" stroke-width="2.5"/>`;
-    out += `<circle cx="${px}" cy="${py}" r="3" fill="#ffffff"/>`;
+    const end = i === last;
+    // Drop line from the point to its caption
+    out += `<line x1="${px}" x2="${px}" y1="${py + 9}" y2="${B + 14}" stroke="#0050e6" stroke-opacity="0.35" stroke-dasharray="3 4"/>`;
+    if (end) out += `<circle cx="${px}" cy="${py}" r="18" fill="#0050e6" fill-opacity="0.15"/>`;
+    out += `<circle cx="${px}" cy="${py}" r="${end ? 9 : 7}" fill="#0050e6" stroke="#ffffff" stroke-width="2.5"/>`;
 
-    // Callout box above the point, kept inside the plot area.
-    // Points that sit low on the curve alternate heights so neighbours don't overlap.
-    const lines = m.label.split("\n");
-    const w = Math.max(90, Math.max(...lines.map((l) => l.length)) * 8.6 + 26), h = 28 + lines.length * 18;
-    let bx = px - w / 2;
-    if (i === MILESTONES.length - 1) bx = px - w + 4; // last one hangs left
-    bx = Math.max(L, Math.min(R - w, bx));
-    const lift = py > B - 60 && i % 2 === 1 ? 62 : 0;
-    const by = py - h - 18 - lift;
-    out += `<g>
-      <rect x="${bx}" y="${by}" width="${w}" height="${h}" rx="7" fill="#111111" stroke="#111111"/>
-      <text x="${bx + 13}" y="${by + 18}" fill="#ecf0f1" font-size="10" font-weight="600" letter-spacing="1.2">${m.when.toUpperCase()}</text>
-      ${lines.map((l, k) => `<text x="${bx + 13}" y="${by + 36 + k * 18}" fill="#ffffff" font-size="14" font-weight="700" font-family="Figtree, sans-serif">${l}</text>`).join("")}
-    </g>`;
+    // Caption under the axis
+    const cy = B + 40;
+    out += `<text x="${px}" y="${cy}" text-anchor="middle" fill="#0050e6" font-size="11" font-weight="700" letter-spacing="1.4">${m.when.toUpperCase()}</text>`;
+    m.label.split("\n").forEach((line, k) => {
+      out += `<text x="${px}" y="${cy + 22 + k * 19}" text-anchor="middle" fill="#111111" font-size="${end ? 15 : 14}" font-weight="700" font-family="Figtree, sans-serif">${line}</text>`;
+    });
   });
 
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
