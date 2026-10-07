@@ -244,14 +244,14 @@ main, .footer { position: relative; z-index: 1; }
   .topbar__inner { justify-content: center; padding: 12px 16px; }
   .topbar .rating { display: none; }
   .topbar .brand__logo { height: 24px; }
-  .hero { padding-top: 16px; padding-bottom: 32px; }
+  .hero { padding-top: 24px; padding-bottom: 32px; }
   .badge { font-size: 12px; padding: 6px 10px; white-space: nowrap; }
-  .hero__title { margin-top: 14px; font-size: 25px; line-height: 1.16; }
-  .hero .ticks { margin-top: 14px; gap: 6px 14px; font-size: 13px; }
+  .hero__title { margin-top: 22px; font-size: 25px; line-height: 1.18; }
+  .hero .ticks { margin-top: 22px; gap: 9px 14px; font-size: 13px; }
   .hero .ticks li { gap: 7px; }
   .hero .ticks li::before { width: 16px; height: 16px; font-size: 9px; }
-  .hero .vsl { margin-top: 16px; border-radius: 10px; }
-  .hero .cta { margin-top: 16px; padding: 14px 20px; font-size: 15px; }
+  .hero .vsl { margin-top: 26px; border-radius: 10px; }
+  .hero .cta { margin-top: 20px; padding: 14px 20px; font-size: 15px; }
 }
 @media (max-width: 370px) {
   .badge { font-size: 11px; }
