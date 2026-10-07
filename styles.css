@@ -238,6 +238,30 @@ main, .footer { position: relative; z-index: 1; }
   .result__pill { font-size: 16px; padding: 10px 18px; }
   .equation__arrow { flex-basis: 100%; transform: rotate(90deg); }
   .coach__avatar { width: 76px; height: 76px; font-size: 22px; }
-  .rating span:last-child { display: none; }
   .brand__logo { height: 26px; }
+
+  /* Phone first screen: logo, callout, headline, ticks, video and CTA all fit without scrolling */
+  .topbar__inner { justify-content: center; padding: 12px 16px; }
+  .topbar .rating { display: none; }
+  .topbar .brand__logo { height: 24px; }
+  .hero { padding-top: 16px; padding-bottom: 32px; }
+  .badge { font-size: 12px; padding: 6px 10px; white-space: nowrap; }
+  .hero__title { margin-top: 14px; font-size: 25px; line-height: 1.16; }
+  .hero .ticks { margin-top: 14px; gap: 6px 14px; font-size: 13px; }
+  .hero .ticks li { gap: 7px; }
+  .hero .ticks li::before { width: 16px; height: 16px; font-size: 9px; }
+  .hero .vsl { margin-top: 16px; border-radius: 10px; }
+  .hero .cta { margin-top: 16px; padding: 14px 20px; font-size: 15px; }
+}
+@media (max-width: 370px) {
+  .badge { font-size: 11px; }
+  .hero__title { font-size: 22px; }
+}
+/* Short phones (e.g. iPhone SE): tighten the first screen a little more so the button still shows */
+@media (max-width: 760px) and (max-height: 600px) {
+  .hero { padding-top: 12px; }
+  .hero__title { margin-top: 10px; font-size: 22px; }
+  .hero .ticks { margin-top: 10px; gap: 4px 12px; font-size: 12px; }
+  .hero .vsl { margin-top: 12px; }
+  .hero .cta { margin-top: 12px; padding: 12px 18px; }
 }
