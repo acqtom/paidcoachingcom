@@ -47,6 +47,8 @@
 
 /* Step 3 – FAQ video cards */
 .faq { margin-top: 44px; }
+/* An odd last card sits centred under the grid */
+.faq__card:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 12px); }
 .faq__card { text-align: left; background: var(--mist); border: 1px solid var(--line-2); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
 .faq__head { display: flex; align-items: center; gap: 12px; min-height: 44px; }
 .faq__head h3 { font-size: 17px; font-weight: 700; line-height: 1.3; }
@@ -82,6 +84,7 @@
 .case dd { margin: 0; font-weight: 600; text-align: right; }
 
 @media (max-width: 760px) {
+  .faq__card:last-child:nth-child(odd) { width: 100%; }
   .invite { grid-template-columns: 1fr; padding: 22px; gap: 24px; }
   .invite__note { margin-bottom: 0; }
   .invite__arrow { display: none; }

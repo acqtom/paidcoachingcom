@@ -5,22 +5,17 @@ const CALL_NUMBER = "+XXX";
 // Step 3 videos. For each one set `youtube` (the video ID, e.g. "dQw4w9WgXcQ")
 // or `mp4` (a path like "/assets/faq/process.mp4"). Leave both empty to show a placeholder.
 const FAQ = [
-  { icon: "map", q: "What Is Paidcoaching.com?", youtube: "", mp4: "" },
-  { icon: "activity", q: "Our Process", youtube: "", mp4: "" },
-  { icon: "user", q: "Who Are Thomas And Derek, And What Funnels Have You Built?", youtube: "", mp4: "" },
-  { icon: "award", q: "How Are We Different From Every Other Ads Agency?", youtube: "", mp4: "" },
-  { icon: "search", q: "Will You Write My Ads And VSL For Me?", youtube: "", mp4: "" },
-  { icon: "shield", q: "Will You Help Me Avoid Burning Ad Spend?", youtube: "", mp4: "" },
-  { icon: "cap", q: "Does It Work If I've Never Run Paid Ads Before?", youtube: "", mp4: "" },
-  { icon: "play", q: "Can't I Just Learn Paid Ads From YouTube?", youtube: "", mp4: "" },
-  { icon: "refresh", q: "Do You Offer A Guarantee?", youtube: "", mp4: "" },
-  { icon: "cash", q: "How Much Ad Spend Do I Need?", youtube: "", mp4: "" },
-  { icon: "eye", q: "What Can I Expect In The First 30 Days?", youtube: "", mp4: "" },
+  { icon: "map", q: "What Exactly Do You Offer?", youtube: "", mp4: "" },
+  { icon: "refresh", q: "What Happens If It Doesn't Perform?", youtube: "", mp4: "" },
+  { icon: "user", q: "Who Are You Guys, And What Have You Done?", youtube: "", mp4: "" },
+  { icon: "cap", q: "Can I Do This If I Don't Know How The System Works?", youtube: "", mp4: "" },
+  { icon: "cash", q: "What Are My Running Expenses?", youtube: "", mp4: "" },
+  { icon: "eye", q: "What Can I Expect From This?", youtube: "", mp4: "" },
   { icon: "target", q: "Who Is This For?", youtube: "", mp4: "" },
   { icon: "ban", q: "Who Is This NOT For?", youtube: "", mp4: "" },
-  { icon: "message", q: "Will I Work With Thomas And Derek Directly?", youtube: "", mp4: "" },
-  { icon: "tag", q: "How Much Does It Cost?", youtube: "", mp4: "" },
-  { icon: "expand", q: "Can You Scale My Funnel After The First 30 Days?", youtube: "", mp4: "" },
+  { icon: "shield", q: "Will You Help Me Avoid Bleeding Spend?", youtube: "", mp4: "" },
+  { icon: "tag", q: "What Is The ROI?", youtube: "", mp4: "" },
+  { icon: "activity", q: "How Long Until I See Results?", youtube: "", mp4: "" },
 ];
 
 // Step 4 client results. Replace the bracketed placeholders with real numbers.
