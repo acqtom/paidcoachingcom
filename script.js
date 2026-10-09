@@ -12,10 +12,10 @@ const COMPARISONS = [
     outputs: [["$97K", "Cash collected"], ["12x", "ROAS", true]],
   },
   {
-    title: "You Don't Have To Post More To Grow",
+    title: "From $0/Month → $100K/Month",
     tags: ["B2C coaching offer", "Real estate niche", "$10k–$12k ticket", "90% cold traffic"],
-    before: { label: "Organic", img: "assets/compare/2-organic.jpg", caption: "Before: $0 cash collected from paid" },
-    after: { label: "Paid", img: "assets/compare/2-paid.jpg", caption: "After: $114,000 cash collected · 5.66x ROAS" },
+    before: { label: "Before", img: "assets/compare/2-organic.jpg", caption: "Before: $0 cash collected from paid" },
+    after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: $114,000 cash collected · 5.66x ROAS" },
     body: "This coach had hit the ceiling of their content. More posts weren't bringing more calls, and every slow week showed up in their revenue. We turned their best organic angles into paid ads and pointed them at a PIF offer built for cold traffic. Same offer, same coach. $15K in, $114K out, and a calendar that fills whether they post or not.",
     inputs: [["$15.2K", "Ad spend"]],
     outputs: [["$114K", "Cash collected"], ["5.66x", "ROAS", true]],
