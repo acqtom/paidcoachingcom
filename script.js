@@ -13,8 +13,8 @@ const COMPARISONS = [
   {
     title: "From $0/Month → $100K/Month",
     tags: ["B2C coaching offer", "Real estate niche", "$10k–$12k ticket", "90% cold traffic"],
-    before: { label: "Before", img: "assets/compare/2-organic.jpg", caption: "Before: $0 cash collected from paid", text: "This coach had hit the ceiling of their content. More posts weren't bringing more calls, and every slow week showed up in their revenue." },
-    after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: $114,000 cash collected · 5.66x ROAS", text: "We turned their best organic angles into paid ads and pointed them at a PIF offer built for cold traffic. Same offer, same coach. $15K in, $114K out, and a calendar that fills whether they post or not." },
+    before: { label: "Before", img: "assets/compare/2-organic.jpg", caption: "Before: $0 cash collected from paid", text: "This was a partner we started fresh with. Validated the first $30k on organic, but leads were moving slow, we couldn't control the exact person coming through, and most couldn't afford the $12k ticket we were selling at." },
+    after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: $114,000 cash collected · 5.66x ROAS", text: "So we moved straight to paid traffic. We rebuilt everything to optimize for a cold audience. Tightened the VSL, tested ads, headline and funnel copy to target our richest ICP, pre-call sequences and sales flows. A few months later, we had an offer vehicle printing $100k/month on autopilot whether the offer owner was on holiday, at construction sites, or only posting 1x YouTube video per month." },
     inputs: [["$15.2K", "Ad spend"]],
     outputs: [["$114K", "Cash collected"], ["5.66x", "ROAS", true]],
   },
