@@ -5,26 +5,23 @@ const COMPARISONS = [
   {
     title: "Bleeding Cash To 12x ROAS",
     tags: ["B2C coaching offer", "Music niche", "$4k–$8k ticket", "100% cold traffic"],
-    before: { label: "Organic", img: "assets/compare/1-organic.jpg", caption: "Screenshot: organic month (DMs, calendar or Stripe)" },
-    after: { label: "Paid", img: "assets/compare/1-paid.png", caption: "Amount Won $101.99K · ROAS 12" },
-    body: "A B2C coaching offer in the music niche, selling at $4k–$8k, running on 100% cold traffic. We rebuilt the funnel, scripted the ads and VSL, and built the backend selling systems. In 30 days, $8,000 of ad spend turned into $97K in cash collected. A 12x return on every dollar.",
+    before: { label: "Organic", img: "assets/compare/1-organic.jpg", caption: "Screenshot: organic month (DMs, calendar or Stripe)", text: "This music production coach had a notable name in the space, so getting people to book calls wasn’t the issue. The problem was they were all financially unqualified. Anyone who had just heard of him recently threw more objections than typical warm traffic leads, came in more skeptical of the offer, and ultimately had to settle for small split payments of $250. His entire messaging could only close warm leads and that’s not scalable." },
+    after: { label: "Paid", img: "assets/compare/1-paid.png", caption: "Amount Won $101.99K · ROAS 12", text: "We rebuilt the entire funnel from the ground up: VSL, Headlines, Landing Page Copy, Offer, Pre-Call Warm up Sequence, Setting Process, Closer Frameworks, Facebook Ads, Pixel Optimization, Confirmation Page, Email Marketing, Pricing Strategy, Student Testimonials, ICP, etc. The result was a business doing consistent $100k/months on pure cold traffic with an 8-12x monthly ROAS." },
     inputs: [["$8,000", "Ad spend"], ["30", "Days"]],
     outputs: [["$97K", "Cash collected"], ["12x", "ROAS", true]],
   },
   {
     title: "From $0/Month → $100K/Month",
     tags: ["B2C coaching offer", "Real estate niche", "$10k–$12k ticket", "90% cold traffic"],
-    before: { label: "Before", img: "assets/compare/2-organic.jpg", caption: "Before: $0 cash collected from paid" },
-    after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: $114,000 cash collected · 5.66x ROAS" },
-    body: "This coach had hit the ceiling of their content. More posts weren't bringing more calls, and every slow week showed up in their revenue. We turned their best organic angles into paid ads and pointed them at a PIF offer built for cold traffic. Same offer, same coach. $15K in, $114K out, and a calendar that fills whether they post or not.",
+    before: { label: "Before", img: "assets/compare/2-organic.jpg", caption: "Before: $0 cash collected from paid", text: "This coach had hit the ceiling of their content. More posts weren't bringing more calls, and every slow week showed up in their revenue." },
+    after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: $114,000 cash collected · 5.66x ROAS", text: "We turned their best organic angles into paid ads and pointed them at a PIF offer built for cold traffic. Same offer, same coach. $15K in, $114K out, and a calendar that fills whether they post or not." },
     inputs: [["$15.2K", "Ad spend"]],
     outputs: [["$114K", "Cash collected"], ["5.66x", "ROAS", true]],
   },
   {
     title: "Stop Letting The Algorithm Decide Your Income",
-    before: { label: "Organic", img: "assets/compare/3-organic.jpg", caption: "Screenshot: organic results" },
-    after: { label: "Paid", img: "assets/compare/3-paid.jpg", caption: "Screenshot: paid results" },
-    body: "[Client] had great months and empty months, and no way of knowing which was coming. One post would go viral, the next ten wouldn't, and their revenue followed. We built a paid funnel that runs every day regardless of reach. Within 30 days they were booking [X] calls a week from ads alone, and the swings were gone.",
+    before: { label: "Organic", img: "assets/compare/3-organic.jpg", caption: "Screenshot: organic results", text: "[Client] had great months and empty months, and no way of knowing which was coming. One post would go viral, the next ten wouldn't, and their revenue followed." },
+    after: { label: "Paid", img: "assets/compare/3-paid.jpg", caption: "Screenshot: paid results", text: "We built a paid funnel that runs every day regardless of reach. Within 30 days they were booking [X] calls a week from ads alone, and the swings were gone." },
     inputs: [["[$X]", "Ad spend"], ["[X]", "Calls / week"]],
     outputs: [["[$X]", "Cash collected"], ["[X]x", "ROAS", true]],
   },
@@ -101,6 +98,11 @@ document.getElementById("year").textContent = new Date().getFullYear();
       <img src="${side.img}" alt="${side.label} results: ${side.caption}" loading="lazy"${side.fit ? ` style="object-fit:${side.fit}"` : ""} onerror="this.remove()" />
       <figcaption>${side.caption}</figcaption>
     </figure>`;
+  const side = (s, cls) => `
+    <div class="result__side">
+      ${media(s, cls)}
+      <p class="result__text"><strong>${s.label}:</strong> ${s.text}</p>
+    </div>`;
   const tile = ([value, label, main], cls) =>
     `<div class="stat ${cls}${main ? " stat--main" : ""}"><strong>${value}</strong><span>${label}</span></div>`;
 
@@ -108,8 +110,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
     <article class="result panel">
       <h3 class="result__pill">${c.title}</h3>
       ${c.tags ? `<ul class="result__tags">${c.tags.map((t) => `<li>${t}</li>`).join("")}</ul>` : ""}
-      <div class="result__pair">${media(c.before, "result__label--organic")}${media(c.after, "result__label--paid")}</div>
-      <p class="result__body">${c.body}</p>
+      <div class="result__pair">${side(c.before, "result__label--organic")}${side(c.after, "result__label--paid")}</div>
       <div class="equation">
         ${c.inputs.map((i) => tile(i, "stat--in")).join('<span class="equation__op">+</span>')}
         <span class="equation__op equation__arrow">→</span>
