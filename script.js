@@ -32,11 +32,11 @@ const COMPARISONS = [
 // First-30-days chart. `roas` sets the height of each point (0–5x).
 // Labels sit under the chart, beneath each point. Use \n to break a label onto two lines.
 const MILESTONES = [
-  { when: "Today", roas: 0, label: "Onboarding\n& Audit" },
-  { when: "Week 1", roas: 0.3, label: "DFY Setup Complete,\nAds Live" },
-  { when: "Week 2", roas: 1.2, label: "Performance Review\n& Iteration" },
-  { when: "Week 3", roas: 2.8, label: "Double Down" },
-  { when: "Week 4", roas: 5, label: "A Profitable 5x\nROAS Paid Funnel" },
+  { when: "Today", roas: 0, label: "Funnel Audit\n& Onboarding" },
+  { when: "Day 7", roas: 0, label: "Cold Funnel Set Up\nComplete, New Ad\nScripts Ready" },
+  { when: "Day 14", roas: 0.6, label: "Ads Live" },
+  { when: "Day 21", roas: 2.2, label: "Closes Begin,\nDouble Down On\nWinning Ads" },
+  { when: "Day 30", roas: 5, label: "More Closes,\nProfitable Campaign\nReady To Scale" },
 ];
 
 // ---- CTAs: open the application form popup --------------------------------
@@ -127,11 +127,11 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const phone = window.matchMedia("(max-width: 600px)");
 
   steps.innerHTML = MILESTONES.map((m, i) => `
-    <li class="${i === last ? "is-goal" : ""}"><span>${m.when}</span>${m.label.replace("\n", " ")}</li>`).join("");
+    <li class="${i === last ? "is-goal" : ""}"><span>${m.when}</span>${m.label.replaceAll("\n", " ")}</li>`).join("");
 
   function draw() {
     const small = phone.matches;
-    const W = small ? 360 : 880, H = small ? 250 : 400;
+    const W = small ? 360 : 880, H = small ? 250 : 420;
     const L = small ? 38 : 110, R = small ? 336 : 790, T = small ? 26 : 46, B = small ? 206 : 290, MAX = 5;
     const x = (i) => L + (i / last) * (R - L);
     const y = (v) => B - (v / MAX) * (B - T);
