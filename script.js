@@ -14,7 +14,7 @@ const COMPARISONS = [
     title: "10x ROAS First 30 Days",
     tags: ["B2C Mentorship Offer", "Real Estate Niche", "$8K–$12K Ticket"],
     before: { label: "Before", img: "assets/compare/2-organic.jpg", caption: "Before: $21K from YouTube · 18 bookings · 31 opt-ins · 1,113 clicks", text: "This real estate mentor had validated his first $21K on organic, but most of his calls weren’t with buyers. They were with people who wanted to network, pick his brain, or talk deals without any capital to back it up. Only a handful could actually afford an $8K–$12K program, and he had no way to control who came through, or when." },
-    after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: paid funnel results", text: "We built him a paid funnel from the ground up: a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads speaking directly to investors with capital ready to deploy. His first $3K in ad spend turned into $33K, a 10x ROAS in month one. We scaled the next month to $49K at an 8.6x ROAS, with his team closing nearly 40% of calls." },
+    after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: $40K cash collected · $3,483.62 ad spend · 9.47x Meta ROAS", text: "We built him a paid funnel from the ground up: a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads speaking directly to investors with capital ready to deploy. His first $3K in ad spend turned into $33K, a 10x ROAS in month one. We scaled the next month to $49K at an 8.6x ROAS, with his team closing nearly 40% of calls." },
     inputs: [["$3K", "Ad spend"]],
     outputs: [["$33K", "Cash collected"], ["10x", "ROAS", true]],
   },
