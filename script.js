@@ -3,20 +3,20 @@
 // Each stat row reads: inputs joined by "+"  →  outputs. Set `main: true` on the headline output.
 const COMPARISONS = [
   {
-    title: "Bleeding Cash To 12x ROAS",
-    tags: ["B2C coaching offer", "Music niche", "$4k–$8k ticket", "100% cold traffic"],
-    before: { label: "Organic", img: "assets/compare/1-organic.jpg", caption: "Screenshot: organic month (DMs, calendar or Stripe)", text: "This music production coach had a notable name in the space, so getting people to book calls wasn’t the issue. The problem was they were all financially unqualified. Anyone who had just heard of him recently threw more objections than typical warm traffic leads, came in more skeptical of the offer, and ultimately had to settle for small split payments of $250. His entire messaging could only close warm leads and that’s not scalable." },
-    after: { label: "Paid", img: "assets/compare/1-paid.png", caption: "Amount Won $101.99K · ROAS 12", text: "We rebuilt the entire funnel from the ground up: VSL, Headlines, Landing Page Copy, Offer, Pre-Call Warm up Sequence, Setting Process, Closer Frameworks, Facebook Ads, Pixel Optimization, Confirmation Page, Email Marketing, Pricing Strategy, Student Testimonials, ICP, etc. The result was a business doing consistent $100k/months on pure cold traffic with an 8-12x monthly ROAS." },
-    inputs: [["$8,000", "Ad spend"], ["30", "Days"]],
-    outputs: [["$97K", "Cash collected"], ["12x", "ROAS", true]],
+    title: "$6K/Month To $101K/Month",
+    tags: ["B2C Coaching Offer", "Music Production Niche", "$4K–$8K Ticket"],
+    before: { label: "Before", img: "assets/compare/1-organic.jpg", caption: "Screenshot: before (Stripe or revenue dashboard)", text: "This music production coach had a known name in his space, so getting calls wasn’t the problem. Getting the right people on them was. His funnel attracted people who loved the idea of getting results, but were highly skeptical of a high-ticket program. The few who bought could only afford small split payments. His average order value was around $500, and he was stuck at 6K–10K a month." },
+    after: { label: "After", img: "assets/compare/1-paid.png", caption: "Amount Won $101.99K · ROAS 12", text: "We rebuilt everything from the ground up, tailored to buyers who could actually afford it. We built a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads around them. Better leads started booking, his average order value jumped from $500 to $4,000, and that justified scaling. He went from $6K a month to breaking $100K a month on 100% cold traffic, averaging an 8-12x ROAS." },
+    inputs: [["$6K/mo", "Before"]],
+    outputs: [["$101K/mo", "After"], ["8–12x", "ROAS", true]],
   },
   {
-    title: "From $0/Month → $100K/Month",
-    tags: ["B2C coaching offer", "Real estate niche", "$10k–$12k ticket", "90% cold traffic"],
-    before: { label: "Before", img: "assets/compare/2-organic.jpg", caption: "Before: $0 cash collected from paid", text: "This was a partner we started fresh with. Validated the first $30k on organic, but leads were moving slow, we couldn't control the exact person coming through, and most couldn't afford the $12k ticket we were selling at." },
-    after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: $114,000 cash collected · 5.66x ROAS", text: "So we moved straight to paid traffic. We rebuilt everything to optimize for a cold audience. Tightened the VSL, tested ads, headline and funnel copy to target our richest ICP, and finalized our pre-call sequences and sales flows. A few months later, we had an offer vehicle printing $100k/month on autopilot whether the offer owner was on holiday, at construction sites, or only posting 1x YouTube video per month." },
-    inputs: [["$15.2K", "Ad spend"]],
-    outputs: [["$114K", "Cash collected"], ["5.66x", "ROAS", true]],
+    title: "10x ROAS First 30 Days",
+    tags: ["B2C Mentorship Offer", "Real Estate Niche", "$8K–$12K Ticket"],
+    before: { label: "Before", img: "assets/compare/2-organic.jpg", caption: "Before: $0 cash collected from paid", text: "This real estate mentor had validated his first $30K on organic, but most of his calls weren’t with buyers. They were with people who wanted to network, pick his brain, or talk deals without any capital to back it up. Only a handful could actually afford an $8K–$12K program, and he had no way to control who came through, or when." },
+    after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: paid funnel results", text: "We built him a paid funnel from the ground up: a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads speaking directly to investors with capital ready to deploy. His first $3K in ad spend turned into $33K, a 10x ROAS in month one. We scaled the next month to $49K at an 8.6x ROAS, with his team closing nearly 40% of calls." },
+    inputs: [["$3K", "Ad spend"]],
+    outputs: [["$33K", "Cash collected"], ["10x", "ROAS", true]],
   },
   {
     title: "Stop Letting The Algorithm Decide Your Income",
