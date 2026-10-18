@@ -67,19 +67,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
   layer.appendChild(frag);
 })();
 
-// ---- VSL: autoplay muted, click to restart with sound ----------------------
-(function vsl() {
-  const wrap = document.getElementById("vsl");
-  const video = document.getElementById("vsl-video");
-  document.getElementById("vsl-unmute").addEventListener("click", () => {
-    video.currentTime = 0;
-    video.muted = false;
-    video.loop = false;
-    video.controls = true;
-    video.play().catch(() => {});
-    wrap.classList.add("is-unmuted");
-  });
-})();
 
 // ---- Paid vs organic results ---------------------------------------------
 (function results() {
