@@ -2,22 +2,6 @@
 // Area code / number your setters call or text from.
 const CALL_NUMBER = "+XXX";
 
-// Step 3 videos. For each one set `youtube` (the video ID, e.g. "dQw4w9WgXcQ")
-// or `mp4` (a path like "/assets/faq/process.mp4"). Leave both empty to show a placeholder.
-const FAQ = [
-  { icon: "map", q: "What Exactly Do You Offer?", youtube: "", mp4: "" },
-  { icon: "refresh", q: "What Happens If It Doesn't Perform?", youtube: "", mp4: "" },
-  { icon: "user", q: "Who Are You Guys, And What Have You Done?", youtube: "", mp4: "" },
-  { icon: "cap", q: "Can I Do This If I Don't Know How The System Works?", youtube: "", mp4: "" },
-  { icon: "cash", q: "What Are My Running Expenses?", youtube: "", mp4: "" },
-  { icon: "eye", q: "What Can I Expect From This?", youtube: "", mp4: "" },
-  { icon: "target", q: "Who Is This For?", youtube: "", mp4: "" },
-  { icon: "ban", q: "Who Is This NOT For?", youtube: "", mp4: "" },
-  { icon: "shield", q: "Will You Help Me Avoid Bleeding Spend?", youtube: "", mp4: "" },
-  { icon: "tag", q: "What Is The ROI?", youtube: "", mp4: "" },
-  { icon: "activity", q: "How Long Until I See Results?", youtube: "", mp4: "" },
-];
-
 // Step 4 client results. Replace the bracketed placeholders with real numbers.
 // `tall: true` uses a vertical (9:16) player, for Reels/Shorts-style testimonials.
 const CASES = [
@@ -107,11 +91,6 @@ document.addEventListener("click", (e) => {
 document.getElementById("call-number").textContent = CALL_NUMBER;
 document.getElementById("year").textContent = new Date().getFullYear();
 
-document.getElementById("faq").innerHTML = FAQ.map((f) => `
-  <article class="faq__card">
-    <div class="faq__head">${icon(f.icon)}<h3>${f.q}</h3></div>
-    ${player(f, f.q)}
-  </article>`).join("");
 
 document.getElementById("cases").innerHTML = CASES.map((c) => `
   <article class="case">
