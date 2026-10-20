@@ -21,22 +21,6 @@ const CASES = [
     breakdown: [["Ad spend", "[$X]"], ["Cost per call", "[$X]"], ["Close rate", "[X%]"], ["Cash collected", "[$X]"]],
     youtube: "", mp4: "",
   },
-  {
-    icon: "building", name: "[Client Name]", tag: "Client Success Story",
-    desc: "[Offer type] – PIF offer to cold traffic",
-    result: "[e.g. $X in PIF sales]",
-    button: "Funnel Breakdown",
-    breakdown: [["Ad spend", "[$X]"], ["Calls booked", "[X]"], ["PIF sales", "[X]"], ["ROAS", "[X]x"]],
-    youtube: "", mp4: "",
-  },
-  {
-    icon: "home", name: "[Client Name]", tag: "",
-    desc: "[Offer type] – scaled after the first 30 days",
-    result: "[e.g. $X / month on paid]",
-    button: "Cost Breakdown",
-    breakdown: [["Monthly ad spend", "[$X]"], ["Cost per call", "[$X]"], ["Cash collected", "[$X]"], ["ROAS", "[X]x"]],
-    youtube: "", mp4: "",
-  },
 ];
 
 // ---- Icons (24×24 stroke paths) --------------------------------------------
