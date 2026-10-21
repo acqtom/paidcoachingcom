@@ -18,13 +18,6 @@ const COMPARISONS = [
     inputs: [["$3K", "Ad spend"]],
     outputs: [["$33K", "Cash collected"], ["10x", "ROAS", true]],
   },
-  {
-    title: "Stop Letting The Algorithm Decide Your Income",
-    before: { label: "Organic", img: "assets/compare/3-organic.jpg", caption: "Screenshot: organic results", text: "[Client] had great months and empty months, and no way of knowing which was coming. One post would go viral, the next ten wouldn't, and their revenue followed." },
-    after: { label: "Paid", img: "assets/compare/3-paid.jpg", caption: "Screenshot: paid results", text: "We built a paid funnel that runs every day regardless of reach. Within 30 days they were booking [X] calls a week from ads alone, and the swings were gone." },
-    inputs: [["[$X]", "Ad spend"], ["[X]", "Calls / week"]],
-    outputs: [["[$X]", "Cash collected"], ["[X]x", "ROAS", true]],
-  },
 ];
 
 
