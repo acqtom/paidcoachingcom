@@ -82,6 +82,7 @@
 .case summary::after { content: "⌄"; transform: translateY(-3px); }
 .case details[open] summary::after { transform: rotate(180deg) translateY(-3px); }
 .case dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; margin: 16px 0 0; padding: 16px; background: var(--white); border: 1px solid var(--line); border-radius: 10px; font-size: 14px; }
+.case__shot { display: block; width: 100%; margin-top: 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--white); }
 .case dt { color: var(--muted); }
 .case dd { margin: 0; font-weight: 600; text-align: right; }
 

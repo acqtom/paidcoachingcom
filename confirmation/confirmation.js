@@ -9,9 +9,10 @@ const CASES = [
     icon: "chart", name: "Stephen", tag: "Client Success Story",
     vturb: "6adaacdcb5b8cc79020c865b", ratio: 62.45654692931634,
     desc: "Music production coach",
-    result: "$100K/month [8–12x ROAS]",
+    result: "$100K in 30 days [10x ROAS]",
     button: "Funnel Breakdown",
-    breakdown: [["Ad spend", "$8,000"], ["Cash collected", "$100K"], ["ROAS", "12x"]],
+    breakdown: [["Ad spend", "$9.7K"], ["Cash collected", "$101.49K"], ["ROAS", "10x"], ["Timeframe", "30 days"]],
+    breakdownImg: "/assets/cases/stephen-breakdown.png",
     youtube: "", mp4: "",
   },
   {
@@ -19,8 +20,9 @@ const CASES = [
     desc: "Real Estate Development Coach",
     result: "$40,000 in first 30 days (10x ROAS)",
     button: "Cost Breakdown",
+    youtube: "Naet6oekdaI",
     breakdown: [["Ad spend", "$3,450"], ["Cash collected (from ads)", "$33,000"], ["ROAS", "10x"], ["Timeframe", "First 30 days"]],
-    youtube: "", mp4: "",
+    mp4: "",
   },
 ];
 
@@ -102,6 +104,7 @@ document.getElementById("cases").innerHTML = CASES.map((c) => `
       <details>
         <summary>${c.button}</summary>
         <dl>${c.breakdown.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
+        ${c.breakdownImg ? `<img class="case__shot" src="${c.breakdownImg}" alt="${c.name} funnel dashboard" loading="lazy" />` : ""}
       </details>
     </div>
     ${player(c, c.name)}

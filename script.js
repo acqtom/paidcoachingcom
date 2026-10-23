@@ -6,9 +6,9 @@ const COMPARISONS = [
     title: "$6K/Month To $101K/Month",
     tags: ["B2C Coaching Offer", "Music Production Niche", "$4K–$8K Ticket"],
     before: { label: "Before", img: "assets/compare/1-before.png", caption: "Amount Won $6K · ROAS 1", text: "This music production coach had a known name in his space, so getting calls wasn’t the problem. Getting the right people on them was. His funnel attracted people who loved the idea of getting results, but were highly skeptical of a high-ticket program. The few who bought could only afford small split payments. His average order value was around $500, and he was stuck at 6K–10K a month." },
-    after: { label: "After", img: "assets/compare/1-paid.png", caption: "Amount Won $101.99K · ROAS 12", text: "We rebuilt everything from the ground up, tailored to buyers who could actually afford it. We built a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads around them. Better leads started booking, his average order value jumped from $500 to $4,000, and that justified scaling. He went from $6K a month to breaking $100K a month on 100% cold traffic, averaging an 8-12x ROAS." },
+    after: { label: "After", img: "assets/compare/1-paid.png", caption: "Amount Won $101.49K · ROAS 10", text: "We rebuilt everything from the ground up, tailored to buyers who could actually afford it. We built a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads around them. Better leads started booking, his average order value jumped from $500 to $4,000, and that justified scaling. He went from $6K a month to breaking $100K in 30 days on 100% cold traffic, at a 10x ROAS." },
     inputs: [["$6K/mo", "Before"]],
-    outputs: [["$101K/mo", "After"], ["8–12x", "ROAS", true]],
+    outputs: [["$101K/mo", "After"], ["10x", "ROAS", true]],
   },
   {
     title: "10x ROAS First 30 Days",
