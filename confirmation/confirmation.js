@@ -19,7 +19,7 @@ const CASES = [
     desc: "Real Estate Development Coach",
     result: "$40,000 in first 30 days (10x ROAS)",
     button: "Cost Breakdown",
-    breakdown: [["Ad spend", "$3,450"], ["Cash collected", "$33,000"], ["ROAS", "10x"], ["Timeframe", "First 30 days"]],
+    breakdown: [["Ad spend", "$3,450"], ["Cash collected (from ads)", "$33,000"], ["ROAS", "10x"], ["Timeframe", "First 30 days"]],
     youtube: "", mp4: "",
   },
 ];
