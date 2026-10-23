@@ -15,11 +15,11 @@ const CASES = [
     youtube: "", mp4: "",
   },
   {
-    icon: "grid", name: "[Client Name]", tag: "",
-    desc: "[Offer type] – moved from organic DMs to paid",
-    result: "[e.g. $X cash collected in 30 days]",
+    icon: "grid", name: "Adriel", tag: "Client Success Story",
+    desc: "Real Estate Development Coach",
+    result: "$40,000 in first 30 days (10x ROAS)",
     button: "Cost Breakdown",
-    breakdown: [["Ad spend", "[$X]"], ["Cost per call", "[$X]"], ["Close rate", "[X%]"], ["Cash collected", "[$X]"]],
+    breakdown: [["Ad spend", "$3,450"], ["Cash collected", "$33,000"], ["ROAS", "10x"], ["Timeframe", "First 30 days"]],
     youtube: "", mp4: "",
   },
 ];
