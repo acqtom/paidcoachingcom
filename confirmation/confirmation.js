@@ -9,7 +9,7 @@ const CASES = [
     icon: "chart", name: "Stephen", tag: "Client Success Story",
     vturb: "6adaacdcb5b8cc79020c865b", ratio: 62.45654692931634,
     desc: "Music production coach",
-    result: "$100K/month [12x ROAS]",
+    result: "$100K/month [8–12x ROAS]",
     button: "Funnel Breakdown",
     breakdown: [["Ad spend", "$8,000"], ["Cash collected", "$100K"], ["ROAS", "12x"]],
     youtube: "", mp4: "",
