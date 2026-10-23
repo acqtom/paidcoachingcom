@@ -6,11 +6,12 @@ const CALL_NUMBER = "+XXX";
 // `tall: true` uses a vertical (9:16) player, for Reels/Shorts-style testimonials.
 const CASES = [
   {
-    icon: "chart", name: "[Client Name]", tag: "Client Success Story", tall: true,
-    desc: "[Niche] coach – first paid funnel ever",
-    result: "[e.g. 5.2x ROAS in 30 days]",
+    icon: "chart", name: "Stephen", tag: "Client Success Story",
+    vturb: "6adaacdcb5b8cc79020c865b", ratio: 62.45654692931634,
+    desc: "Music production coach",
+    result: "$100K/month [12x ROAS]",
     button: "Funnel Breakdown",
-    breakdown: [["Ad spend", "[$X]"], ["Calls booked", "[X]"], ["Cash collected", "[$X]"], ["ROAS", "[X]x"]],
+    breakdown: [["Ad spend", "$8,000"], ["Cash collected", "$100K"], ["ROAS", "12x"]],
     youtube: "", mp4: "",
   },
   {
@@ -50,7 +51,22 @@ const icon = (name) => `<span class="icon-box"><svg viewBox="0 0 24 24" aria-hid
 
 // ---- Video players: thumbnail + play button, loads the video on click -------
 const PLAY_SVG = '<svg viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></svg>';
-function player({ youtube, mp4, tall }, label) {
+// vturb players in their own frame. vturb has some of these saved with aspectRatio 5625
+// (instead of the real ratio), vertical mode and another video's thumbnail, so correct them inside the frame.
+const VTURB_ACCOUNT = "3b9d5e0c-cdfa-409b-9c8d-b0d07c3dcb14";
+const escAttr = (str) => str.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+function vturbFrame(id, ratio, label) {
+  const cover = `https://images.converteai.net/${VTURB_ACCOUNT}/players/${id}/cover.jpg`;
+  const doc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>html,body{margin:0;background:#000;overflow:hidden}vturb-smartplayer{max-width:none!important}.thumbnail{padding-top:${ratio}%!important}.thumbnail-image{content:url(${cover})}</style></head><body>` +
+    `<script>var _as=Element.prototype.attachShadow;Element.prototype.attachShadow=function(o){var r=_as.call(this,o),s=document.createElement("style");s.textContent='[style*="5625%"]{padding-top:${ratio}%!important}';r.appendChild(s);return r};<\/script>` +
+    `<vturb-smartplayer id="vid-${id}" style="display: block; margin: 0 auto; width: 100%; "><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: ${ratio}% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>` +
+    `<script>(function(){var el=document.getElementById("vid-${id}"),fn;Object.defineProperty(el,"start",{configurable:true,get:function(){return fn},set:function(f){fn=function(n){try{n.playerInit.aspectRatio=${ratio};n.playerInit.verticalVideo=false;n.playerInit.thumbnailKey="${VTURB_ACCOUNT}/players/${id}/cover.jpg"}catch(e){}return f.call(this,n)}}});})();<\/script>` +
+    `<script>var s=document.createElement("script");s.src="https://scripts.converteai.net/${VTURB_ACCOUNT}/players/${id}/v4/player.js";s.async=true;document.head.appendChild(s);<\/script></body></html>`;
+  return `<div class="player player--vturb" style="aspect-ratio: 100 / ${ratio}"><iframe title="${escAttr(label)}" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen srcdoc="${escAttr(doc)}"></iframe></div>`;
+}
+
+function player({ youtube, mp4, tall, vturb, ratio }, label) {
+  if (vturb) return vturbFrame(vturb, ratio || 56.25, label);
   const thumb = youtube ? `<img src="https://i.ytimg.com/vi/${youtube}/hqdefault.jpg" alt="" loading="lazy" />` : "";
   const soon = youtube || mp4 ? "" : '<span class="player__soon">Video coming soon</span>';
   return `<div class="player${tall ? " player--tall" : ""}" data-youtube="${youtube || ""}" data-mp4="${mp4 || ""}">
