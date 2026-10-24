@@ -1,6 +1,6 @@
 // ---- Config ---------------------------------------------------------------
 // Area code / number your setters call or text from.
-const CALL_NUMBER = "+XXX";
+const CALL_NUMBER = "(714)";
 
 // Step 4 client results. Replace the bracketed placeholders with real numbers.
 // `tall: true` uses a vertical (9:16) player, for Reels/Shorts-style testimonials.
@@ -126,11 +126,11 @@ document.getElementById("cases").innerHTML = CASES.map((c) => `
 // First-30-days chart. `roas` sets the height of each point (0–5x).
 // Labels sit under the chart, beneath each point. Use \n to break a label onto two lines.
 const MILESTONES = [
-  { when: "Today", roas: 0, label: "Funnel Audit\n& Onboarding" },
-  { when: "Day 7", roas: 0, label: "Cold Funnel Set Up\nComplete, New Ad\nScripts Ready" },
-  { when: "Day 14", roas: 0.6, label: "Ads Live" },
-  { when: "Day 21", roas: 2.2, label: "Closes Begin,\nDouble Down On\nWinning Ads" },
-  { when: "Day 30", roas: 5, label: "More Closes,\nProfitable Campaign\nReady To Scale" },
+  { when: "Day 1", short: "Day 1", roas: 0, label: "Onboarding Call" },
+  { when: "Day 7", short: "Day 7", roas: 0, label: "Funnel Scripted,\nReady To Film" },
+  { when: "Ads Live", short: "Live", roas: 0, label: "30-Day Sprint\nBegins" },
+  { when: "Sprint Day 14", short: "Day 14", roas: 1.55, label: "Better Calls, First\nCold Traffic Sales" },
+  { when: "Sprint Day 30", short: "Day 30", roas: 5, label: "Profitable Campaign,\nReady To Scale" },
 ];
 
 // ---- Growth chart ---------------------------------------------------------
@@ -188,7 +188,7 @@ const MILESTONES = [
 
       if (small) {
         // Short axis labels; the full step names are in the list under the chart
-        const short = m.when.replace("Week ", "Wk ");
+        const short = m.short || m.when;
         const anchor = i === 0 ? "start" : i === last ? "end" : "middle";
         const tx = i === 0 ? px - 6 : i === last ? px + 6 : px;
         out += `<text x="${tx}" y="${B + 26}" text-anchor="${anchor}" fill="#0050e6" font-size="11" font-weight="700" letter-spacing="0.8">${short.toUpperCase()}</text>`;
