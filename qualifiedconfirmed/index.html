@@ -31,6 +31,16 @@
   src="https://www.facebook.com/tr?id=1794996214952576&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
+  <script>
+    try {
+      if (!sessionStorage.getItem('pc_schedule_fired')) {
+        fbq('track', 'Schedule');
+        sessionStorage.setItem('pc_schedule_fired', '1');
+      }
+    } catch (e) {
+      fbq('track', 'Schedule');
+    }
+  </script>
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
