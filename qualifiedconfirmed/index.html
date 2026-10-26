@@ -32,7 +32,18 @@
   /></noscript>
   <!-- End Meta Pixel Code -->
   <script>
-    fbq('track', 'Schedule');
+  (function () {
+    if (typeof fbq !== "function") return;
+    try {
+      if (sessionStorage.getItem("schedule_fired") === "1") return;
+      fbq("track", "Schedule");
+      sessionStorage.setItem("schedule_fired", "1");
+    } catch (e) {
+      if (window.__scheduleFired) return;
+      fbq("track", "Schedule");
+      window.__scheduleFired = true;
+    }
+  })();
   </script>
 </head>
 <body>
