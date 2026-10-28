@@ -107,6 +107,8 @@ main, .footer { position: relative; z-index: 1; }
 .vsl__icon { width: clamp(56px, 13vw, 100px); height: auto; color: var(--white); }
 .vsl.is-unmuted .vsl__overlay { display: none; }
 .vsl--embed { aspect-ratio: auto; background: #000; }
+.vsl--embed vturb-smartplayer { max-width: none !important; }
+.vsl--embed .thumbnail { padding-top: 56.25% !important; }
 
 /* Desktop hero: 3-line headline and everything (incl. button) above the fold */
 @media (min-width: 761px) {
