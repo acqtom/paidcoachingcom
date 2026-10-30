@@ -123,6 +123,51 @@ main, .footer { position: relative; z-index: 1; }
   .hero .cta { margin-top: 16px; padding: 15px 30px; font-size: 17px; }
 }
 
+/* Hero guarantee + "on this call" */
+.guarantee { display: flex; width: fit-content; align-items: center; gap: 10px; max-width: 760px; margin: 18px auto 0; padding: 10px 18px; border: 1px solid rgba(0, 80, 230, 0.35); border-radius: 999px; background: var(--mist); font-size: 14px; line-height: 1.4; color: var(--black); text-align: left; }
+.guarantee strong { font-weight: 800; }
+.guarantee svg { flex: none; width: 18px; height: 18px; fill: none; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.oncall { max-width: 680px; margin: 22px auto 0; padding: 22px 28px; background: var(--white); border: 1px solid var(--line-2); border-radius: 14px; box-shadow: 6px 6px 0 rgba(0, 80, 230, 0.12); text-align: left; }
+.oncall__title { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.oncall ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.oncall li { position: relative; padding-left: 28px; font-size: 16px; line-height: 1.5; color: var(--muted-2); }
+.oncall li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--blue); font-weight: 800; }
+@media (max-width: 760px) {
+  .hero .badge { white-space: normal; max-width: 100%; line-height: 1.35; }
+  .guarantee { border-radius: 14px; padding: 10px 14px; font-size: 13px; margin-top: 14px; }
+  .oncall { padding: 18px 16px; margin-top: 16px; }
+  .oncall li { font-size: 14px; }
+}
+
+/* Client results: summary cards */
+.stories { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 980px; margin: 40px auto 0; }
+.story { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 26px; text-align: left; font: inherit; color: inherit; background: var(--mist); border: 1px solid var(--line-2); border-top: 3px solid var(--blue); border-radius: 16px; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.story:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(17, 17, 17, 0.1); }
+.story__who { font-size: 14px; color: var(--muted); }
+.story__who strong { color: var(--black); font-weight: 700; }
+.story__metric { font-family: var(--heading); font-size: 26px; font-weight: 800; line-height: 1.2; color: var(--blue); }
+.story__sub { margin-top: -4px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.story__blurb { font-size: 15px; line-height: 1.6; color: var(--muted-2); }
+.story__more { margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 700; color: var(--blue); }
+.story:hover .story__more { text-decoration: underline; }
+
+/* Client story popup */
+.story-modal { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 24px; background: rgba(17, 17, 17, 0.6); backdrop-filter: blur(4px); visibility: hidden; opacity: 0; transition: opacity 0.2s ease, visibility 0.2s; }
+.story-modal.is-open { visibility: visible; opacity: 1; }
+.story-modal__panel { position: relative; width: min(1040px, 100%); max-height: 92vh; overflow-y: auto; background: var(--mist); border-radius: 18px; box-shadow: 0 30px 80px rgba(17, 17, 17, 0.35); }
+.story-modal__close { position: sticky; top: 12px; float: right; margin: 12px 12px 0 0; z-index: 2; width: 38px; height: 38px; border-radius: 50%; border: 0; background: var(--black); color: var(--white); font-size: 16px; cursor: pointer; }
+.story-modal__body .result { padding: 40px; text-align: center; }
+.story-modal__body .result .cta { margin-top: 30px; }
+@media (max-width: 760px) {
+  .stories { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+  .story { padding: 20px 18px; }
+  .story__metric { font-size: 22px; }
+  .story__blurb { font-size: 14px; }
+  .story-modal { padding: 0; }
+  .story-modal__panel { max-height: 100%; height: 100%; border-radius: 0; }
+  .story-modal__body .result { padding: 20px 16px 28px; }
+}
+
 /* Paid vs organic results */
 .results { display: grid; gap: 28px; margin: 52px auto 0; max-width: 1040px; }
 .result { padding: 40px; }

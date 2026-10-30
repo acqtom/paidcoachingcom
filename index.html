@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Paidcoaching.com</title>
-  <meta name="description" content="We’ll build you a paid ads funnel from scratch, get it to 5-10x ROAS, and hand it over for you to scale, in a 30-day sprint." />
+  <meta name="description" content="We build your entire paid ads funnel. You get calls that close like your organic leads. Your November ad spend is on us." />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png" />
@@ -39,12 +39,12 @@
     <!-- Hero -->
     <section class="hero section">
       <div class="container container--wide center">
-        <span class="badge">High-Ticket Coaches And Consultants</span>
+        <span class="badge">For High-Ticket Coaches Doing $30K+/Month on YouTube &amp; Instagram</span>
         <h1 class="hero__title">
-          We’ll Build You A Paid Ads Funnel From Scratch, Get It To 5-10x ROAS, And Hand It Over For You To Scale,
-          <span class="accent">In A 30-Day Sprint</span>
+          We Build Your Entire Paid Ads Funnel. You Get Calls That Close Like Your Organic Leads.
+          <span class="accent">Your November Ad Spend Is On Us.</span>
         </h1>
-        <p class="hero__sub">In this sprint, Tom &amp; Derek (8-12x ROAS months on cold traffic) build the exact system behind their clients’ $100K months, done for you from day one... including your ads, VSL, landing pages, pre-call warm-up, and scaling frameworks.</p>
+        <p class="hero__sub">Give us 30 days. We’ll optimize your ads toward 5-10x ROAS, then hand off a stable source of qualified calls that doesn’t depend on your organic content. No retainers. No revenue splits.</p>
 
         <div class="hero__offer">
           <p class="bonus"><strong>Offer Launch Bonus:</strong> For our first cohort, your ad spend is on us.</p>
@@ -55,16 +55,27 @@
           <vturb-smartplayer id="vid-6ae133c7afbe3cdd0421586e" style="display: block; margin: 0 auto; width: 100%; "><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer> <script>(function(){var el=document.getElementById("vid-6ae133c7afbe3cdd0421586e"),fn;Object.defineProperty(el,"start",{configurable:true,get:function(){return fn},set:function(f){fn=function(n){try{n.playerInit.aspectRatio=56.25;n.playerInit.verticalVideo=false}catch(e){}return f.call(this,n)}}});})();</script> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/3b9d5e0c-cdfa-409b-9c8d-b0d07c3dcb14/players/6ae133c7afbe3cdd0421586e/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
         </div>
 
-        <a class="cta js-cta" href="#apply">Apply For November Cohort <span class="cta__arrow">→</span></a>
+        <a class="cta js-cta" href="#apply">Book A Free Strategy Session <span class="cta__arrow">→</span></a>
+        <p class="guarantee"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg><span><strong>30-Day ROI Guarantee:</strong> If the sprint doesn’t pay for itself in 30 days, we keep working for free until it does.</span></p>
+        <div class="oncall">
+          <p class="oncall__title">On This Call We’ll:</p>
+          <ul>
+            <li>Pinpoint why paid leads haven’t closed like your organic ones, or how to make sure they do</li>
+            <li>Map out exactly what we’d build for your offer: ads, VSL, landing page and pre-call follow-up</li>
+            <li>Run the numbers on what your funnel could bring in, using your actual price and close rate</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- Paid vs organic results -->
+    <!-- Client results: summary cards, full story opens in a popup -->
     <section class="section">
       <div class="container center">
-        <h2 class="h2">Our Client <span class="accent">Results</span><br />Speak For Themselves</h2>
-        <div class="results" id="results"></div>
-        <a class="cta js-cta" href="#apply">Apply For November Cohort <span class="cta__arrow">→</span></a>
+        <p class="eyebrow eyebrow--blue">Real Results</p>
+        <h2 class="h2">What Happens When We Install <span class="accent">Paid Ads</span> For High-Ticket Coaches</h2>
+        <p class="lead">Every coach below was relying on inconsistent leads from YouTube, Instagram, or ads that barely broke even. Here’s what happened after we installed their paid ads funnel.</p>
+        <div class="stories" id="results"></div>
+        <a class="cta js-cta" href="#apply">Book A Free Strategy Session <span class="cta__arrow">→</span></a>
       </div>
     </section>
 
@@ -99,7 +110,7 @@
           <div><strong>5–10x</strong><span>Monthly average ROAS</span></div>
           <div><strong>$3k–$15k</strong><span>Packages</span></div>
         </div>
-        <a class="cta js-cta" href="#apply">Apply For November Cohort <span class="cta__arrow">→</span></a>
+        <a class="cta js-cta" href="#apply">Book A Free Strategy Session <span class="cta__arrow">→</span></a>
       </div>
     </section>
   </main>
@@ -119,6 +130,14 @@
     </div>
     <p class="container container--wide footer__copy">© <span id="year">2026</span> Paidcoaching.com. All rights reserved.</p>
   </footer>
+
+  <!-- Client story popup -->
+  <div class="story-modal" id="story-modal" aria-hidden="true" role="dialog" aria-label="Client story">
+    <div class="story-modal__panel">
+      <button class="story-modal__close" type="button" aria-label="Close">✕</button>
+      <div class="story-modal__body" id="story-body"></div>
+    </div>
+  </div>
 
   <!-- Application form popup (Typeform) -->
   <div class="tf-modal" id="apply-modal" aria-hidden="true" role="dialog" aria-label="Apply for a strategy session">

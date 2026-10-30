@@ -3,6 +3,7 @@
 // Each stat row reads: inputs joined by "+"  →  outputs. Set `main: true` on the headline output.
 const COMPARISONS = [
   {
+    card: { who: "Stephen", meta: "Music Production Coaching · $4K–$8K ticket", metric: "$10K Ad Spend → $101K Revenue", blurb: "Plenty of leads, wrong buyers. We rebuilt his funnel and he went from $6K/mo to $101K/mo." },
     title: "$6K/Month To $101K/Month",
     tags: ["B2C Coaching Offer", "Music Production Niche", "$4K–$8K Ticket"],
     before: { label: "Before", img: "assets/compare/1-before.png", caption: "Amount Won $6K · ROAS 1", text: "This music production coach had a known name in his space, so getting calls wasn’t the problem. Getting the right people on them was. His funnel attracted people who loved the idea of getting results, but were highly skeptical of a high-ticket program. The few who bought could only afford small split payments. His average order value was around $500, and he was stuck at 6K–10K a month." },
@@ -11,6 +12,7 @@ const COMPARISONS = [
     outputs: [["$101K/mo", "After"], ["10x", "ROAS", true]],
   },
   {
+    card: { who: "Adriel", meta: "Real Estate Mentorship · $7K–$12K ticket", metric: "$3K Ad Spend → $33K Revenue", sub: "First 30 days · 10x ROAS", blurb: "His first paid campaign ever. His team closed nearly 40% of calls from people who’d never heard of him." },
     title: "10x ROAS First 30 Days",
     tags: ["B2C Mentorship Offer", "Real Estate Niche", "$8K–$12K Ticket"],
     before: { label: "Before", img: "assets/compare/2-organic.jpg", caption: "Before: $21K from YouTube · 18 bookings · 31 opt-ins · 1,113 clicks", text: "This real estate mentor had validated his first $21K on organic, but most of his calls weren’t with buyers. They were with people who wanted to network, pick his brain, or talk deals without any capital to back it up. Only a handful could actually afford an $8K–$12K program, and he had no way to control who came through, or when." },
@@ -36,7 +38,7 @@ const COMPARISONS = [
     document.body.style.overflow = "";
     if (location.hash === "#apply") history.replaceState(null, "", location.pathname + location.search);
   };
-  document.querySelectorAll(".js-cta").forEach((a) => a.addEventListener("click", open));
+  document.addEventListener("click", (e) => { if (e.target.closest(".js-cta")) open(e); });
   modal.querySelector(".tf-modal__close").addEventListener("click", close);
   modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("is-open")) close(); });
@@ -77,8 +79,8 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const tile = ([value, label, main], cls) =>
     `<div class="stat ${cls}${main ? " stat--main" : ""}"><strong>${value}</strong><span>${label}</span></div>`;
 
-  document.getElementById("results").innerHTML = COMPARISONS.map((c) => `
-    <article class="result panel">
+  const full = (c) => `
+    <article class="result">
       <h3 class="result__pill">${c.title}</h3>
       ${c.tags ? `<ul class="result__tags">${c.tags.map((t) => `<li>${t}</li>`).join("")}</ul>` : ""}
       <div class="result__pair">${side(c.before, "result__label--organic")}${side(c.after, "result__label--paid")}</div>
@@ -87,6 +89,44 @@ document.getElementById("year").textContent = new Date().getFullYear();
         <span class="equation__op equation__arrow">→</span>
         ${c.outputs.map((o) => tile(o, "stat--out")).join("")}
       </div>
-    </article>`).join("");
+      <a class="cta js-cta" href="#apply">Book A Free Strategy Session <span class="cta__arrow">→</span></a>
+    </article>`;
+
+  // Summary cards
+  document.getElementById("results").innerHTML = COMPARISONS.map((c, i) => `
+    <button class="story" type="button" data-story="${i}">
+      <span class="story__who"><strong>${c.card.who}</strong> · ${c.card.meta}</span>
+      <span class="story__metric">${c.card.metric}</span>
+      ${c.card.sub ? `<span class="story__sub">${c.card.sub}</span>` : ""}
+      <span class="story__blurb">${c.card.blurb}</span>
+      <span class="story__more">See full story →</span>
+    </button>`).join("");
+
+  // Full story popup
+  const modal = document.getElementById("story-modal");
+  const body = document.getElementById("story-body");
+  const applyModal = document.getElementById("apply-modal");
+  const open = (i) => {
+    body.innerHTML = full(COMPARISONS[i]);
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    modal.querySelector(".story-modal__panel").scrollTop = 0;
+  };
+  const close = () => {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    if (!applyModal.classList.contains("is-open")) document.body.style.overflow = "";
+  };
+  document.getElementById("results").addEventListener("click", (e) => {
+    const card = e.target.closest(".story");
+    if (card) open(+card.dataset.story);
+  });
+  modal.querySelector(".story-modal__close").addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) close();
+    if (e.target.closest(".js-cta")) close(); // the apply popup opens on top
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("is-open")) close(); });
 })();
 
