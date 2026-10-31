@@ -38,7 +38,12 @@ const COMPARISONS = [
     document.body.style.overflow = "";
     if (location.hash === "#apply") history.replaceState(null, "", location.pathname + location.search);
   };
-  document.addEventListener("click", (e) => { if (e.target.closest(".js-cta")) open(e); });
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".js-cta")) return;
+    // Meta Pixel conversion: every click on a button that opens the application form
+    if (typeof fbq === "function") fbq("track", "Lead");
+    open(e);
+  });
   modal.querySelector(".tf-modal__close").addEventListener("click", close);
   modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("is-open")) close(); });
