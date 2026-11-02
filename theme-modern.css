@@ -137,6 +137,12 @@ h1, h2, h3 { letter-spacing: -0.035em; }
   .hero { padding-bottom: 44px; }
 }
 
+/* Small pill above the video */
+.adspend-pill { display: flex; width: fit-content; align-items: center; gap: 8px; margin: 22px auto 0; padding: 6px 14px 6px 10px; background: var(--cream); border: 1px solid var(--cream-line); border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--ink); }
+.adspend-pill__meta { flex: none; width: 22px; height: 13px; fill: none; stroke: #0081fb; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.hero .adspend-pill + .vsl { margin-top: 14px; }
+@media (max-width: 760px) { .adspend-pill { margin-top: 14px; font-size: 12px; padding: 5px 12px 5px 9px; } .hero .adspend-pill + .vsl { margin-top: 10px; } }
+
 /* Team */
 .panel { background: #ffffff; border-color: var(--line-2); border-radius: 14px; }
 .coach__name { color: var(--ink); }
