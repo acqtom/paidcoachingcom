@@ -89,6 +89,22 @@ h1, h2, h3 { letter-spacing: -0.035em; }
 .promise__terms { margin-top: 14px; color: var(--muted); font-size: 12px; line-height: 1.6; }
 @media (max-width: 760px) { .promise__cards { grid-template-columns: 1fr; } }
 
+/* Stats row in the hero + mini guarantee cards under it */
+.hero-stats { max-width: 820px; margin: 0 auto; padding: 30px 12px 0; border-top: 0; text-align: center; }
+.hero .oncall { margin-bottom: 0; }
+.promise-mini { background: var(--band); padding: 34px 0; }
+.promise-mini__cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 680px; margin: 0 auto; }
+.promise-mini__card { padding: 22px 24px; background: #ffffff; border: 1px solid var(--line-2); border-radius: 12px; text-align: center; }
+.promise-mini__card .promise__when { margin-bottom: 8px; color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.promise-mini__card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+.promise-mini__card p { color: var(--muted); font-size: 14px; line-height: 1.55; }
+.promise-mini + .section { background: var(--band); padding-top: 24px; }
+@media (max-width: 760px) {
+  .promise-mini { padding: 24px 0; }
+  .promise-mini__cards { grid-template-columns: 1fr; gap: 12px; }
+  .hero-stats { padding-top: 22px; }
+}
+
 /* Team */
 .panel { background: #ffffff; border-color: var(--line-2); border-radius: 14px; }
 .coach__name { color: var(--ink); }
