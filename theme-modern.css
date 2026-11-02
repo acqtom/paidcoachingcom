@@ -119,6 +119,24 @@ h1, h2, h3 { letter-spacing: -0.035em; }
   .gcard__text { font-size: 13px; }
 }
 
+/* Roomier spacing below the video (matches reference) */
+@media (min-width: 761px) {
+  .hero .cta { margin-top: 30px; }
+  .gcards { margin-top: 30px; gap: 16px; }
+  .gcard { padding: 16px 20px; }
+  .hero .oncall { margin-top: 48px; padding-bottom: 40px; }
+  .oncall__title { margin-bottom: 16px; }
+  .oncall ul { gap: 12px; }
+  .hero-stats { padding-top: 40px; }
+  .hero { padding-bottom: 64px; }
+}
+@media (max-width: 760px) {
+  .gcards { margin-top: 20px; }
+  .hero .oncall { margin-top: 32px; padding-bottom: 28px; }
+  .hero-stats { padding-top: 28px; }
+  .hero { padding-bottom: 44px; }
+}
+
 /* Team */
 .panel { background: #ffffff; border-color: var(--line-2); border-radius: 14px; }
 .coach__name { color: var(--ink); }
