@@ -168,3 +168,5 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
   .oncall { padding-bottom: 24px; margin-top: 22px; }
   .oncall li { font-size: 14px; }
 }
+
+.hero__dfy { color: var(--ink); font-weight: 700; }
