@@ -1,0 +1,103 @@
+/* Black / white / blue theme (loaded after styles.css) for the main and confirmation pages.
+   Remove the <link> to theme-modern.css on a page to go back to the old look. */
+
+:root {
+  --blue: #0050e6;            /* accent: logo blue */
+  --gold: #0050e6;
+  --gold-text: #0050e6;
+  --cream: #eef3ff;
+  --cream-line: #c8d7fb;
+  --band: #f5f7fa;
+  --ink: #161616;
+  --black: #161616;
+  --muted: #6b6b6b;
+  --muted-2: #3f3f3f;
+  --line: #ece9e1;
+  --line-2: #e4e0d5;
+  --mist: #ffffff;
+  --heading: "Inter Tight", "Figtree", system-ui, sans-serif;
+  --body: "DM Sans", "Inter", system-ui, sans-serif;
+}
+
+body { background: #ffffff; color: var(--ink); }
+.stars { display: none; }
+.accent { color: var(--gold-text); }
+h1, h2, h3 { letter-spacing: -0.035em; }
+
+/* Hero */
+.hero .badge {
+  background: var(--cream); color: var(--ink); border: 1px solid var(--cream-line); border-radius: 999px;
+  padding: 8px 16px; font-family: var(--body); font-weight: 600; font-size: 14px;
+}
+.badge__hl { color: var(--gold-text); font-weight: 700; }
+.hero__title { font-weight: 700; color: var(--ink); }
+.hero__sub { color: var(--muted); }
+.vsl { border: 0; border-radius: 12px; box-shadow: 0 28px 70px rgba(20, 20, 20, 0.14); background: #f4f2ec; }
+
+/* Buttons */
+.cta {
+  background: var(--gold); color: #ffffff; border: 0; border-radius: 4px;
+  box-shadow: 0 10px 24px rgba(0, 80, 230, 0.28); font-family: var(--body); font-weight: 700;
+}
+.cta:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0, 80, 230, 0.36); background: #1a63f0; }
+
+/* Guarantee pill */
+.guarantee { background: var(--cream); border-color: var(--cream-line); }
+.guarantee svg { stroke: var(--gold-text); }
+
+/* "On this call" — plain list with a divider under it, like the reference */
+.oncall { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: 0 0 34px; border-bottom: 1px solid var(--line-2); max-width: 820px; margin-top: 34px; }
+.oncall__title { color: var(--muted-2); font-size: 12px; letter-spacing: 0.16em; }
+.oncall ul { max-width: 520px; margin: 0 auto; }
+.oncall li { font-size: 15px; color: var(--muted-2); }
+.oncall li::before { color: var(--gold); font-weight: 400; }
+
+/* Section headings */
+.h2 { font-weight: 700; color: var(--ink); }
+.eyebrow--blue { color: var(--gold-text); letter-spacing: 0.16em; }
+.lead { color: var(--muted); }
+
+/* Results band + cards */
+.hero + .section { background: var(--band); }
+.story { background: #ffffff; border: 1px solid var(--line-2); border-top: 1px solid var(--line-2); border-radius: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+.story:hover { box-shadow: 0 18px 40px rgba(20, 20, 20, 0.08); }
+.story__metric { color: var(--gold-text); }
+.story__more { color: var(--gold-text); }
+.story__pfp { background: var(--gold); box-shadow: 0 0 0 1.5px var(--gold); }
+
+/* Story popup (full before/after) */
+.story-modal__panel { background: #ffffff; }
+.result__pill { color: var(--ink); border-color: var(--cream-line); background: var(--cream); }
+.result__tags li { background: #ffffff; }
+.result__img, .result__text { border-color: var(--line-2); }
+.result__label--paid { background: var(--gold); color: #ffffff; }
+.equation__arrow { color: var(--gold-text); }
+.stat--out { border-color: var(--cream-line); color: var(--gold-text); }
+.stat--main { background: var(--gold); color: #ffffff; box-shadow: 0 10px 24px rgba(0, 80, 230, 0.28); }
+.stat--main span { color: rgba(255, 255, 255, 0.85); }
+
+/* Team */
+.panel { background: #ffffff; border-color: var(--line-2); border-radius: 14px; }
+.coach__name { color: var(--ink); }
+.coach__avatar { border-color: var(--gold); background: var(--gold); }
+.coach__avatars .coach__avatar + .coach__avatar { box-shadow: 0 0 0 4px #ffffff; }
+.team-stats { background: transparent; border: 0; border-top: 1px solid var(--line-2); border-radius: 0; }
+.team-stats strong { color: var(--ink); font-weight: 700; }
+.team-stats span { color: var(--muted); letter-spacing: 0.14em; }
+
+/* Footer */
+.footer { background: var(--band); border-top-color: var(--line-2); }
+.footer__links a:hover { color: var(--gold-text); }
+
+/* Apply popup close button */
+.tf-modal__close, .story-modal__close { background: var(--ink); }
+
+/* Confirmation pages: alternate white / light blue-grey section bands */
+main:has(.conf-hero) > section:nth-of-type(even) { background: var(--band); }
+main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; }
+
+@media (max-width: 760px) {
+  .hero .badge { font-size: 12px; padding: 7px 12px; }
+  .oncall { padding-bottom: 24px; margin-top: 22px; }
+  .oncall li { font-size: 14px; }
+}
