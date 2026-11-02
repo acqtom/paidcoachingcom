@@ -76,6 +76,19 @@ h1, h2, h3 { letter-spacing: -0.035em; }
 .stat--main { background: var(--gold); color: #ffffff; box-shadow: 0 10px 24px rgba(0, 80, 230, 0.28); }
 .stat--main span { color: rgba(255, 255, 255, 0.85); }
 
+/* Guarantee + offer section */
+.promise { background: var(--band); }
+.promise__icon { display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto 22px; border-radius: 50%; background: var(--blue); box-shadow: 0 10px 24px rgba(0, 80, 230, 0.25); }
+.promise__icon svg { width: 24px; height: 24px; fill: none; stroke: #ffffff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.promise__cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 640px; margin: 34px auto 0; text-align: left; }
+.promise__card { padding: 20px 22px; background: #ffffff; border: 1px solid var(--line-2); border-radius: 12px; }
+.promise__card .promise__when { margin-bottom: 8px; color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.promise__card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+.promise__card p { color: var(--muted); font-size: 14px; line-height: 1.55; }
+.promise .cta { margin-top: 30px; }
+.promise__terms { margin-top: 14px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 760px) { .promise__cards { grid-template-columns: 1fr; } }
+
 /* Team */
 .panel { background: #ffffff; border-color: var(--line-2); border-radius: 14px; }
 .coach__name { color: var(--ink); }
