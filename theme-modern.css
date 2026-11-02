@@ -98,11 +98,25 @@ h1, h2, h3 { letter-spacing: -0.035em; }
 .promise-mini__card .promise__when { margin-bottom: 8px; color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
 .promise-mini__card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
 .promise-mini__card p { color: var(--muted); font-size: 14px; line-height: 1.55; }
-.promise-mini + .section { background: var(--band); padding-top: 24px; }
 @media (max-width: 760px) {
   .promise-mini { padding: 24px 0; }
   .promise-mini__cards { grid-template-columns: 1fr; gap: 12px; }
   .hero-stats { padding-top: 22px; }
+}
+
+/* Guarantee cards under the hero button (pill style) */
+.gcards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 640px; margin: 20px auto 0; text-align: left; }
+.gcard { padding: 14px 18px; background: var(--cream); border: 1px solid var(--cream-line); border-radius: 14px; }
+.gcard__head { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--ink); }
+.gcard__head strong { font-weight: 800; }
+.gcard__head svg { flex: none; width: 18px; height: 18px; fill: none; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.gcard__when { margin-top: 6px !important; color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.gcard__text { margin-top: 4px !important; color: var(--muted-2); font-size: 13.5px; line-height: 1.5; }
+@media (max-width: 760px) {
+  .gcards { grid-template-columns: 1fr; gap: 10px; margin-top: 16px; }
+  .gcard { padding: 12px 14px; }
+  .gcard__head { font-size: 14px; }
+  .gcard__text { font-size: 13px; }
 }
 
 /* Team */
