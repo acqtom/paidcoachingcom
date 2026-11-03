@@ -24,6 +24,18 @@ const CASES = [
     breakdown: [["Ad spend", "$3,450"], ["Cash collected (from ads)", "$33,000"], ["ROAS", "10x"], ["Timeframe", "First 30 days"]],
     mp4: "",
   },
+  {
+    // Vertical video testimonial: placeholder until the video is ready (add vturb/youtube/mp4 here)
+    icon: "play", name: "Alex", tag: "Client Success Story",
+    desc: "YouTube Automation Coach",
+    result: "$12/month Skool → $200K cash collected",
+    button: "Proof",
+    breakdownImgs: [
+      ["/assets/compare/3-before.png", "Alex's Skool before: $12/month, 101 members"],
+      ["/assets/compare/3-after.png", "Alex's dashboard after: $202,889.01 cash collected, 91 new customers"],
+    ],
+    tall: true, youtube: "", mp4: "",
+  },
 ];
 
 // ---- Icons (24×24 stroke paths) --------------------------------------------
@@ -103,8 +115,9 @@ document.getElementById("cases").innerHTML = CASES.map((c) => `
       <p class="case__result">${c.result}</p>
       <details>
         <summary>${c.button}</summary>
-        <dl>${c.breakdown.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
+        ${c.breakdown ? `<dl>${c.breakdown.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>` : ""}
         ${c.breakdownImg ? `<img class="case__shot" src="${c.breakdownImg}" alt="${c.name} funnel dashboard" loading="lazy" />` : ""}
+        ${(c.breakdownImgs || []).map(([src, alt]) => `<img class="case__shot" src="${src}" alt="${alt}" loading="lazy" />`).join("")}
       </details>
     </div>
     ${player(c, c.name)}

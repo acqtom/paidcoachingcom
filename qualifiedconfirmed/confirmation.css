@@ -66,7 +66,7 @@
 .player__play:disabled span { opacity: 0.35; transform: none; box-shadow: none; }
 .player__play svg { width: 26px; height: 26px; fill: var(--white); margin-left: 4px; }
 .player__soon { position: absolute; left: 12px; bottom: 10px; font-size: 12px; color: var(--muted); }
-.player--tall { aspect-ratio: 9 / 16; max-height: 560px; width: auto; margin-left: auto; }
+.player--tall { aspect-ratio: 9 / 16; width: min(315px, 100%); margin-left: auto; }
 
 /* Step 4 – case studies */
 .cases { display: grid; gap: 24px; margin-top: 44px; }
@@ -92,5 +92,5 @@
   .invite__note { margin-bottom: 0; }
   .invite__arrow { display: none; }
   .case { grid-template-columns: 1fr; padding: 22px; gap: 22px; }
-  .player--tall { margin: 0 auto; max-height: 480px; }
+  .player--tall { margin: 0 auto; width: min(270px, 100%); }
 }

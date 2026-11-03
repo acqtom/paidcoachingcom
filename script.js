@@ -26,8 +26,8 @@ const COMPARISONS = [
     title: "$12 Skool To $200K Cash Collected",
     video: { caption: "[Video testimonial coming soon]" }, // later: video: { embed: "<iframe …>" }
     tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$2K–$4K Ticket"],
-    before: { label: "Before", img: "assets/compare/3-before.png", fit: "contain", bg: "#333333", caption: "Before: $12/month Skool · 101 members" },
-    after: { label: "After", img: "assets/compare/3-after.png", fit: "contain", bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers" },
+    before: { label: "Before", img: "assets/compare/3-before.png", fit: "contain", thin: true, bg: "#333333", caption: "Before: $12/month Skool · 101 members" },
+    after: { label: "After", img: "assets/compare/3-after.png", fit: "contain", thin: true, bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers" },
     inputs: [["$12/mo", "Skool"]],
     outputs: [["$200K", "Cash collected", true]],
   },
@@ -82,7 +82,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // ---- Paid vs organic results ---------------------------------------------
 (function results() {
   const media = (side, cls) => `
-    <figure class="result__img"${side.bg ? ` style="background:${side.bg}"` : ""}>
+    <figure class="result__img${side.thin ? " result__img--thin" : ""}"${side.bg ? ` style="background:${side.bg}"` : ""}>
       <span class="result__label ${cls}">${side.label}</span>
       <img src="${side.img}" alt="${side.label} results: ${side.caption}" loading="lazy"${side.fit ? ` style="object-fit:${side.fit}"` : ""} onerror="this.remove()" />
       <figcaption>${side.caption}</figcaption>
