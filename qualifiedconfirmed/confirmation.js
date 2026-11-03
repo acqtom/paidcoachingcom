@@ -29,8 +29,7 @@ const CASES = [
     icon: "play", name: "Alex", tag: "Client Success Story",
     desc: "YouTube Automation Coach",
     result: "$12/month Skool → $200K cash collected",
-    button: "Proof",
-    breakdownImgs: [
+    shots: [
       ["/assets/compare/3-before.png", "Alex's Skool before: $12/month, 101 members"],
       ["/assets/compare/3-after.png", "Alex's dashboard after: $202,889.01 cash collected, 91 new customers"],
     ],
@@ -113,12 +112,12 @@ document.getElementById("cases").innerHTML = CASES.map((c) => `
       <div class="case__title"><h3>${c.name}</h3>${c.tag ? `<span class="case__tag">${c.tag}</span>` : ""}</div>
       <p class="case__desc">${c.desc}</p>
       <p class="case__result">${c.result}</p>
-      <details>
+      ${c.button ? `<details>
         <summary>${c.button}</summary>
         ${c.breakdown ? `<dl>${c.breakdown.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>` : ""}
         ${c.breakdownImg ? `<img class="case__shot" src="${c.breakdownImg}" alt="${c.name} funnel dashboard" loading="lazy" />` : ""}
-        ${(c.breakdownImgs || []).map(([src, alt]) => `<img class="case__shot" src="${src}" alt="${alt}" loading="lazy" />`).join("")}
-      </details>
+      </details>` : ""}
+      ${c.shots ? `<div class="case__shots">${c.shots.map(([src, alt]) => `<img class="case__shot" src="${src}" alt="${alt}" loading="lazy" />`).join("")}</div>` : ""}
     </div>
     ${player(c, c.name)}
   </article>`).join("");

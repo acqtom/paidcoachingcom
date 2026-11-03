@@ -94,3 +94,4 @@
   .case { grid-template-columns: 1fr; padding: 22px; gap: 22px; }
   .player--tall { margin: 0 auto; width: min(270px, 100%); }
 }
+.case__shots { margin-top: 18px; }
