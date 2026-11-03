@@ -19,6 +19,9 @@ const COMPARISONS = [
     after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: $33K cash collected · $3,223.94 ad spend · 10.24x Meta ROAS", text: "We built him a paid funnel from the ground up: a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads speaking directly to investors with capital ready to deploy. His first $3K in ad spend turned into $33K, a 10x ROAS in month one. We scaled the next month to $49K at an 8.6x ROAS, with his team closing nearly 40% of calls." },
     inputs: [["$3K", "Ad spend"]],
     outputs: [["$33K", "Cash collected"], ["10x", "ROAS", true]],
+  },  {
+    // Card only for now: no photo or full story yet
+    card: { who: "Alex", meta: "YouTube Automation Mentorship · $3K–$5K ticket", metric: "$27 Skool → $200K Cash Collected" },
   },
 ];
 
@@ -98,17 +101,20 @@ document.getElementById("year").textContent = new Date().getFullYear();
     </article>`;
 
   // Summary cards
-  document.getElementById("results").innerHTML = COMPARISONS.map((c, i) => `
-    <button class="story" type="button" data-story="${i}">
+  document.getElementById("results").innerHTML = COMPARISONS.map((c, i) => c.title ? `
+    <button class="story" type="button" data-story="${i}">${cardInner(c)}
+      <span class="story__more">See full story →</span>
+    </button>` : `
+    <div class="story story--static">${cardInner(c)}
+    </div>`).join("");
+  function cardInner(c) { return `
       <span class="story__head">
-        <span class="story__pfp"><img src="${c.card.photo}" alt="" loading="lazy" onerror="this.remove()" />${c.card.who[0]}</span>
+        <span class="story__pfp">${c.card.photo ? `<img src="${c.card.photo}" alt="" loading="lazy" onerror="this.remove()" />` : ""}${c.card.who[0]}</span>
         <span class="story__who"><strong>${c.card.who}</strong><br />${c.card.meta}</span>
       </span>
       <span class="story__metric">${c.card.metric}</span>
       ${c.card.sub ? `<span class="story__sub">${c.card.sub}</span>` : ""}
-      <span class="story__blurb">${c.card.blurb}</span>
-      <span class="story__more">See full story →</span>
-    </button>`).join("");
+      ${c.card.blurb ? `<span class="story__blurb">${c.card.blurb}</span>` : ""}`; }
 
   // Full story popup
   const modal = document.getElementById("story-modal");
@@ -127,7 +133,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
     if (!applyModal.classList.contains("is-open")) document.body.style.overflow = "";
   };
   document.getElementById("results").addEventListener("click", (e) => {
-    const card = e.target.closest(".story");
+    const card = e.target.closest("button.story");
     if (card) open(+card.dataset.story);
   });
   modal.querySelector(".story-modal__close").addEventListener("click", close);
