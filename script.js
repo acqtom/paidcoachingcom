@@ -22,13 +22,13 @@ const COMPARISONS = [
   },
   {
     // PLACEHOLDER full story: swap in Alex's real before/after text, screenshots and numbers
-    card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $3K–$5K ticket", metric: "$27 Skool → $200K Cash Collected", blurb: "His organic audience couldn’t afford a high-ticket offer, so we built and launched a paid ads funnel. Now he books qualified calls every day and has collected $200K since launch." },
-    title: "$27 Skool To $200K Cash Collected",
+    card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $3K–$5K ticket", metric: "$12 Skool → $200K Cash Collected", blurb: "His organic audience couldn’t afford a high-ticket offer, so we built and launched a paid ads funnel. Now he books qualified calls every day and has collected $200K since launch." },
+    title: "$12 Skool To $200K Cash Collected",
     video: { caption: "[Video testimonial coming soon]" }, // later: video: { embed: "<iframe …>" }
     tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$3K–$5K Ticket"],
-    before: { label: "Before", img: "assets/compare/3-before.png", caption: "[Before screenshot coming soon]", text: "[Placeholder: where Alex was before. His $27/month Skool community, why his organic audience couldn’t afford a high-ticket offer, and what was holding him back.]" },
+    before: { label: "Before", img: "assets/compare/3-before.png", fit: "contain", bg: "#333333", caption: "Before: $12/month Skool · 101 members", text: "[Placeholder: where Alex was before. His $12/month Skool community, why his organic audience couldn’t afford a high-ticket offer, and what was holding him back.]" },
     after: { label: "After", img: "assets/compare/3-after.png", caption: "[After screenshot coming soon]", text: "[Placeholder: what we built and launched (VSL, landing page, application, pre-call warm-up, ads), how calls and close rate changed, and how he reached $200K cash collected since launch.]" },
-    inputs: [["$27/mo", "Skool"]],
+    inputs: [["$12/mo", "Skool"]],
     outputs: [["$200K", "Cash collected", true]],
   },
 ];
@@ -82,7 +82,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // ---- Paid vs organic results ---------------------------------------------
 (function results() {
   const media = (side, cls) => `
-    <figure class="result__img">
+    <figure class="result__img"${side.bg ? ` style="background:${side.bg}"` : ""}>
       <span class="result__label ${cls}">${side.label}</span>
       <img src="${side.img}" alt="${side.label} results: ${side.caption}" loading="lazy"${side.fit ? ` style="object-fit:${side.fit}"` : ""} onerror="this.remove()" />
       <figcaption>${side.caption}</figcaption>
