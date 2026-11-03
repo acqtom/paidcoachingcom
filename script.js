@@ -24,6 +24,7 @@ const COMPARISONS = [
     // PLACEHOLDER full story: swap in Alex's real before/after text, screenshots and numbers
     card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $3K–$5K ticket", metric: "$27 Skool → $200K Cash Collected", blurb: "His organic audience couldn’t afford a high-ticket offer, so we built and launched a paid ads funnel. Now he books qualified calls every day and has collected $200K since launch." },
     title: "$27 Skool To $200K Cash Collected",
+    video: { caption: "[Video testimonial coming soon]" }, // later: video: { embed: "<iframe …>" }
     tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$3K–$5K Ticket"],
     before: { label: "Before", img: "assets/compare/3-before.png", caption: "[Before screenshot coming soon]", text: "[Placeholder: where Alex was before. His $27/month Skool community, why his organic audience couldn’t afford a high-ticket offer, and what was holding him back.]" },
     after: { label: "After", img: "assets/compare/3-after.png", caption: "[After screenshot coming soon]", text: "[Placeholder: what we built and launched (VSL, landing page, application, pre-call warm-up, ads), how calls and close rate changed, and how he reached $200K cash collected since launch.]" },
@@ -98,6 +99,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
     <article class="result">
       <h3 class="result__pill">${c.title}</h3>
       ${c.tags ? `<ul class="result__tags">${c.tags.map((t) => `<li>${t}</li>`).join("")}</ul>` : ""}
+      ${c.video ? `<div class="result__video">${c.video.embed || `<span class="result__label result__label--paid">Video testimonial</span><p>${c.video.caption}</p>`}</div>` : ""}
       <div class="result__pair">${side(c.before, "result__label--organic")}${side(c.after, "result__label--paid")}</div>
       <div class="equation">
         ${c.inputs.map((i) => tile(i, "stat--in")).join('<span class="equation__op">+</span>')}
