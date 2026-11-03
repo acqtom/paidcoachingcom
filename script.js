@@ -27,7 +27,7 @@ const COMPARISONS = [
     video: { caption: "[Video testimonial coming soon]" }, // later: video: { embed: "<iframe …>" }
     tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$3K–$5K Ticket"],
     before: { label: "Before", img: "assets/compare/3-before.png", fit: "contain", bg: "#333333", caption: "Before: $12/month Skool · 101 members", text: "[Placeholder: where Alex was before. His $12/month Skool community, why his organic audience couldn’t afford a high-ticket offer, and what was holding him back.]" },
-    after: { label: "After", img: "assets/compare/3-after.png", caption: "[After screenshot coming soon]", text: "[Placeholder: what we built and launched (VSL, landing page, application, pre-call warm-up, ads), how calls and close rate changed, and how he reached $200K cash collected since launch.]" },
+    after: { label: "After", img: "assets/compare/3-after.png", fit: "contain", bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers", text: "[Placeholder: what we built and launched (VSL, landing page, application, pre-call warm-up, ads), how calls and close rate changed, and how he reached $200K cash collected since launch.]" },
     inputs: [["$12/mo", "Skool"]],
     outputs: [["$200K", "Cash collected", true]],
   },
