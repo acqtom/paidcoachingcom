@@ -20,8 +20,8 @@ const COMPARISONS = [
     inputs: [["$3K", "Ad spend"]],
     outputs: [["$33K", "Cash collected"], ["10x", "ROAS", true]],
   },  {
-    // Card only for now: no photo or full story yet
-    card: { who: "Alex", meta: "YouTube Automation Mentorship · $3K–$5K ticket", metric: "$27 Skool → $200K Cash Collected" },
+    // Card only for now: no full story yet
+    card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $3K–$5K ticket", metric: "$27 Skool → $200K Cash Collected" },
   },
 ];
 
