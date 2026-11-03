@@ -19,9 +19,16 @@ const COMPARISONS = [
     after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: $33K cash collected · $3,223.94 ad spend · 10.24x Meta ROAS", text: "We built him a paid funnel from the ground up: a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads speaking directly to investors with capital ready to deploy. His first $3K in ad spend turned into $33K, a 10x ROAS in month one. We scaled the next month to $49K at an 8.6x ROAS, with his team closing nearly 40% of calls." },
     inputs: [["$3K", "Ad spend"]],
     outputs: [["$33K", "Cash collected"], ["10x", "ROAS", true]],
-  },  {
-    // Card only for now: no full story yet
-    card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $3K–$5K ticket", metric: "$27 Skool → $200K Cash Collected" },
+  },
+  {
+    // PLACEHOLDER full story: swap in Alex's real before/after text, screenshots and numbers
+    card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $3K–$5K ticket", metric: "$27 Skool → $200K Cash Collected", blurb: "His organic audience couldn’t afford a high-ticket offer, so we built and launched a paid ads funnel. Now he books qualified calls every day and has collected $200K since launch." },
+    title: "$27 Skool To $200K Cash Collected",
+    tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$3K–$5K Ticket"],
+    before: { label: "Before", img: "assets/compare/3-before.png", caption: "[Before screenshot coming soon]", text: "[Placeholder: where Alex was before. His $27/month Skool community, why his organic audience couldn’t afford a high-ticket offer, and what was holding him back.]" },
+    after: { label: "After", img: "assets/compare/3-after.png", caption: "[After screenshot coming soon]", text: "[Placeholder: what we built and launched (VSL, landing page, application, pre-call warm-up, ads), how calls and close rate changed, and how he reached $200K cash collected since launch.]" },
+    inputs: [["$27/mo", "Skool"]],
+    outputs: [["$200K", "Cash collected", true]],
   },
 ];
 
