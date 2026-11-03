@@ -22,10 +22,10 @@ const COMPARISONS = [
   },
   {
     // PLACEHOLDER full story: swap in Alex's real before/after text, screenshots and numbers
-    card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $3K–$5K ticket", metric: "$12 Skool → $200K Cash Collected", blurb: "His organic audience couldn’t afford a high-ticket offer, so we built and launched a paid ads funnel. Now he books qualified calls every day and has collected $200K since launch." },
+    card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $2K–$4K ticket", metric: "$12 Skool → $200K Cash Collected", blurb: "His organic audience couldn’t afford a high-ticket offer, so we built and launched a paid ads funnel. Now he books qualified calls every day and has collected $200K since launch." },
     title: "$12 Skool To $200K Cash Collected",
     video: { caption: "[Video testimonial coming soon]" }, // later: video: { embed: "<iframe …>" }
-    tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$3K–$5K Ticket"],
+    tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$2K–$4K Ticket"],
     before: { label: "Before", img: "assets/compare/3-before.png", fit: "contain", bg: "#333333", caption: "Before: $12/month Skool · 101 members", text: "[Placeholder: where Alex was before. His $12/month Skool community, why his organic audience couldn’t afford a high-ticket offer, and what was holding him back.]" },
     after: { label: "After", img: "assets/compare/3-after.png", fit: "contain", bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers", text: "[Placeholder: what we built and launched (VSL, landing page, application, pre-call warm-up, ads), how calls and close rate changed, and how he reached $200K cash collected since launch.]" },
     inputs: [["$12/mo", "Skool"]],
