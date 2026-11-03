@@ -26,8 +26,8 @@ const COMPARISONS = [
     title: "$12 Skool To $200K Cash Collected",
     video: { caption: "[Video testimonial coming soon]" }, // later: video: { embed: "<iframe …>" }
     tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$2K–$4K Ticket"],
-    before: { label: "Before", img: "assets/compare/3-before.png", fit: "contain", bg: "#333333", caption: "Before: $12/month Skool · 101 members", text: "[Placeholder: where Alex was before. His $12/month Skool community, why his organic audience couldn’t afford a high-ticket offer, and what was holding him back.]" },
-    after: { label: "After", img: "assets/compare/3-after.png", fit: "contain", bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers", text: "[Placeholder: what we built and launched (VSL, landing page, application, pre-call warm-up, ads), how calls and close rate changed, and how he reached $200K cash collected since launch.]" },
+    before: { label: "Before", img: "assets/compare/3-before.png", fit: "contain", bg: "#333333", caption: "Before: $12/month Skool · 101 members" },
+    after: { label: "After", img: "assets/compare/3-after.png", fit: "contain", bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers" },
     inputs: [["$12/mo", "Skool"]],
     outputs: [["$200K", "Cash collected", true]],
   },
@@ -90,7 +90,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const side = (s, cls) => `
     <div class="result__side">
       ${media(s, cls)}
-      <p class="result__text"><strong>${s.label}:</strong> ${s.text}</p>
+      ${s.text ? `<p class="result__text"><strong>${s.label}:</strong> ${s.text}</p>` : ""}
     </div>`;
   const tile = ([value, label, main], cls) =>
     `<div class="stat ${cls}${main ? " stat--main" : ""}"><strong>${value}</strong><span>${label}</span></div>`;
