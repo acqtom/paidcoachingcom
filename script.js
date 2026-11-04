@@ -21,10 +21,9 @@ const COMPARISONS = [
     outputs: [["$33K", "Cash collected"], ["10x", "ROAS", true]],
   },
   {
-    // PLACEHOLDER full story: swap in Alex's real before/after text, screenshots and numbers
     card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $2K–$4K ticket", metric: "$12 Skool → $200K Cash Collected", blurb: "His organic audience couldn’t afford a high-ticket offer, so we built and launched a paid ads funnel. Now he books qualified calls every day and has collected $200K since launch." },
     title: "$12 Skool To $200K Cash Collected",
-    video: { caption: "[Video testimonial coming soon]" }, // later: video: { embed: "<iframe …>" }
+    // Video testimonial: add video: { embed: "<iframe …>" } here when it's ready
     tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$2K–$4K Ticket"],
     before: { label: "Before", img: "assets/compare/3-before.png", fit: "contain", thin: true, bg: "#333333", caption: "Before: $12/month Skool · 101 members" },
     after: { label: "After", img: "assets/compare/3-after.png", fit: "contain", thin: true, bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers" },

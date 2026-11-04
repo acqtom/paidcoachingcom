@@ -25,7 +25,7 @@ const CASES = [
     mp4: "",
   },
   {
-    // Vertical video testimonial: placeholder until the video is ready (add vturb/youtube/mp4 here)
+    // No video yet, so the screenshots sit on the right. Add vturb/youtube/mp4 here and the vertical video takes that spot, with the screenshots moving under the text.
     icon: "play", name: "Alex", tag: "Client Success Story",
     desc: "YouTube Automation Coach",
     result: "$12/month Skool → $200K cash collected",
@@ -105,6 +105,8 @@ document.getElementById("call-number").textContent = CALL_NUMBER;
 document.getElementById("year").textContent = new Date().getFullYear();
 
 
+const caseShots = (c) => `<div class="case__shots">${c.shots.map(([src, alt]) => `<img class="case__shot" src="${src}" alt="${alt}" loading="lazy" />`).join("")}</div>`;
+const hasVideo = (c) => c.vturb || c.youtube || c.mp4;
 document.getElementById("cases").innerHTML = CASES.map((c) => `
   <article class="case">
     <div>
@@ -117,9 +119,9 @@ document.getElementById("cases").innerHTML = CASES.map((c) => `
         ${c.breakdown ? `<dl>${c.breakdown.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>` : ""}
         ${c.breakdownImg ? `<img class="case__shot" src="${c.breakdownImg}" alt="${c.name} funnel dashboard" loading="lazy" />` : ""}
       </details>` : ""}
-      ${c.shots ? `<div class="case__shots">${c.shots.map(([src, alt]) => `<img class="case__shot" src="${src}" alt="${alt}" loading="lazy" />`).join("")}</div>` : ""}
+      ${c.shots && hasVideo(c) ? caseShots(c) : ""}
     </div>
-    ${player(c, c.name)}
+    ${c.shots && !hasVideo(c) ? caseShots(c) : player(c, c.name)}
   </article>`).join("");
 
 
