@@ -25,7 +25,7 @@ const CASES = [
     mp4: "",
   },
   {
-    // No video yet, so the screenshots sit on the right. Add vturb/youtube/mp4 here and the vertical video takes that spot, with the screenshots moving under the text.
+    // Vertical video on the right, screenshots under the text
     icon: "play", name: "Alex", tag: "Client Success Story",
     desc: "YouTube Automation Coach",
     result: "$12/month Skool → $200K cash collected",
@@ -33,7 +33,7 @@ const CASES = [
       ["/assets/compare/3-before.png", "Alex's Skool before: $12/month, 101 members"],
       ["/assets/compare/3-after.png", "Alex's dashboard after: $202,889.01 cash collected, 91 new customers"],
     ],
-    tall: true, youtube: "", mp4: "",
+    tall: true, vturb: "6aeb9e10653f10da78260d68", ratio: 179.25925925925924, youtube: "", mp4: "",
   },
 ];
 
@@ -78,7 +78,17 @@ function vturbFrame(id, ratio, label) {
   return `<div class="player player--vturb" style="aspect-ratio: 100 / ${ratio}"><iframe title="${escAttr(label)}" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen srcdoc="${escAttr(doc)}"></iframe></div>`;
 }
 
+// Vertical vturb player in its own frame. Its size is saved correctly in vturb; Smart Autoplay and the resume prompt (both in Portuguese) are switched off so it is click-to-play like the others.
+function vturbVertical(id, ratio, label) {
+  const doc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>html,body{margin:0;background:#000;overflow:hidden}vturb-smartplayer{max-width:none!important}</style></head><body>` +
+    `<vturb-smartplayer id="vid-${id}" style="display: block; margin: 0 auto; width: 100%; "><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: ${ratio}% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>` +
+    `<script>(function(){var el=document.getElementById("vid-${id}"),fn;Object.defineProperty(el,"start",{configurable:true,get:function(){return fn},set:function(f){fn=function(n){try{n.smartAutoPlay={active:false,items:[]};n.resume.active=false}catch(e){}return f.call(this,n)}}});})();<\/script>` +
+    `<script>var s=document.createElement("script");s.src="https://scripts.converteai.net/${VTURB_ACCOUNT}/players/${id}/v4/player.js";s.async=true;document.head.appendChild(s);<\/script></body></html>`;
+  return `<div class="player player--vturb player--tall" style="aspect-ratio: 100 / ${ratio}"><iframe title="${escAttr(label)}" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen srcdoc="${escAttr(doc)}"></iframe></div>`;
+}
+
 function player({ youtube, mp4, tall, vturb, ratio }, label) {
+  if (vturb && tall) return vturbVertical(vturb, ratio, label);
   if (vturb) return vturbFrame(vturb, ratio || 56.25, label);
   const thumb = youtube ? `<img src="https://i.ytimg.com/vi/${youtube}/hqdefault.jpg" alt="" loading="lazy" />` : "";
   const soon = youtube || mp4 ? "" : '<span class="player__soon">Video coming soon</span>';

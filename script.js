@@ -23,7 +23,7 @@ const COMPARISONS = [
   {
     card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $2K–$4K ticket", metric: "$12 Skool → $200K Cash Collected", blurb: "His organic audience couldn’t afford a high-ticket offer, so we built and launched a paid ads funnel. Now he books qualified calls every day and has collected $200K since launch." },
     title: "$12 Skool To $200K Cash Collected",
-    // Video testimonial: add video: { embed: "<iframe …>" } here when it's ready
+    video: { vturb: "6aeb9e10653f10da78260d68", ratio: 179.25925925925924 }, // vertical testimonial
     tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$2K–$4K Ticket"],
     before: { label: "Before", img: "assets/compare/3-before.png", fit: "contain", thin: true, bg: "#333333", caption: "Before: $12/month Skool · 101 members" },
     after: { label: "After", img: "assets/compare/3-after.png", fit: "contain", thin: true, bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers" },
@@ -94,11 +94,22 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const tile = ([value, label, main], cls) =>
     `<div class="stat ${cls}${main ? " stat--main" : ""}"><strong>${value}</strong><span>${label}</span></div>`;
 
+  // vturb player in its own frame (scripts added through innerHTML wouldn't run), with Smart Autoplay and the resume prompt (both in Portuguese) off so it's click-to-play
+  const VTURB_ACCOUNT = "3b9d5e0c-cdfa-409b-9c8d-b0d07c3dcb14";
+  const videoFrame = ({ vturb, ratio }, who) => {
+    const doc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>html,body{margin:0;background:#000;overflow:hidden}vturb-smartplayer{max-width:none!important}</style></head><body>` +
+      `<vturb-smartplayer id="vid-${vturb}" style="display: block; margin: 0 auto; width: 100%; "><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: ${ratio}% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>` +
+      `<script>(function(){var el=document.getElementById("vid-${vturb}"),fn;Object.defineProperty(el,"start",{configurable:true,get:function(){return fn},set:function(f){fn=function(n){try{n.smartAutoPlay={active:false,items:[]};n.resume.active=false}catch(e){}return f.call(this,n)}}});})();<\/script>` +
+      `<script>var s=document.createElement("script");s.src="https://scripts.converteai.net/${VTURB_ACCOUNT}/players/${vturb}/v4/player.js";s.async=true;document.head.appendChild(s);<\/script></body></html>`;
+    const attr = doc.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return `<div class="result__video" style="aspect-ratio: 100 / ${ratio}"><iframe title="${who} video testimonial" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen srcdoc="${attr}"></iframe></div>`;
+  };
+
   const full = (c) => `
     <article class="result">
       <h3 class="result__pill">${c.title}</h3>
       ${c.tags ? `<ul class="result__tags">${c.tags.map((t) => `<li>${t}</li>`).join("")}</ul>` : ""}
-      ${c.video ? `<div class="result__video">${c.video.embed || `<span class="result__label result__label--paid">Video testimonial</span><p>${c.video.caption}</p>`}</div>` : ""}
+      ${c.video ? videoFrame(c.video, c.card.who) : ""}
       <div class="result__pair">${side(c.before, "result__label--organic")}${side(c.after, "result__label--paid")}</div>
       <div class="equation">
         ${c.inputs.map((i) => tile(i, "stat--in")).join('<span class="equation__op">+</span>')}
@@ -136,6 +147,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
     modal.querySelector(".story-modal__panel").scrollTop = 0;
   };
   const close = () => {
+    body.querySelectorAll("iframe").forEach((f) => f.remove()); // stops any video still playing
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     if (!applyModal.classList.contains("is-open")) document.body.style.overflow = "";
