@@ -18,7 +18,7 @@ const CASES = [
   {
     icon: "grid", name: "Adriel", tag: "Client Success Story",
     desc: "Real Estate Development Coach",
-    result: "$40,000 in first 30 days (10x ROAS)",
+    result: "$33,000 in first 30 days (10x ROAS)",
     button: "Cost Breakdown",
     youtube: "Naet6oekdaI",
     breakdown: [["Ad spend", "$3,450"], ["Cash collected (from ads)", "$33,000"], ["ROAS", "10x"], ["Timeframe", "First 30 days"]],
