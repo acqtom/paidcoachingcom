@@ -195,3 +195,5 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 /* Shorter boxes for wide, thin screenshots (label sits above the image) */
 .result__img--thin { aspect-ratio: 2 / 1; }
 .result__img--thin img { top: 44px; height: calc(100% - 54px); }
+.oncall:last-child { border-bottom: 0; padding-bottom: 0; }
+.nowrap { white-space: nowrap; }
