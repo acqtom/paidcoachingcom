@@ -197,3 +197,8 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 .result__img--thin img { top: 44px; height: calc(100% - 54px); }
 .oncall:last-child { border-bottom: 0; padding-bottom: 0; }
 .nowrap { white-space: nowrap; }
+
+/* Eyebrow pill: all caps with a red !! */
+.hero .badge { text-transform: uppercase; letter-spacing: 0.06em; }
+.badge__alert { color: #e5262d; font-weight: 800; margin-right: 8px; letter-spacing: 0; }
+@media (max-width: 760px) { .hero .badge { font-size: 11px; letter-spacing: 0.03em; padding: 7px 12px; } .badge__alert { margin-right: 6px; } }
