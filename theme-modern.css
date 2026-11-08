@@ -202,3 +202,8 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 .hero .badge { text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
 .badge__alert { color: #e5262d; font-weight: 800; margin-right: 8px; letter-spacing: 0; }
 @media (max-width: 760px) { .hero .badge { font-size: 11px; letter-spacing: 0.03em; padding: 7px 12px; } .badge__alert { margin-right: 6px; } }
+
+/* Guarantee + ad spend pills side by side under the hero button */
+.pill-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
+.pill-row .guarantee-pill { margin: 0; }
+.pill-note { color: var(--muted); font-weight: 600; }
