@@ -237,4 +237,4 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 .hero .cta, .section:not(.hero) .hero__ask + .cta { padding: 21px 50px; font-size: 20px; gap: 14px; border-radius: 6px; }
 @media (max-width: 760px) { .hero .cta, .section:not(.hero) .hero__ask + .cta { padding: 19px 20px; font-size: min(17.5px, 4.55vw); gap: 10px; white-space: nowrap; } }
 @media (max-width: 370px) { .hero .cta, .section:not(.hero) .hero__ask + .cta { padding: 17px 14px; gap: 8px; } }
-@media (max-width: 760px) { .hero .pill-row { margin-top: 90px; } }
+@media (max-width: 760px) { .hero .pill-row { margin-top: max(90px, calc(100lvh - 620px)); } }
