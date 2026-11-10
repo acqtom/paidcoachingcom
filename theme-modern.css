@@ -232,3 +232,4 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 .section:not(.hero) .hero__ask { margin-top: 40px; }
 .section:not(.hero) .hero__ask + .cta { margin-top: 12px; }
 @media (max-width: 760px) { .hero .hero__ask { white-space: nowrap; font-size: min(17px, 3.95vw); letter-spacing: -0.01em; } }
+.section--stats .team-stats--bottom { margin-top: 0; padding-top: 0; border-top: 0; }
