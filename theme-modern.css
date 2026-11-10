@@ -208,3 +208,6 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 .pill-row .guarantee-pill { margin: 0; }
 .pill-note { color: var(--muted); font-weight: 600; }
 .hero__sub { font-style: italic; }
+.hero__ask { margin: 26px auto 0; font-family: var(--heading); font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.35; }
+.hero .hero__ask + .cta { margin-top: 12px; }
+@media (max-width: 760px) { .hero__ask { margin-top: 22px; font-size: 17px; } .hero .hero__ask + .cta { margin-top: 10px; } }
