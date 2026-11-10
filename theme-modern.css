@@ -231,3 +231,4 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 @media (prefers-reduced-motion: reduce) { .cta .cta__arrow, .cta .cta__arrow::after { animation: none; } }
 .section:not(.hero) .hero__ask { margin-top: 40px; }
 .section:not(.hero) .hero__ask + .cta { margin-top: 12px; }
+@media (max-width: 760px) { .hero .hero__ask { white-space: nowrap; font-size: min(17px, 3.95vw); letter-spacing: -0.01em; } }
