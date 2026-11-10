@@ -228,9 +228,12 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 }
 @keyframes ctaNudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
 @keyframes ctaRing { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(1.6); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .cta .cta__arrow, .cta .cta__arrow::after { animation: none; } }
 .section:not(.hero) .hero__ask { margin-top: 40px; }
 .section:not(.hero) .hero__ask + .cta { margin-top: 12px; }
 @media (max-width: 760px) { .hero .hero__ask { white-space: nowrap; font-size: min(17px, 3.95vw); letter-spacing: -0.01em; } }
 .section--stats .team-stats--bottom { margin-top: 0; padding-top: 0; border-top: 0; }
 .section--stats { background: var(--band); padding-top: 8px; }
+/* Main CTAs (hero + results): slightly bigger */
+.hero .cta, .section:not(.hero) .hero__ask + .cta { padding: 21px 50px; font-size: 20px; gap: 14px; border-radius: 6px; }
+@media (max-width: 760px) { .hero .cta, .section:not(.hero) .hero__ask + .cta { padding: 19px 20px; font-size: min(17.5px, 4.55vw); gap: 10px; white-space: nowrap; } }
+@media (max-width: 370px) { .hero .cta, .section:not(.hero) .hero__ask + .cta { padding: 17px 14px; gap: 8px; } }
