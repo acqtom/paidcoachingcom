@@ -211,3 +211,21 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 .hero__ask { margin: 26px auto 0; font-family: var(--heading); font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.35; }
 .hero .hero__ask + .cta { margin-top: 12px; }
 @media (max-width: 760px) { .hero__ask { margin-top: 22px; font-size: 17px; } .hero .hero__ask + .cta { margin-top: 10px; } }
+/* Hero CTA: big */
+.hero .cta { padding: 26px 60px; font-size: 26px; gap: 18px; border-radius: 6px; }
+@media (max-width: 760px) { .hero .cta { padding: 22px 20px; font-size: 18px; gap: 10px; white-space: nowrap; } }
+@media (max-width: 370px) { .hero .cta { padding: 18px 12px; font-size: 15px; gap: 8px; } }
+/* CTA arrow: white circle that nudges right + pulse ring */
+.cta .cta__arrow {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 1.7em; height: 1.7em; border-radius: 50%; background: #ffffff; color: var(--gold);
+  font-size: 1em; font-weight: 800; line-height: 1;
+  animation: ctaNudge 1.4s ease-in-out infinite;
+}
+.cta .cta__arrow::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(255,255,255,0.85);
+  animation: ctaRing 1.4s ease-out infinite;
+}
+@keyframes ctaNudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+@keyframes ctaRing { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(1.6); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cta .cta__arrow, .cta .cta__arrow::after { animation: none; } }
