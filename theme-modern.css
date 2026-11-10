@@ -207,3 +207,4 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 .pill-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
 .pill-row .guarantee-pill { margin: 0; }
 .pill-note { color: var(--muted); font-weight: 600; }
+.hero__sub { font-style: italic; }
