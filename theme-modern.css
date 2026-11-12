@@ -309,3 +309,38 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
   border-color: var(--blue); background: var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 12px no-repeat;
 }
 @media (max-width: 760px) { .choice span { font-size: 15px; padding: 11px 12px; min-height: 0; } }
+/* /audit: compact form */
+.audit-form { max-width: 540px; padding: 24px; margin-top: 26px; }
+.audit-form__grid { gap: 10px; }
+.audit-form .field__label { margin-bottom: 5px; font-size: 14px; }
+.audit-form .field__hint { font-size: 12px; }
+.audit-form input[type="text"], .audit-form input[type="email"], .audit-form input[type="tel"] { padding: 9px 12px; font-size: 15px; border-radius: 8px; }
+.audit-form .field--choices { margin-top: 18px; }
+.choices, .choices--3 { gap: 6px; }
+.choice span { padding: 8px 12px; gap: 10px; font-size: 14px; border-radius: 8px; }
+.choice span::before { width: 16px; height: 16px; }
+.choice input[type="checkbox"] + span::before { border-radius: 4px; }
+.choice input[type="checkbox"]:checked + span::before { background-size: 10px; }
+.audit-form .audit-form__submit { margin-top: 20px; }
+.audit-form__error { margin-top: 16px; padding: 10px 12px; font-size: 13px; }
+@media (max-width: 760px) {
+  .audit-form { margin-top: 18px; padding: 14px 12px; border-radius: 12px; }
+  .audit-form__grid { gap: 8px; }
+  .audit-form .field__label { margin-bottom: 4px; font-size: 13px; }
+  .audit-form input[type="text"], .audit-form input[type="email"], .audit-form input[type="tel"] { padding: 8px 10px; font-size: 16px; }
+  .audit-form .field--choices { margin-top: 14px; }
+  .choices, .choices--3 { gap: 5px; }
+  .choice span { padding: 6px 10px; font-size: 14px; }
+  .audit-form .audit-form__submit { margin-top: 16px; }
+}
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.audit-form input::placeholder { color: #8a8a90; font-weight: 500; }
+.audit-form__grid { gap: 8px; }
+.audit-form .audit-form__submit.cta { padding: 14px 20px; font-size: 17px; }
+@media (max-width: 760px) {
+  .audit-form__grid { gap: 7px; }
+  .audit-form .field--choices { margin-top: 12px; }
+  .choice span { padding: 5px 10px; font-size: 14px; }
+  .choices, .choices--3 { gap: 4px; }
+  .audit-form .audit-form__submit.cta { padding: 13px 16px; font-size: 16px; margin-top: 14px; }
+}
