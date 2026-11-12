@@ -292,3 +292,20 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
   .choice span { font-size: 14px; min-height: 46px; padding: 8px; }
   .audit-form .audit-form__submit { font-size: 17px; }
 }
+/* /audit: multiple-choice as a simple stacked list with a radio/checkbox button */
+.choices, .choices--3 { grid-template-columns: 1fr; gap: 8px; }
+.choice span {
+  justify-content: flex-start; gap: 12px; min-height: 0; padding: 12px 14px; text-align: left;
+  font-weight: 500; background: #ffffff;
+}
+.choice span::before {
+  content: ""; flex: none; width: 18px; height: 18px; box-sizing: border-box;
+  border: 2px solid #c9c9cf; border-radius: 50%; background: #ffffff; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.choice input[type="checkbox"] + span::before { border-radius: 5px; }
+.choice input:checked + span { background: var(--cream); color: var(--ink); box-shadow: none; }
+.choice input[type="radio"]:checked + span::before { border-color: var(--blue); box-shadow: inset 0 0 0 3px #ffffff; background: var(--blue); }
+.choice input[type="checkbox"]:checked + span::before {
+  border-color: var(--blue); background: var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+@media (max-width: 760px) { .choice span { font-size: 15px; padding: 11px 12px; min-height: 0; } }
