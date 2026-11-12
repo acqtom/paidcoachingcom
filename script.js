@@ -3,30 +3,30 @@
 // Each stat row reads: inputs joined by "+"  →  outputs. Set `main: true` on the headline output.
 const COMPARISONS = [
   {
-    card: { photo: "assets/clients/stephen.jpg", who: "Stephen", meta: "Music Production Coaching · $4K–$8K ticket", metric: "$10K Ad Spend → $101K/Month", blurb: "Plenty of leads, wrong buyers. We rebuilt his funnel and he went from $6K/mo to $101K/mo." },
+    card: { photo: "/assets/clients/stephen.jpg", who: "Stephen", meta: "Music Production Coaching · $4K–$8K ticket", metric: "$10K Ad Spend → $101K/Month", blurb: "Plenty of leads, wrong buyers. We rebuilt his funnel and he went from $6K/mo to $101K/mo." },
     title: "$6K/Month To $101K/Month",
     tags: ["B2C Coaching Offer", "Music Production Niche", "$4K–$8K Ticket"],
-    before: { label: "Before", img: "assets/compare/1-before.png", caption: "Amount Won $6K · ROAS 1", text: "This music production coach had a known name in his space, so getting calls wasn’t the problem. Getting the right people on them was. His funnel attracted people who loved the idea of getting results, but were highly skeptical of a high-ticket program. The few who bought could only afford small split payments. His average order value was around $500, and he was stuck at 6K–10K a month." },
-    after: { label: "After", img: "assets/compare/1-paid.png", caption: "Amount Won $101.49K · ROAS 10", text: "We rebuilt everything from the ground up, tailored to buyers who could actually afford it. We built a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads around them. Better leads started booking, his average order value jumped from $500 to $4,000, and that justified scaling. He went from $6K a month to breaking $100K in 30 days on 100% cold traffic, at a 10x ROAS." },
+    before: { label: "Before", img: "/assets/compare/1-before.png", caption: "Amount Won $6K · ROAS 1", text: "This music production coach had a known name in his space, so getting calls wasn’t the problem. Getting the right people on them was. His funnel attracted people who loved the idea of getting results, but were highly skeptical of a high-ticket program. The few who bought could only afford small split payments. His average order value was around $500, and he was stuck at 6K–10K a month." },
+    after: { label: "After", img: "/assets/compare/1-paid.png", caption: "Amount Won $101.49K · ROAS 10", text: "We rebuilt everything from the ground up, tailored to buyers who could actually afford it. We built a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads around them. Better leads started booking, his average order value jumped from $500 to $4,000, and that justified scaling. He went from $6K a month to breaking $100K in 30 days on 100% cold traffic, at a 10x ROAS." },
     inputs: [["$6K/mo", "Before"]],
     outputs: [["$101K/mo", "After"], ["10x", "ROAS", true]],
   },
   {
-    card: { photo: "assets/clients/adriel.jpg", who: "Adriel", meta: "Real Estate Mentorship · $7K–$12K ticket", metric: "$3K Ad Spend → 10x ROAS First 30 Days", sub: "$33K cash collected", blurb: "His first paid campaign ever. His team closed nearly 40% of calls from people who’d never heard of him." },
+    card: { photo: "/assets/clients/adriel.jpg", who: "Adriel", meta: "Real Estate Mentorship · $7K–$12K ticket", metric: "$3K Ad Spend → 10x ROAS First 30 Days", sub: "$33K cash collected", blurb: "His first paid campaign ever. His team closed nearly 40% of calls from people who’d never heard of him." },
     title: "10x ROAS First 30 Days",
     tags: ["B2C Mentorship Offer", "Real Estate Niche", "$8K–$12K Ticket"],
-    before: { label: "Before", img: "assets/compare/2-organic.jpg", caption: "Before: $21K from YouTube · 18 bookings · 31 opt-ins · 1,113 clicks", text: "This real estate mentor had validated his first $21K on organic, but most of his calls weren’t with buyers. They were with people who wanted to network, pick his brain, or talk deals without any capital to back it up. Only a handful could actually afford an $8K–$12K program, and he had no way to control who came through, or when." },
-    after: { label: "After", img: "assets/compare/2-paid.jpg", caption: "After: $33K cash collected · $3,223.94 ad spend · 10.24x Meta ROAS", text: "We built him a paid funnel from the ground up: a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads speaking directly to investors with capital ready to deploy. His first $3K in ad spend turned into $33K, a 10x ROAS in month one. We scaled the next month to $49K at an 8.6x ROAS, with his team closing nearly 40% of calls." },
+    before: { label: "Before", img: "/assets/compare/2-organic.jpg", caption: "Before: $21K from YouTube · 18 bookings · 31 opt-ins · 1,113 clicks", text: "This real estate mentor had validated his first $21K on organic, but most of his calls weren’t with buyers. They were with people who wanted to network, pick his brain, or talk deals without any capital to back it up. Only a handful could actually afford an $8K–$12K program, and he had no way to control who came through, or when." },
+    after: { label: "After", img: "/assets/compare/2-paid.jpg", caption: "After: $33K cash collected · $3,223.94 ad spend · 10.24x Meta ROAS", text: "We built him a paid funnel from the ground up: a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads speaking directly to investors with capital ready to deploy. His first $3K in ad spend turned into $33K, a 10x ROAS in month one. We scaled the next month to $49K at an 8.6x ROAS, with his team closing nearly 40% of calls." },
     inputs: [["$3K", "Ad spend"]],
     outputs: [["$33K", "Cash collected"], ["10x", "ROAS", true]],
   },
   {
-    card: { photo: "assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $2K–$4K ticket", metric: "$12 Skool → $200K Cash Collected", blurb: "His organic audience couldn’t afford a high-ticket offer, so we built and launched a paid ads funnel. Now he books qualified calls every day and has collected $200K since launch." },
+    card: { photo: "/assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $2K–$4K ticket", metric: "$12 Skool → $200K Cash Collected", blurb: "His organic audience couldn’t afford a high-ticket offer, so we built and launched a paid ads funnel. Now he books qualified calls every day and has collected $200K since launch." },
     title: "$12 Skool To $200K Cash Collected",
     video: { vturb: "6aeb9e10653f10da78260d68", ratio: 179.25925925925924 }, // vertical testimonial
     tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$2K–$4K Ticket"],
-    before: { label: "Before", img: "assets/compare/3-before.png", fit: "contain", thin: true, bg: "#333333", caption: "Before: $12/month Skool · 101 members" },
-    after: { label: "After", img: "assets/compare/3-after.png", fit: "contain", thin: true, bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers" },
+    before: { label: "Before", img: "/assets/compare/3-before.png", fit: "contain", thin: true, bg: "#333333", caption: "Before: $12/month Skool · 101 members" },
+    after: { label: "After", img: "/assets/compare/3-after.png", fit: "contain", thin: true, bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers" },
     inputs: [["$12/mo", "Skool"]],
     outputs: [["$200K", "Cash collected", true]],
   },
@@ -36,6 +36,7 @@ const COMPARISONS = [
 // ---- CTAs: open the application form popup --------------------------------
 (function applyPopup() {
   const modal = document.getElementById("apply-modal");
+  if (!modal) return; // pages without the Typeform popup (e.g. /audit)
   const open = (e) => {
     if (e) e.preventDefault();
     modal.classList.add("is-open");
@@ -150,7 +151,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
     body.querySelectorAll("iframe").forEach((f) => f.remove()); // stops any video still playing
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
-    if (!applyModal.classList.contains("is-open")) document.body.style.overflow = "";
+    if (!applyModal || !applyModal.classList.contains("is-open")) document.body.style.overflow = "";
   };
   document.getElementById("results").addEventListener("click", (e) => {
     const card = e.target.closest("button.story");
