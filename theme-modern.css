@@ -344,3 +344,13 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
   .choices, .choices--3 { gap: 4px; }
   .audit-form .audit-form__submit.cta { padding: 13px 16px; font-size: 16px; margin-top: 14px; }
 }
+/* Hero placeholder image (in place of the VSL) */
+.vsl--placeholder { overflow: hidden; }
+.vsl-ph { position: relative; width: 100%; padding-top: 56.25%; background: linear-gradient(135deg, #eef3ff, #dfe6f5); }
+.vsl-ph svg, .vsl-ph span { position: absolute; left: 50%; transform: translateX(-50%); }
+.vsl-ph svg { top: calc(50% - 40px); width: 56px; height: 56px; fill: none; stroke: #9aa8c7; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.vsl-ph span { top: calc(50% + 24px); font: 600 14px var(--body); color: #7d8aa8; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+/* Longer hero headline: a bit smaller so the button stays above the fold */
+@media (min-width: 761px) { .hero .hero__title { font-size: clamp(32px, 3.2vw, 46px); max-width: 1180px; } }
+@media (max-width: 760px) { .hero .hero__title { font-size: 25px; } }
+.hero__sub { text-wrap: balance; }
