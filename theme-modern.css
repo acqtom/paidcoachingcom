@@ -354,3 +354,5 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 @media (min-width: 761px) { .hero .hero__title { font-size: clamp(32px, 3.2vw, 46px); max-width: 1180px; } }
 @media (max-width: 760px) { .hero .hero__title { font-size: 25px; } }
 .hero__sub { text-wrap: balance; }
+.hero__title .accent--blue { color: var(--gold-text); font-style: normal; }
+.hero .vsl + .cta { margin-top: 28px; }
