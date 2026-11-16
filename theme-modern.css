@@ -356,3 +356,4 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 .hero__sub { text-wrap: balance; }
 .hero__title .accent--blue { color: var(--gold-text); font-style: normal; }
 .hero .vsl + .cta { margin-top: 28px; }
+.oncall ul { width: fit-content; max-width: 100%; }
