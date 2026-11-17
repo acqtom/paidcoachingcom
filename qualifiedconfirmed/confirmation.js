@@ -7,7 +7,6 @@ const CALL_NUMBER = "(714)";
 const CASES = [
   {
     icon: "chart", name: "Stephen", tag: "Client Success Story",
-    vturb: "6adaacdcb5b8cc79020c865b", ratio: 62.45654692931634,
     desc: "Music production coach",
     result: "$500 course → $101K/month mentorship",
     button: "Results Breakdown",
@@ -92,6 +91,7 @@ function vturbVertical(id, ratio, label) {
 function player({ youtube, mp4, tall, vturb, ratio }, label) {
   if (vturb && tall) return vturbVertical(vturb, ratio, label);
   if (vturb) return vturbFrame(vturb, ratio || 56.25, label);
+  if (!youtube && !mp4) return '<div class="vsl-ph faq-ph case-ph" role="img" aria-label="Video placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg><span>Video coming soon</span></div>';
   const thumb = youtube ? `<img src="https://i.ytimg.com/vi/${youtube}/hqdefault.jpg" alt="" loading="lazy" />` : "";
   const soon = youtube || mp4 ? "" : '<span class="player__soon">Video coming soon</span>';
   return `<div class="player${tall ? " player--tall" : ""}" data-youtube="${youtube || ""}" data-mp4="${mp4 || ""}">
