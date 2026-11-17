@@ -357,3 +357,13 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 .hero__title .accent--blue { color: var(--gold-text); font-style: normal; }
 .hero .vsl + .cta { margin-top: 28px; }
 .oncall ul { width: fit-content; max-width: 100%; }
+/* Main page: new sections */
+.section--band { background: var(--band); }
+.section--stats { background: #ffffff; }
+.type-pill { align-self: flex-start; display: inline-block; margin-bottom: 14px; padding: 5px 12px; border-radius: 999px; background: var(--cream); border: 1px solid var(--cream-line); color: var(--gold-text); font: 700 11px var(--body); letter-spacing: 0.12em; text-transform: uppercase; }
+.types .card h3 { margin-top: 0; }
+.panel.framework { margin-top: 32px; text-align: left; }
+.framework .steps__n { font-size: 13px; }
+.framework + .cta { margin-top: 36px; }
+.stories + .cta { margin-top: 40px; }
+@media (max-width: 760px) { .hero .cta, .section:not(.hero) .hero__ask + .cta { white-space: normal; text-align: center; line-height: 1.25; font-size: 16.5px; padding: 15px 18px; max-width: 100%; box-sizing: border-box; } .cta { max-width: 100%; box-sizing: border-box; } }

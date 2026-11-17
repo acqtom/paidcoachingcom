@@ -117,7 +117,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
         <span class="equation__op equation__arrow">→</span>
         ${c.outputs.map((o) => tile(o, "stat--out")).join("")}
       </div>
-      <a class="cta js-cta" href="#apply">Book Your Offer Planning Call <span class="cta__arrow">→</span></a>
+      <a class="cta js-cta" href="#apply">Start Building My Mentorship Program <span class="cta__arrow">→</span></a>
     </article>`;
 
   // Summary cards
