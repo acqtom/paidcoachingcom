@@ -367,3 +367,11 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 .framework + .cta { margin-top: 36px; }
 .stories + .cta { margin-top: 40px; }
 @media (max-width: 760px) { .hero .cta, .section:not(.hero) .hero__ask + .cta { white-space: normal; text-align: center; line-height: 1.25; font-size: 16.5px; padding: 15px 18px; max-width: 100%; box-sizing: border-box; } .cta { max-width: 100%; box-sizing: border-box; } }
+/* 3-part framework: three clean cards, no connector lines */
+.panel.framework { background: none; border: 0; box-shadow: none; padding: 0; margin-top: 36px; }
+.framework .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.framework .steps li { flex-direction: column; gap: 14px; padding: 26px 24px; background: #ffffff; border: 1px solid var(--line-2); border-radius: 14px; box-shadow: 0 14px 34px rgba(20, 20, 20, 0.05); }
+.framework .steps li::before { display: none; }
+.framework .steps h3 { margin: 0 0 8px; }
+.framework .steps p { font-size: 15px; line-height: 1.65; }
+@media (max-width: 860px) { .framework .steps { grid-template-columns: 1fr; gap: 12px; } .framework .steps li { padding: 20px 18px; gap: 10px; } }
