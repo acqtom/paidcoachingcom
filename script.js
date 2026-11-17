@@ -13,12 +13,12 @@ const COMPARISONS = [
   },
   {
     card: { photo: "/assets/clients/adriel.jpg", who: "Adriel", meta: "Real Estate Mentorship · $7K–$12K ticket", metric: "$997 Course → $100K In 90 Days", blurb: "His first time launching a mentorship. We built and managed everything." },
-    title: "10x ROAS First 30 Days",
+    title: "$997 Course To $100K In 90 Days",
     tags: ["B2C Mentorship Offer", "Real Estate Niche", "$8K–$12K Ticket"],
-    before: { label: "Before", img: "/assets/compare/2-before-courses.png", fit: "contain", bg: "#ffffff", caption: "Before: $997 courses", text: "This real estate mentor had validated his first $21K on organic, but most of his calls weren’t with buyers. They were with people who wanted to network, pick his brain, or talk deals without any capital to back it up. Only a handful could actually afford an $8K–$12K program, and he had no way to control who came through, or when." },
-    after: { label: "After", img: "/assets/compare/2-after-115k.png", fit: "contain", thin: true, bg: "#111111", caption: "After: $115,000 cash collected · 18 new customers", text: "We built him a paid funnel from the ground up: a new VSL, landing page, application, pre-call warm-up, and our Direct Offer ads speaking directly to investors with capital ready to deploy. His first $3K in ad spend turned into $33K, a 10x ROAS in month one. We scaled the next month to $49K at an 8.6x ROAS, with his team closing nearly 40% of calls." },
-    inputs: [["$3K", "Ad spend"]],
-    outputs: [["$33K", "Cash collected"], ["10x", "ROAS", true]],
+    before: { label: "Before", img: "/assets/compare/2-before-courses.png", fit: "contain", bg: "#ffffff", caption: "Before: $997 courses", text: "This real estate educator was selling $997 courses on new construction, commercial flipping, wholesaling and small apartments. He had real knowledge and an audience that trusted him, but every sale was a one-off $997 purchase, so growing his income meant finding more and more buyers." },
+    after: { label: "After", img: "/assets/compare/2-after-115k.png", fit: "contain", thin: true, bg: "#111111", caption: "After: $115,000 cash collected · 18 new customers", text: "This was his first time launching a mentorship. We built his high-ticket offer around what he already knew and managed everything from the marketing to the sales process. He went from $997 course sales to $100K in his first 90 days, with $115,000 cash collected from 18 new customers." },
+    inputs: [["$997", "Course"]],
+    outputs: [["$100K", "First 90 days", true]],
   },
   {
     card: { photo: "/assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $2K–$4K ticket", metric: "$12 Skool → $200K Cash Collected", blurb: "He was underselling his knowledge in a $12 Skool. We built him a high-ticket mentorship and he’s booking calls every day with people ready to pay him $3K–$6K." },
