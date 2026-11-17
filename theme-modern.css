@@ -377,3 +377,11 @@ main:has(.conf-hero) > section:nth-of-type(even) .invite { background: #ffffff; 
 @media (max-width: 860px) { .framework .steps { grid-template-columns: 1fr; gap: 12px; } .framework .steps li { padding: 20px 18px; gap: 10px; } }
 .faq-ph { border-radius: 10px; overflow: hidden; margin-top: 14px; }
 .case-ph { margin-top: 0; }
+/* Star rating (confirmation Step 1) */
+.rating { display: inline-flex; align-items: center; gap: 10px; margin: 14px auto 0; padding: 7px 14px; background: #ffffff; border: 1px solid var(--line-2); border-radius: 999px; box-shadow: 0 6px 18px rgba(20, 20, 20, 0.05); }
+.rating__stars { display: inline-flex; gap: 2px; }
+.rating__stars svg { width: 17px; height: 17px; fill: #f5b301; }
+.rating__text { font: 500 14px var(--body); color: var(--muted-2); }
+.rating__text strong { color: var(--ink); font-weight: 800; }
+.rating + .vsl { margin-top: 20px; }
+@media (max-width: 760px) { .rating__stars svg { width: 15px; height: 15px; } .rating__text { font-size: 13px; } .rating + .vsl { margin-top: 14px; } }
