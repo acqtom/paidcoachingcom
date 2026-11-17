@@ -23,7 +23,6 @@ const COMPARISONS = [
   {
     card: { photo: "/assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $2K–$4K ticket", metric: "$12 Skool → $200K Cash Collected", blurb: "He was underselling his knowledge in a $12 Skool. We built him a high-ticket mentorship and he’s booking calls every day with people ready to pay him $3K–$6K." },
     title: "$12 Skool To $200K Cash Collected",
-    video: { vturb: "6aeb9e10653f10da78260d68", ratio: 179.25925925925924 }, // vertical testimonial
     tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$2K–$4K Ticket"],
     before: { label: "Before", img: "/assets/compare/3-before.png", fit: "contain", thin: true, bg: "#333333", caption: "Before: $12/month Skool · 101 members" },
     after: { label: "After", img: "/assets/compare/3-after.png", fit: "contain", thin: true, bg: "#0a0a0a", caption: "After: $202,889.01 cash collected · 91 new customers" },
