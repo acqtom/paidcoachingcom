@@ -21,7 +21,7 @@
   --line: #f1e3d3;
   --line-2: #ecd9c4;
   --mist: #fffaf4;
-  --heading: "Inter Tight", "Inter", system-ui, sans-serif;
+  --heading: "Outfit", "Inter", system-ui, sans-serif;
   --body: "Inter", system-ui, -apple-system, sans-serif;
 }
 
@@ -29,7 +29,7 @@ body { background: var(--page); color: var(--ink); font-family: var(--body); }
 .stars { display: none; }
 
 /* Headings: soft serif, normal tracking; highlighted words in italic orange */
-h1, h2, h3, .hero__title, .h2, .conf-title, .step { font-family: var(--heading); letter-spacing: -0.035em; font-weight: 700; }
+h1, h2, h3, .hero__title, .h2, .conf-title, .step { font-family: var(--heading); letter-spacing: -0.025em; font-weight: 700; }
 .hero__title { font-weight: 700; }
 .h2 { font-weight: 700; }
 .accent { color: var(--gold-text); font-style: normal; }
@@ -72,7 +72,7 @@ main:has(.conf-hero) > section:nth-of-type(even) { background: var(--band); }
 .card--glow::before { background: linear-gradient(90deg, transparent, var(--accent-soft), transparent); }
 .story { box-shadow: 0 14px 34px rgba(120, 60, 20, 0.06); }
 .story__metric, .story__more, .case__result, .team-stats strong, .coach__name { color: var(--gold-text); }
-.story__metric, .case__result { font-family: var(--heading); font-weight: 700; letter-spacing: -0.02em; }
+.story__metric, .case__result { font-family: var(--heading); font-weight: 700; letter-spacing: -0.015em; }
 .team-stats strong { font-family: var(--heading); font-weight: 700; color: var(--ink); }
 .type-pill { background: var(--cream); border-color: var(--cream-line); color: var(--gold-text); }
 
@@ -112,3 +112,33 @@ main:has(.conf-hero) > section:nth-of-type(even) { background: var(--band); }
 
 /* Links */
 .footer__links a:hover, .footer__copy a:hover { color: var(--gold-text); }
+
+/* Big stat numbers in Outfit; buttons/labels in Inter */
+.team-stats strong, .stat strong, .steps__n, .num { font-family: var(--heading); font-weight: 700; }
+.cta, .badge, .guarantee-pill, .eyebrow, .type-pill, .oncall__title { font-family: var(--body); }
+
+/* Backgrounds like the reference: cream gradient, soft "sun" circles top-right, layered waves at the bottom of the hero */
+body { background: linear-gradient(180deg, #fdf4e9 0%, #fcefe1 100%); }
+.hero, .conf-hero { position: relative; overflow: hidden; background: linear-gradient(180deg, #fdf3e6 0%, #fcecdb 100%); }
+.hero > .container, .conf-hero > .container { position: relative; z-index: 1; }
+.hero::before, .conf-hero::before {
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  top: -240px; right: -210px; width: 560px; height: 560px; border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #f2c08b 0 47%, transparent 47.4%),
+    radial-gradient(circle at 50% 50%, #f8ddc0 0 70%, transparent 70.4%);
+  opacity: 0.85;
+}
+.hero::after, .conf-hero::after {
+  content: ""; position: absolute; z-index: 0; pointer-events: none; left: 0; right: 0; bottom: 0; height: 220px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 220' preserveAspectRatio='none'%3E%3Cpath d='M0 120 C 240 60 480 70 720 110 S 1200 170 1440 90 V220 H0Z' fill='%23f8e2cb' fill-opacity='0.75'/%3E%3Cpath d='M0 165 C 300 120 560 135 820 160 S 1260 190 1440 150 V220 H0Z' fill='%23f5d6b5' fill-opacity='0.7'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
+}
+@media (max-width: 760px) {
+  .hero::before, .conf-hero::before { top: -150px; right: -150px; width: 320px; height: 320px; opacity: 0.7; }
+  .hero::after, .conf-hero::after { height: 120px; }
+}
+.vsl { border: 7px solid #ffffff; box-shadow: 0 24px 60px rgba(120, 60, 20, 0.16); }
+@media (max-width: 760px) { .vsl { border-width: 5px; } }
+/* Eyebrow pill: dark brown like the reference CTA block, !! in its light peach */
+.hero .badge { background: #2a1d15; color: #fdf3e6; border-color: #2a1d15; box-shadow: 0 8px 20px rgba(42, 29, 21, 0.18); }
+.hero .badge .badge__alert { color: var(--accent-soft); }
