@@ -1,0 +1,114 @@
+/* Warm cream / brown / burnt-orange theme with serif headings.
+   Loaded after theme-modern.css. Colours, fonts and surface styling only — no layout changes.
+   Remove the <link> to theme-warm.css on a page to go back to the blue theme. */
+
+:root {
+  --blue: #b4531f;            /* accent: burnt orange */
+  --gold: #b4531f;
+  --gold-text: #b4531f;
+  --accent-hover: #9c4517;
+  --accent-soft: #f2b47c;     /* light orange (buttons on dark) */
+  --cream: #fdeedd;           /* soft accent fill: pills, selected choices */
+  --cream-line: #f0d3b4;
+  --band: #fbeee0;            /* alternating section background */
+  --page: #fdf6ee;            /* page background */
+  --surface: #fffaf4;         /* cards */
+  --ink: #2a1d15;
+  --black: #2a1d15;
+  --white: #ffffff;
+  --muted: #7d6a5c;
+  --muted-2: #4d3c30;
+  --line: #f1e3d3;
+  --line-2: #ecd9c4;
+  --mist: #fffaf4;
+  --heading: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+body { background: var(--page); color: var(--ink); font-family: var(--body); }
+.stars { display: none; }
+
+/* Headings: soft serif, normal tracking; highlighted words in italic orange */
+h1, h2, h3, .hero__title, .h2, .conf-title, .step { font-family: var(--heading); letter-spacing: -0.015em; font-weight: 600; }
+.hero__title { font-weight: 600; }
+.h2 { font-weight: 600; }
+.accent { color: var(--gold-text); font-style: italic; }
+.hero__title .accent, .hero__title .accent--blue { color: var(--gold-text); font-style: italic; }
+.hero__sub .accent { color: inherit; font-style: inherit; }
+.lead { color: var(--muted); }
+.eyebrow, .eyebrow--blue { color: var(--gold-text); }
+
+/* Eyebrow pill */
+.hero .badge { background: #ffffff; color: var(--gold-text); border: 1px solid var(--cream-line); border-radius: 999px; box-shadow: 0 4px 14px rgba(120, 60, 20, 0.06); }
+.badge__alert { color: var(--gold-text); }
+
+/* Buttons: rounded pill, burnt orange */
+.cta {
+  background: var(--gold); color: #ffffff; border-radius: 999px;
+  box-shadow: 0 12px 26px rgba(180, 83, 31, 0.28); font-family: var(--body);
+}
+.cta:hover { background: var(--accent-hover); box-shadow: 0 16px 32px rgba(180, 83, 31, 0.34); }
+.cta .cta__arrow { color: var(--gold); }
+.cta .cta__arrow::after { border-color: rgba(255, 255, 255, 0.85); }
+.audit-form .audit-form__submit.cta, .hero .cta { border-radius: 999px; }
+@media (max-width: 760px) { .cta .cta__arrow { color: #ffffff; } }
+
+/* Pills under the button */
+.guarantee-pill { background: #ffffff; border-color: var(--cream-line); color: var(--ink); }
+.guarantee-pill svg { stroke: var(--gold-text); }
+.guarantee { background: var(--cream); border-color: var(--cream-line); }
+
+/* Section bands */
+.hero + .section, .section--band, .promise, .promise-mini, .footer { background: var(--band); }
+main:has(.conf-hero) > section:nth-of-type(even) { background: var(--band); }
+.section--stats { background: var(--page); }
+.footer { border-top-color: var(--line-2); }
+
+/* Cards and panels: warm surface, soft border, rounder corners */
+.card, .panel, .story, .promise__card, .faq__card, .case, .audit-form, .audit-done, .invite, .framework .steps li, .result, .rating {
+  background: var(--surface); border-color: var(--line-2);
+}
+.card, .panel, .story, .faq__card, .case, .framework .steps li { border-radius: 18px; }
+.card--glow::before { background: linear-gradient(90deg, transparent, var(--accent-soft), transparent); }
+.story { box-shadow: 0 14px 34px rgba(120, 60, 20, 0.06); }
+.story__metric, .story__more, .case__result, .team-stats strong, .coach__name { color: var(--gold-text); }
+.story__metric, .case__result { font-family: var(--heading); font-weight: 600; letter-spacing: -0.01em; }
+.team-stats strong { font-family: var(--heading); font-weight: 600; color: var(--ink); }
+.type-pill { background: var(--cream); border-color: var(--cream-line); color: var(--gold-text); }
+
+/* Numbered badges, ticks, icons */
+.steps__n, .num, .icon-box, .promise__icon, .confirmed__check { background: var(--gold); color: #ffffff; }
+.promise__icon { box-shadow: 0 12px 28px rgba(180, 83, 31, 0.28); }
+.rows--check li::before { background: var(--gold); }
+.oncall li::before { color: var(--gold); }
+.stat--main { background: var(--gold); box-shadow: 0 10px 24px rgba(180, 83, 31, 0.28); }
+.stat--out { border-color: var(--cream-line); color: var(--gold-text); }
+.result__label--paid { background: var(--gold); }
+
+/* Placeholder image / video boxes: warm peach like the reference */
+.vsl { background: #f6dcc0; border-radius: 18px; box-shadow: 0 24px 60px rgba(120, 60, 20, 0.14); }
+.vsl-ph { background: linear-gradient(160deg, #f9e3cb 0%, #f3c99f 100%); }
+.vsl-ph svg { stroke: #a8623a; }
+.vsl-ph span { color: #8a5434; }
+
+/* Confirmation page bits */
+.conf-title .hl, mark.hl { background: var(--gold); color: #ffffff; }
+.step__n { color: var(--gold-text); }
+.confirmed { background: var(--surface); border-color: var(--line-2); }
+.confirmed__eyebrow, .confirmed__cal svg { color: var(--gold-text); stroke: var(--gold-text); }
+.case__tag { color: var(--gold-text); border-color: var(--cream-line); }
+.invite__note, .invite__important, .invite__click { color: var(--gold-text); }
+.invite__add { background: var(--gold); }
+
+/* /audit form */
+.audit-form input[type="text"], .audit-form input[type="email"], .audit-form input[type="tel"], .choice span { background: #ffffff; border-color: var(--line-2); }
+.audit-form input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(180, 83, 31, 0.15); }
+.choice input:checked + span { background: var(--cream); border-color: var(--gold); }
+.choice input[type="radio"]:checked + span::before, .choice input[type="checkbox"]:checked + span::before { border-color: var(--gold); background-color: var(--gold); }
+.choice input:focus-visible + span { box-shadow: 0 0 0 3px rgba(180, 83, 31, 0.25); }
+
+/* Popups */
+.story-modal__panel, .tf-modal__panel { background: var(--page); }
+
+/* Links */
+.footer__links a:hover, .footer__copy a:hover { color: var(--gold-text); }
