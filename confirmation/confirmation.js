@@ -41,6 +41,7 @@ const CASES = [
     icon: "cash", name: "Brem", tag: "Client Success Story",
     desc: "Creator",
     result: "$35 Whop → $44K cash collected",
+    placeholder: true, // video coming soon (keeps screenshots on the left)
     shots: [
       ["/assets/compare/4-before-brem.png", "Brem's Whop sales before"],
       ["/assets/compare/4-after-brem.png", "Brem's dashboard after: $44,635 cash collected"],
