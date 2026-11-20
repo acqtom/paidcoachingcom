@@ -8,9 +8,9 @@ const CASES = [
   {
     icon: "chart", name: "Stephen", tag: "Client Success Story",
     desc: "Music production coach",
-    result: "$500 course → $101K/month mentorship",
+    result: "$6K/month → $101K/month",
     button: "Results Breakdown",
-    breakdown: [["Before", "$500 course"], ["After", "High-ticket mentorship"], ["Average order value", "$500 → $4,000"], ["Monthly revenue", "$6K → $101.49K"]],
+    breakdown: [["Before", "$6K/month"], ["After", "$101.49K/month"], ["Average order value", "$500 → $4,000"]],
     breakdownImg: "/assets/cases/stephen-breakdown.png",
     youtube: "", mp4: "",
   },
