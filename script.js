@@ -105,7 +105,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const side = (s, cls) => `
     <div class="result__side">
       ${media(s, cls)}
-      ${s.text ? `<p class="result__text"><strong>${s.label}:</strong> ${s.text}</p>` : ""}
     </div>`;
   const tile = ([value, label, main], cls) =>
     `<div class="stat ${cls}${main ? " stat--main" : ""}"><strong>${value}</strong><span>${label}</span></div>`;
