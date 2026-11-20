@@ -31,9 +31,19 @@ const COMPARISONS = [
   },
   {
     card: { photo: "/assets/clients/brem.jpg", who: "Brem", meta: "High-ticket mentorship", metric: "$49 Whop → $44K Cash Collected", blurb: "He was selling a $49 Whop and working hard for every sale. We built him a high-ticket mentorship and he’s collected $44K since launching it." },
+    title: "$49 Whop To $44K Cash Collected",
+    before: { label: "Before", thin: true, caption: "Before: $49 Whop", text: "Brem was selling a $49 Whop. Every sale took real work but paid a fraction of what his knowledge was worth, so growing meant selling to more and more people." },
+    after: { label: "After", img: "/assets/compare/4-after-brem.png", fit: "contain", thin: true, bg: "#111111", caption: "After: $44,635 cash collected", text: "We built him a high-ticket mentorship around the result his members actually wanted, packaged and priced so it was worth it, then set up the marketing and sales process to sell it. Since launching, he’s collected $44,635." },
+    inputs: [["$49", "Whop"]],
+    outputs: [["$44K", "Cash collected", true]],
   },
   {
     card: { who: "Zych", meta: "High-ticket mentorship", metric: "$19 Ebook → $20K Mentorship", blurb: "His only offer was a $19 ebook. We turned what he knew into a high-ticket mentorship and he’s made $20,000 from it." },
+    title: "$19 Ebook To $20K Mentorship",
+    before: { label: "Before", thin: true, caption: "Before: $19 ebook", text: "Zych’s only offer was a $19 ebook. People valued what he taught, but at $19 a sale there was no way to turn that into a real income." },
+    after: { label: "After", thin: true, caption: "After: $20,000 from his mentorship", text: "We turned what he already knew into a high-ticket mentorship, showed him how to market it to his audience, and gave him the sales process to close it. He’s made $20,000 from the mentorship." },
+    inputs: [["$19", "Ebook"]],
+    outputs: [["$20K", "Mentorship", true]],
   },
 ];
 
@@ -89,7 +99,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const media = (side, cls) => `
     <figure class="result__img${side.thin ? " result__img--thin" : ""}"${side.bg ? ` style="background:${side.bg}"` : ""}>
       <span class="result__label ${cls}">${side.label}</span>
-      <img src="${side.img}" alt="${side.label} results: ${side.caption}" loading="lazy"${side.fit ? ` style="object-fit:${side.fit}"` : ""} onerror="this.remove()" />
+      ${side.img ? `<img src="${side.img}" alt="${side.label} results: ${side.caption}" loading="lazy"${side.fit ? ` style="object-fit:${side.fit}"` : ""} onerror="this.remove()" />` : `<span class="result__soon">Screenshot coming soon</span>`}
       <figcaption>${side.caption}</figcaption>
     </figure>`;
   const side = (s, cls) => `
