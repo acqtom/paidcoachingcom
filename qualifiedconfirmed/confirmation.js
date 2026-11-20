@@ -49,8 +49,8 @@ const CASES = [
     youtube: "", mp4: "",
   },
   {
-    icon: "cap", name: "Zych", tag: "Client Success Story",
-    desc: "Creator",
+    icon: "cap", name: "Zyck", tag: "Client Success Story",
+    desc: "Drum chops and solo coaching",
     result: "$19 e-books → $20K in 1:1 mentorships",
     youtube: "", mp4: "",
   },

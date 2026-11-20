@@ -3,7 +3,7 @@
 // Each stat row reads: inputs joined by "+"  →  outputs. Set `main: true` on the headline output.
 const COMPARISONS = [
   {
-    card: { photo: "/assets/clients/stephen.jpg", who: "Stephen", meta: "Music Production Coaching · $4K–$8K ticket", metric: "$6K/Month → $101K/Month", blurb: "He had a mentorship, but it kept attracting people who couldn’t afford it or needed “time to think.” We rebuilt his program, pricing, pages, and content to speak to buyers who could pay, and he finally broke $100K+/mo." },
+    card: { photo: "/assets/clients/stephen.jpg", who: "Stephen", meta: "Music Production Coaching", metric: "$6K/Month → $101K/Month", blurb: "He had a mentorship, but it kept attracting people who couldn’t afford it or needed “time to think.” We rebuilt his program, pricing, pages, and content to speak to buyers who could pay, and he finally broke $100K+/mo." },
     title: "$6K/Month To $101K/Month",
     tags: ["B2C Coaching Offer", "Music Production Niche", "$4K–$8K Ticket"],
     before: { label: "Before", img: "/assets/compare/1-before.png", caption: "Amount Won $6K · ROAS 1", text: "This music production coach had a known name in his space, so getting calls wasn’t the problem. Getting the right people on them was. His content attracted people who loved the idea of getting results, but were highly skeptical of a high-ticket program. The few who bought could only afford small split payments. His average order value was around $500, and he was stuck at $6K–$10K a month." },
@@ -12,7 +12,7 @@ const COMPARISONS = [
     outputs: [["$101K/mo", "After"], ["10x", "ROAS", true]],
   },
   {
-    card: { photo: "/assets/clients/adriel.jpg", who: "Adriel", meta: "Real Estate Mentorship · $7K–$12K ticket", metric: "0 Sales → $100K In 90 Days", blurb: "He recorded an entire course with incredible knowledge, but nobody understood why they needed it, so nobody bought. We helped him turn it into a mentorship, market it to his 41.7K-subscriber audience, ran ads, and he collected $100K in 90 days." },
+    card: { photo: "/assets/clients/adriel.jpg", who: "Adriel", meta: "Real Estate Mentorship", metric: "0 Sales → $100K In 90 Days", blurb: "He recorded an entire course with incredible knowledge, but nobody understood why they needed it, so nobody bought. We helped him turn it into a mentorship, market it to his 41.7K-subscriber audience, ran ads, and he collected $100K in 90 days." },
     title: "0 Sales To $100K In 90 Days",
     tags: ["B2C Mentorship Offer", "Real Estate Niche", "$8K–$12K Ticket"],
     before: { label: "Before", img: "/assets/compare/2-before-courses.png", fit: "contain", bg: "#ffffff", caption: "Before: $997 courses", text: "This real estate educator was selling $997 courses on new construction, commercial flipping, wholesaling and small apartments. He had real knowledge and an audience that trusted him, but every sale was a one-off $997 purchase, so growing his income meant finding more and more buyers." },
@@ -21,7 +21,7 @@ const COMPARISONS = [
     outputs: [["$100K", "First 90 days", true]],
   },
   {
-    card: { photo: "/assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship · $2K–$4K ticket", metric: "$12 Community → $200K In 1:1 Mentorships", blurb: "He was selling a 12-dollar Skool and answering DMs 24/7 from people asking for help. We showed him how to teach the same thing 1:1 as a mentorship, and now a handful of calls a week with serious students has collected him $200K." },
+    card: { photo: "/assets/clients/alex.jpg", who: "Alex", meta: "YouTube Automation Mentorship", metric: "$12 Community → $200K In 1:1 Mentorships", blurb: "He was selling a 12-dollar Skool and answering DMs 24/7 from people asking for help. We showed him how to teach the same thing 1:1 as a mentorship, and now a handful of calls a week with serious students has collected him $200K." },
     title: "$12 Community To $200K In 1:1 Mentorships",
     tags: ["B2C Mentorship Offer", "YouTube Automation Niche", "$2K–$4K Ticket"],
     before: { label: "Before", img: "/assets/compare/3-before.png", fit: "contain", thin: true, bg: "#333333", caption: "Before: $12/month Skool · 101 members" },
@@ -38,9 +38,9 @@ const COMPARISONS = [
     outputs: [["$44K", "Cash collected", true]],
   },
   {
-    card: { who: "Zych", meta: "High-ticket mentorship", metric: "$19 E-Books → $20K In 1:1 Mentorships", blurb: "He had 50K+ Instagram followers and 40K+ YouTube subscribers, but his 19-dollar ebook and low-ticket courses only made a few hundred bucks a month. We showed him how to package and deliver a $1,497 mentorship, helped market it to his audience and grow it, and he made $20K from it." },
+    card: { who: "Zyck", meta: "Drum Chops And Solo Coaching", metric: "$19 E-Books → $20K In 1:1 Mentorships", blurb: "He had 50K+ Instagram followers and 40K+ YouTube subscribers, but his 19-dollar ebook and low-ticket courses only made a few hundred bucks a month. We showed him how to package and deliver a $1,497 mentorship, helped market it to his audience and grow it, and he made $20K from it." },
     title: "$19 E-Books To $20K In 1:1 Mentorships",
-    before: { label: "Before", thin: true, caption: "Before: $19 ebook", text: "Zych’s only offer was a $19 ebook. People valued what he taught, but at $19 a sale there was no way to turn that into a real income." },
+    before: { label: "Before", thin: true, caption: "Before: $19 ebook", text: "Zyck’s only offer was a $19 ebook. People valued what he taught, but at $19 a sale there was no way to turn that into a real income." },
     after: { label: "After", thin: true, caption: "After: $20,000 from his mentorship", text: "We turned what he already knew into a high-ticket mentorship, showed him how to market it to his audience, and gave him the sales process to close it. He’s made $20,000 from the mentorship." },
     inputs: [["$19", "Ebook"]],
     outputs: [["$20K", "Mentorship", true]],
