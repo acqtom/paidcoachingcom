@@ -147,3 +147,4 @@ body { background: linear-gradient(180deg, #fdf4e9 0%, #fcefe1 100%); }
 .hero__sub .accent { color: var(--ink); font-weight: 600; }
 .section.section--stats { padding-top: 44px; padding-bottom: 44px; }
 @media (max-width: 760px) { .section.section--stats { padding-top: 32px; padding-bottom: 32px; } }
+@media (min-width: 761px) { .stories > .story:nth-child(5):last-child { grid-column: 1 / -1; justify-self: center; width: calc(50% - 10px); } .stories > .story:nth-child(3):not(:last-child) { grid-column: auto; justify-self: stretch; width: auto; } }
