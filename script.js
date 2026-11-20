@@ -30,7 +30,7 @@ const COMPARISONS = [
     outputs: [["$200K", "Cash collected", true]],
   },
   {
-    card: { who: "Brem", meta: "High-ticket mentorship", metric: "$49 Whop → $44K Cash Collected", blurb: "He was selling a $49 Whop and working hard for every sale. We built him a high-ticket mentorship and he’s collected $44K since launching it." },
+    card: { photo: "/assets/clients/brem.jpg", who: "Brem", meta: "High-ticket mentorship", metric: "$49 Whop → $44K Cash Collected", blurb: "He was selling a $49 Whop and working hard for every sale. We built him a high-ticket mentorship and he’s collected $44K since launching it." },
   },
   {
     card: { who: "Zych", meta: "High-ticket mentorship", metric: "$19 Ebook → $20K Mentorship", blurb: "His only offer was a $19 ebook. We turned what he knew into a high-ticket mentorship and he’s made $20,000 from it." },
