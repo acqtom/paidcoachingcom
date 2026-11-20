@@ -17,7 +17,7 @@ const CASES = [
   {
     icon: "grid", name: "Adriel", tag: "Client Success Story",
     desc: "Real Estate Educator",
-    result: "$997 course → $100K in first 90 days",
+    result: "0 sales → $100K in 90 days",
     placeholder: true, // video coming soon (keeps screenshots on the left)
     youtube: "",
     shots: [
@@ -30,7 +30,7 @@ const CASES = [
     // Vertical video on the right, screenshots under the text
     icon: "play", name: "Alex", tag: "Client Success Story",
     desc: "YouTube Automation Coach",
-    result: "$12/month Skool → $200K cash collected",
+    result: "$12 community → $200K in 1:1 mentorships",
     shots: [
       ["/assets/compare/3-before.png", "Alex's Skool before: $12/month, 101 members"],
       ["/assets/compare/3-after.png", "Alex's dashboard after: $202,889.01 cash collected, 91 new customers"],
@@ -40,7 +40,7 @@ const CASES = [
   {
     icon: "cash", name: "Brem", tag: "Client Success Story",
     desc: "Creator",
-    result: "$35 Whop → $44K cash collected",
+    result: "$35 community → $44K in 1:1 mentorships",
     placeholder: true, // video coming soon (keeps screenshots on the left)
     shots: [
       ["/assets/compare/4-before-brem.png", "Brem's Whop sales before"],
@@ -51,7 +51,7 @@ const CASES = [
   {
     icon: "cap", name: "Zych", tag: "Client Success Story",
     desc: "Creator",
-    result: "$19 ebook → $20K mentorship",
+    result: "$19 e-books → $20K in 1:1 mentorships",
     youtube: "", mp4: "",
   },
 ];
