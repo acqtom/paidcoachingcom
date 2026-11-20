@@ -18,7 +18,8 @@ const CASES = [
     icon: "grid", name: "Adriel", tag: "Client Success Story",
     desc: "Real Estate Educator",
     result: "$997 course → $100K in first 90 days",
-    youtube: "Naet6oekdaI",
+    placeholder: true, // video coming soon (keeps screenshots on the left)
+    youtube: "",
     shots: [
       ["/assets/compare/2-before-courses.png", "Adriel's $997 courses before"],
       ["/assets/compare/2-after-115k.png", "Adriel's dashboard after: $115,000 cash collected, 18 new customers"],
@@ -35,6 +36,22 @@ const CASES = [
       ["/assets/compare/3-after.png", "Alex's dashboard after: $202,889.01 cash collected, 91 new customers"],
     ],
     tall: true, vturb: "6aeb9e10653f10da78260d68", ratio: 179.25925925925924, youtube: "", mp4: "",
+  },
+  {
+    icon: "cash", name: "Brem", tag: "Client Success Story",
+    desc: "Creator",
+    result: "$35 Whop → $44K cash collected",
+    shots: [
+      ["/assets/compare/4-before-brem.png", "Brem's Whop sales before"],
+      ["/assets/compare/4-after-brem.png", "Brem's dashboard after: $44,635 cash collected"],
+    ],
+    youtube: "", mp4: "",
+  },
+  {
+    icon: "cap", name: "Zych", tag: "Client Success Story",
+    desc: "Creator",
+    result: "$19 ebook → $20K mentorship",
+    youtube: "", mp4: "",
   },
 ];
 
@@ -123,7 +140,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 
 const caseShots = (c) => `<div class="case__shots">${c.shots.map(([src, alt]) => `<img class="case__shot" src="${src}" alt="${alt}" loading="lazy" />`).join("")}</div>`;
-const hasVideo = (c) => c.vturb || c.youtube || c.mp4;
+const hasVideo = (c) => c.vturb || c.youtube || c.mp4 || c.placeholder;
 document.getElementById("cases").innerHTML = CASES.map((c) => `
   <article class="case">
     <div>
