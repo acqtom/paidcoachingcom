@@ -3,7 +3,7 @@
 // Each stat row reads: inputs joined by "+"  →  outputs. Set `main: true` on the headline output.
 const COMPARISONS = [
   {
-    card: { photo: "/assets/clients/stephen.jpg", who: "Stephen", meta: "Music Production Coaching · $4K–$8K ticket", metric: "$6K/Month → $101K/Month", blurb: "Plenty of leads, wrong offer and service. We rebuilt what he was offering and he went from $6K/mo to $101K/mo." },
+    card: { photo: "/assets/clients/stephen.jpg", who: "Stephen", meta: "Music Production Coaching · $4K–$8K ticket", metric: "$6K/Month → $101K/Month", blurb: "He had a mentorship, but it kept attracting people who couldn’t afford it or needed “time to think.” We rebuilt his program, pricing, pages, and content to speak to buyers who could pay, and he finally broke $100K+/mo." },
     title: "$6K/Month To $101K/Month",
     tags: ["B2C Coaching Offer", "Music Production Niche", "$4K–$8K Ticket"],
     before: { label: "Before", img: "/assets/compare/1-before.png", caption: "Amount Won $6K · ROAS 1", text: "This music production coach had a known name in his space, so getting calls wasn’t the problem. Getting the right people on them was. His content attracted people who loved the idea of getting results, but were highly skeptical of a high-ticket program. The few who bought could only afford small split payments. His average order value was around $500, and he was stuck at $6K–$10K a month." },
