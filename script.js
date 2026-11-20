@@ -30,11 +30,11 @@ const COMPARISONS = [
     outputs: [["$200K", "Cash collected", true]],
   },
   {
-    card: { photo: "/assets/clients/brem.jpg", who: "Brem", meta: "High-ticket mentorship", metric: "$49 Whop → $44K Cash Collected", blurb: "He was selling a $49 Whop and working hard for every sale. We built him a high-ticket mentorship and he’s collected $44K since launching it." },
-    title: "$49 Whop To $44K Cash Collected",
-    before: { label: "Before", img: "/assets/compare/4-before-brem.png", fit: "contain", thin: true, bg: "#111111", caption: "Before: $49 Whop", text: "Brem was selling a $49 Whop. Every sale took real work but paid a fraction of what his knowledge was worth, so growing meant selling to more and more people." },
+    card: { photo: "/assets/clients/brem.jpg", who: "Brem", meta: "High-ticket mentorship", metric: "$35 Whop → $44K Cash Collected", blurb: "He was selling a $35 Whop and working hard for every sale. We built him a high-ticket mentorship and he’s collected $44K since launching it." },
+    title: "$35 Whop To $44K Cash Collected",
+    before: { label: "Before", img: "/assets/compare/4-before-brem.png", fit: "contain", thin: true, bg: "#111111", caption: "Before: $35 Whop", text: "Brem was selling a $35 Whop. Every sale took real work but paid a fraction of what his knowledge was worth, so growing meant selling to more and more people." },
     after: { label: "After", img: "/assets/compare/4-after-brem.png", fit: "contain", thin: true, bg: "#111111", caption: "After: $44,635 cash collected", text: "We built him a high-ticket mentorship around the result his members actually wanted, packaged and priced so it was worth it, then set up the marketing and sales process to sell it. Since launching, he’s collected $44,635." },
-    inputs: [["$49", "Whop"]],
+    inputs: [["$35", "Whop"]],
     outputs: [["$44K", "Cash collected", true]],
   },
   {
