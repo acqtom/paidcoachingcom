@@ -152,3 +152,15 @@ body { background: linear-gradient(180deg, #fdf4e9 0%, #fcefe1 100%); }
 .stat.stat--main, .stat--out.stat--main { color: #ffffff; border-color: var(--gold); }
 .stat--main strong { color: #ffffff; }
 .stat--main span { color: rgba(255, 255, 255, 0.88); }
+/* Proof cards: screenshots inside the card, between the title and the breakdown */
+.story__shots { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 4px; }
+.story__shot { position: relative; display: block; aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid var(--line-2); }
+.story__shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 22px 6px 6px; box-sizing: border-box; }
+.story__shot-label { position: absolute; top: 6px; left: 6px; z-index: 1; padding: 2px 8px; border-radius: 999px; background: #2a1d15; color: #fdf3e6; font: 700 10px var(--body); letter-spacing: 0.08em; text-transform: uppercase; }
+.story__shot + .story__shot .story__shot-label { background: var(--gold); color: #ffffff; }
+.story__shots + .story__blurb { margin-top: 10px; }
+.story__shots { width: 100%; align-self: stretch; box-sizing: border-box; }
+/* stack screenshots full width at their natural shape so wide dashboards stay readable */
+.story__shots { grid-template-columns: 1fr; gap: 8px; }
+.story__shot { aspect-ratio: auto; padding: 30px 8px 8px; box-sizing: border-box; }
+.story__shot img { position: static; display: block; width: 100%; height: auto; max-height: 200px; object-fit: contain; padding: 0; margin: 0 auto; }

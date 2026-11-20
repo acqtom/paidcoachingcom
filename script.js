@@ -135,12 +135,19 @@ document.getElementById("year").textContent = new Date().getFullYear();
     </article>`;
 
   // Summary cards
-  document.getElementById("results").innerHTML = COMPARISONS.map((c, i) => c.title ? `
-    <button class="story" type="button" data-story="${i}">${cardInner(c)}
-      <span class="story__more">See full story →</span>
-    </button>` : `
+  // Each card: title, then the before/after screenshots, then the short breakdown (no popup)
+  document.getElementById("results").innerHTML = COMPARISONS.map((c) => `
     <div class="story story--static">${cardInner(c)}
     </div>`).join("");
+  function cardShots(c) {
+    const shots = [c.before, c.after].filter((x) => x && x.img);
+    if (!shots.length) return "";
+    return `<span class="story__shots">${shots.map((x) => `
+        <span class="story__shot"${x.bg ? ` style="background:${x.bg}"` : ""}>
+          <span class="story__shot-label">${x.label}</span>
+          <img src="${x.img}" alt="${c.card.who} ${x.label.toLowerCase()}: ${x.caption}" loading="lazy" />
+        </span>`).join("")}</span>`;
+  }
   function cardInner(c) { return `
       <span class="story__head">
         <span class="story__pfp">${c.card.photo ? `<img src="${c.card.photo}" alt="" loading="lazy" onerror="this.remove()" />` : ""}${c.card.who[0]}</span>
@@ -148,6 +155,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       </span>
       <span class="story__metric">${c.card.metric}</span>
       ${c.card.sub ? `<span class="story__sub">${c.card.sub}</span>` : ""}
+      ${cardShots(c)}
       ${c.card.blurb ? `<span class="story__blurb">${c.card.blurb}</span>` : ""}`; }
 
   // Full story popup
