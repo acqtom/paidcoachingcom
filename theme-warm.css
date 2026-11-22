@@ -220,3 +220,46 @@ body { background: linear-gradient(180deg, #fdf4e9 0%, #fcefe1 100%); }
   text-shadow: none;
 }
 @media (max-width: 760px) { .cta .cta__arrow { background: none; box-shadow: none; text-shadow: 0 1px 1px rgba(90, 30, 5, 0.35); } }
+
+/* ---- Liquid glass on the other pills / buttons ---- */
+/* Dark glass: eyebrow pill + "Before" tags */
+.hero .badge, .story__shot-label {
+  position: relative; overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(255, 255, 255, 0) 55%, rgba(0, 0, 0, 0.18) 100%),
+    rgba(42, 29, 21, 0.86);
+  -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(255, 220, 190, 0.10),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.25),
+    0 1px 2px rgba(42, 29, 21, 0.25),
+    0 10px 24px -8px rgba(42, 29, 21, 0.35);
+}
+/* Orange glass: "After" tags */
+.story__shot + .story__shot .story__shot-label {
+  border-color: rgba(255, 255, 255, 0.35);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0) 55%, rgba(60, 20, 0, 0.12) 100%),
+    rgba(180, 83, 31, 0.92);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -4px 8px rgba(90, 30, 5, 0.22), 0 4px 10px -4px rgba(180, 83, 31, 0.45);
+}
+/* Clear glass: guarantee pills, rating, card pills and tags, confirmation dropdown buttons */
+.guarantee-pill, .rating, .type-pill, .case__tag, .case summary {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 244, 232, 0.45) 100%);
+  -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    inset 0 -1px 0 rgba(180, 83, 31, 0.10),
+    inset 0 -6px 12px rgba(180, 83, 31, 0.06),
+    0 0 0 1px rgba(180, 83, 31, 0.10),
+    0 1px 2px rgba(120, 60, 20, 0.08),
+    0 8px 22px -8px rgba(120, 60, 20, 0.22);
+}
+.type-pill, .case__tag { color: var(--gold-text); }
+.case summary { color: var(--gold-text); border-radius: 999px; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.case summary:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 #ffffff, inset 0 -6px 12px rgba(180, 83, 31, 0.08), 0 0 0 1px rgba(180, 83, 31, 0.16), 0 10px 24px -8px rgba(120, 60, 20, 0.28); }
