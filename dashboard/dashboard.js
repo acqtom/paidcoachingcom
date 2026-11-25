@@ -9,6 +9,7 @@ const el = (tag, cls, ...kids) => {
   return n;
 };
 const pct = (a, b) => (b ? (Math.round(Math.min(1, a / b) * 1000) / 10).toFixed(1).replace(/\.0$/, "") + "%" : "–");
+const pct2 = (a, b) => (b ? (Math.min(1, a / b) * 100).toFixed(2) + "%" : "–"); // small rates need two decimals
 let data = null, leads = [], leadTotal = 0;
 
 const fail = (msg) => { $("app-err").textContent = msg; $("app-err").hidden = !msg; };
@@ -74,13 +75,15 @@ function renderStats() {
   out.replaceChildren();
   const tile = (k, v, d) => el("div", "tile", el("p", "tile__k", k), el("p", "tile__v", v), el("p", "tile__d", d));
   const started = t["a_" + QUESTIONS[0][0]];
-  out.append(el("div", "tiles",
+  const key = tile("Page visit → booked call", pct2(t.book, t.view), t.book + " of " + t.view + " visits booked a call");
+  key.classList.add("tile--key");
+  out.append(el("div", "tiles", key,
     tile("Page visits", t.view.toLocaleString(), "One per browser visit"),
     tile("VSL play rate", pct(t.play, t.view), t.play + " of " + t.view + " pressed play"),
     tile("VSL engagement", engagement(t), "Average share watched by players"),
     tile("Button click rate", pct(t.click, t.view), t.click + " of " + t.view + " clicked a button"),
     tile("Form completion", pct(t.sub, started), t.sub + " of " + started + " who started it"),
-    tile("Calls booked", t.book.toLocaleString(), pct(t.book, t.sub) + " of submits, " + pct(t.book, t.view) + " of visits")));
+    tile("Calls booked", t.book.toLocaleString(), pct(t.book, t.sub) + " of submits")));
   if (!t.view) out.append(el("div", "card empty", "No visits recorded for this selection yet."));
 
   // Question drop-off
@@ -126,7 +129,7 @@ function renderStats() {
   const rows = sources().map((s) => [s, sum((d, x) => x === s && (!dev || d === dev))]).filter((r) => r[1].view || r[1].sub).sort((a, b) => b[1].view - a[1].view).slice(0, 50);
   if (rows.length) {
     out.append(el("div", "card", el("h2", "", "By ad / source"), el("p", "", "From utm_content, else utm_campaign, else utm_source."),
-      table(["Ad / source", "Visits", "Play rate", "Engagement", "Click rate", "Submits", "Booked"], rows.map(([s, x]) => [s, x.view, pct(x.play, x.view), engagement(x), pct(x.click, x.view), x.sub, x.book]))));
+      table(["Ad / source", "Visits", "Play rate", "Engagement", "Click rate", "Submits", "Booked", "Visit → booked"], rows.map(([s, x]) => [s, x.view, pct(x.play, x.view), engagement(x), pct(x.click, x.view), x.sub, x.book, pct2(x.book, x.view)]))));
   }
   out.append(el("p", "note", "Days start at midnight " + data.tz.split("/").pop().replace("_", " ") + " time. Coming back in a new tab counts as a new visit. A visit that’s still open can show as having left."));
 }

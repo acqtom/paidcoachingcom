@@ -32,13 +32,16 @@ button:hover { border-color: var(--bar); }
 .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .filters label { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 13px; font-weight: 600; }
 .filters select { max-width: 200px; color: var(--ink); font-weight: 500; }
-.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
 .tile, .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
 .tile { padding: 16px 18px; }
 .tile p { margin: 0; }
 .tile .tile__k { color: var(--muted); font-size: 13.5px; font-weight: 600; }
 .tile .tile__v { margin: 4px 0; font: 700 34px/1.1 "Outfit", sans-serif; }
 .tile .tile__d { color: var(--muted); font-size: 13px; }
+.tile--key { grid-column: span 2; background: #b4531f; border-color: #b4531f; }
+.tile.tile--key p { color: #fff; }
+.tile.tile--key .tile__v { font-size: 46px; }
 .card { margin-top: 16px; padding: 20px 22px; }
 .card > p { margin: 4px 0 16px; color: var(--muted); font-size: 14px; }
 .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
@@ -85,6 +88,7 @@ td button { padding: 4px 10px; font-size: 13px; }
   .main { padding: 20px 16px 50px; }
   .tiles { grid-template-columns: 1fr 1fr; }
   .tile .tile__v { font-size: 28px; }
+  .tile.tile--key .tile__v { font-size: 40px; }
   .drop__row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; }
   .drop__row .bar { grid-column: 1 / -1; grid-row: 2; }
   .card { padding: 18px 16px; }
