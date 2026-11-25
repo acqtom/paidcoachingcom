@@ -56,3 +56,30 @@
   .hero .apply .apply__next { padding: 13px 22px; font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .apply__step { animation: none; } .apply__bar span { transition: none; } }
+/* lettered answers, long text, contact step, booking step */
+#apply-form { scroll-margin-top: 20px; }
+.apply__q:focus { outline: none; }
+.apply__note { margin: -8px 0 18px; font: 500 15px/1.5 var(--body); color: var(--muted); }
+.apply__option span::before { display: none; }
+.apply__option i { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border: 1.5px solid var(--cream-line); border-radius: 8px; background: var(--cream); color: var(--gold-text); font: 700 13px var(--body); }
+.apply__option em { font-style: normal; line-height: 1.35; }
+.apply__option input:checked + span::before { display: none; }
+.apply__option input:checked + span i { background: var(--gold); border-color: var(--gold); color: #fff; }
+textarea.apply__input { display: block; resize: vertical; line-height: 1.45; }
+.apply__hint { margin: 8px 0 0; font: 500 13px var(--body); color: var(--muted); }
+.apply__contact { display: grid; gap: 14px; }
+.apply__field { display: block; }
+.apply__label { display: block; margin-bottom: 6px; font: 600 14px var(--body); color: var(--ink); }
+.apply__contact .apply__input { padding: 14px 16px; }
+.apply__phone { display: grid; grid-template-columns: 132px 1fr; gap: 8px; }
+.apply__contact .apply__country { padding: 14px 8px 14px 12px; font-size: 16px; text-overflow: ellipsis; }
+.apply__legal { margin: 4px 0 0; font: 400 13px/1.55 var(--body); color: var(--muted); }
+.apply__legal a { color: inherit; text-decoration: underline; }
+.apply__agree { display: flex; gap: 12px; align-items: flex-start; font: 500 14px/1.45 var(--body); color: var(--ink); cursor: pointer; }
+.apply__agree input { flex: none; width: 20px; height: 20px; margin: 0; accent-color: #b4531f; }
+.apply__calendar { display: block; width: 100%; height: 700px; border: 0; border-radius: 16px; background: #fff; }
+@media (max-width: 760px) {
+  .apply__phone { grid-template-columns: 116px 1fr; }
+  .apply__hint { display: none; }
+  .apply__calendar { height: 640px; }
+}

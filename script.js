@@ -64,8 +64,11 @@ const COMPARISONS = [
     document.body.style.overflow = "";
     if (location.hash === "#apply") history.replaceState(null, "", location.pathname + location.search);
   };
+  // Pages with the on-page form scroll to it instead (apply-form.js); the popup is only its fallback
+  const onPageForm = document.getElementById("apply-form");
+  window.openApplyPopup = open;
   document.addEventListener("click", (e) => {
-    if (!e.target.closest(".js-cta")) return;
+    if (onPageForm || !e.target.closest(".js-cta")) return;
     // Meta Pixel conversion: every click on a button that opens the application form
     if (typeof fbq === "function") fbq("track", "Lead");
     open(e);
@@ -74,7 +77,7 @@ const COMPARISONS = [
   modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("is-open")) close(); });
   // Links straight to the form (e.g. from an ad) can use paidcoaching.com/#apply
-  if (location.hash === "#apply") open();
+  if (!onPageForm && location.hash === "#apply") open();
 })();
 document.getElementById("year").textContent = new Date().getFullYear();
 
