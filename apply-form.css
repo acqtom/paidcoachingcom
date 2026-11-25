@@ -1,0 +1,58 @@
+/* One-question-at-a-time application form */
+.apply { max-width: 760px; margin: 52px auto 0; scroll-margin-top: 24px; }
+.hero .apply .h2 { font-size: clamp(27px, 3.4vw, 42px); text-wrap: balance; }
+.apply__wrap { position: relative; margin-top: 26px; }
+.apply__card { position: relative; padding: 36px 40px 38px; text-align: left; background: rgba(255, 250, 244, 0.94); border: 1.5px solid rgba(180, 83, 31, 0.5); border-radius: 30px; box-shadow: inset 0 1px 0 #fff, 0 0 0 6px rgba(242, 180, 124, 0.16), 0 26px 64px -14px rgba(180, 83, 31, 0.34); }
+.apply__eyebrow { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--gold-text); font: 700 13px/1.4 var(--body); letter-spacing: 0.14em; text-transform: uppercase; }
+.apply__eyebrow::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(180, 83, 31, 0.16); }
+.apply__meta { display: flex; justify-content: space-between; margin-top: 22px; font: 600 13px var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.apply__pct { color: var(--gold-text); }
+.apply__bar { height: 7px; margin-top: 10px; overflow: hidden; border-radius: 99px; background: #f1dfcb; }
+.apply__bar span { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #b4531f, #f0a566); transition: width 0.45s ease; }
+.apply__stage { min-height: 208px; }
+.apply__step { margin: 0; animation: applyIn 0.3s ease; }
+@keyframes applyIn { from { opacity: 0; transform: translateY(10px); } }
+.apply__q { margin: 28px 0 18px; font-size: 28px; line-height: 1.2; color: var(--ink); }
+.apply__input { width: 100%; box-sizing: border-box; padding: 18px 20px; font: 500 17px var(--body); color: var(--ink); background: #fff; border: 1.5px solid var(--line-2); border-radius: 16px; outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+.apply__input::placeholder { color: #a39283; }
+.apply__input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(180, 83, 31, 0.14); }
+.apply__options { display: grid; gap: 8px; }
+.apply__option { position: relative; cursor: pointer; }
+.apply__option input { position: absolute; opacity: 0; }
+.apply__option span { display: flex; align-items: center; gap: 12px; padding: 14px 18px; font: 500 16px var(--body); color: var(--ink); background: #fff; border: 1.5px solid var(--line-2); border-radius: 14px; }
+.apply__option span::before { content: ""; flex: none; width: 18px; height: 18px; box-sizing: border-box; border: 2px solid #cdb9a6; border-radius: 50%; }
+.apply__option input[type="checkbox"] + span::before { border-radius: 5px; }
+.apply__option:hover span { border-color: var(--accent-soft); }
+.apply__option input:checked + span { background: var(--cream); border-color: var(--gold); }
+.apply__option input:checked + span::before { border-color: var(--gold); background: var(--gold); box-shadow: inset 0 0 0 3px #fff; }
+.apply__option input:focus-visible + span { box-shadow: 0 0 0 4px rgba(180, 83, 31, 0.2); }
+.apply__actions { display: flex; align-items: center; gap: 20px; margin-top: 18px; }
+.hero .apply .apply__next { width: auto; margin: 0; padding: 14px 26px; font-size: 17px; cursor: pointer; }
+.hero .apply .apply__next:disabled { opacity: 0.42; cursor: default; transform: none; }
+.apply__next:disabled .cta__arrow, .apply__next:disabled .cta__arrow::after { animation: none; }
+.apply__back { padding: 8px 4px; border: 0; background: none; color: var(--muted); font: 600 15px var(--body); cursor: pointer; }
+.apply__back:hover { color: var(--ink); }
+.apply__error { margin: 16px 0 0; padding: 11px 14px; border-radius: 12px; background: #fdecec; color: #a3161c; font: 600 14px var(--body); }
+.apply__error[hidden] { display: none; }
+.apply__thanks { margin: 0; color: var(--muted-2); }
+/* Handwritten "Apply Here" + arrow */
+.apply__here { position: absolute; right: calc(100% + 4px); top: 6px; width: 170px; color: var(--gold-text); pointer-events: none; }
+.apply__here b { display: block; font: 400 38px/1 "Caveat Brush", cursive; transform: rotate(-9deg); white-space: nowrap; }
+.apply__here svg { display: block; width: 118px; margin: 6px 0 0 46px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 1120px) {
+  .apply__here { position: static; display: flex; align-items: flex-start; justify-content: center; width: auto; margin-bottom: 8px; }
+  .apply__here b { font-size: 33px; transform: rotate(-5deg); }
+  .apply__here svg { width: 58px; margin: 10px 0 0 10px; }
+}
+@media (max-width: 760px) {
+  .apply { margin-top: 38px; }
+  .apply__wrap { margin-top: 16px; }
+  .apply__card { padding: 22px 18px 24px; border-radius: 22px; }
+  .apply__eyebrow { font-size: 11px; letter-spacing: 0.08em; }
+  .apply__meta { margin-top: 16px; font-size: 11.5px; }
+  .apply__q { margin: 22px 0 14px; font-size: 22px; }
+  .apply__input { padding: 15px 16px; font-size: 16px; }
+  .apply__option span { padding: 12px 14px; }
+  .hero .apply .apply__next { padding: 13px 22px; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .apply__step { animation: none; } .apply__bar span { transition: none; } }
