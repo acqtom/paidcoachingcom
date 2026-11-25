@@ -16,6 +16,9 @@ const APPLY_CONSENT_HTML = 'You agree to receive automated follow-up and reminde
 // ISO code, dial code (first one is the default)
 const APPLY_COUNTRIES = "US1 CA1 GB44 AU61 NZ64 IE353 ZA27 AE971 SA966 QA974 KW965 IL972 IN91 PK92 BD880 LK94 SG65 MY60 PH63 ID62 TH66 VN84 HK852 JP81 KR82 TW886 DE49 FR33 ES34 PT351 IT39 NL31 BE32 LU352 CH41 AT43 SE46 NO47 DK45 FI358 IS354 PL48 CZ420 SK421 HU36 RO40 BG359 GR30 CY357 MT356 HR385 SI386 RS381 EE372 LV371 LT370 UA380 TR90 EG20 MA212 NG234 GH233 KE254 BR55 MX52 AR54 CL56 CO57 PE51 CR506 PA507".split(" ").map((c) => [c.slice(0, 2), c.slice(2)]);
 
+// How many digits a number has after the country code (and without a leading 0), as [min, max]
+const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9], NZ: [8, 10], IE: [7, 9], ZA: [9, 9], AE: [8, 9], SA: [8, 9], QA: [8, 8], KW: [8, 8], IL: [8, 9], IN: [10, 10], PK: [9, 10], BD: [8, 10], LK: [9, 9], SG: [8, 8], MY: [8, 10], PH: [8, 10], ID: [8, 12], TH: [8, 9], VN: [9, 10], HK: [8, 8], JP: [9, 10], KR: [8, 10], TW: [8, 9], DE: [7, 12], FR: [9, 9], ES: [9, 9], PT: [9, 9], IT: [6, 11], NL: [9, 9], BE: [8, 9], LU: [6, 11], CH: [9, 9], AT: [7, 13], SE: [7, 10], NO: [8, 8], DK: [8, 8], FI: [6, 12], IS: [7, 9], PL: [9, 9], CZ: [9, 9], SK: [9, 9], HU: [8, 9], RO: [9, 9], BG: [7, 9], GR: [10, 10], CY: [8, 8], MT: [8, 8], HR: [8, 9], SI: [8, 8], RS: [7, 10], EE: [7, 8], LV: [8, 8], LT: [8, 8], UA: [9, 9], TR: [10, 10], EG: [8, 10], MA: [9, 9], NG: [8, 10], GH: [9, 9], KE: [7, 10], BR: [10, 11], MX: [10, 10], AR: [10, 11], CL: [9, 9], CO: [10, 10], PE: [8, 9], CR: [8, 8], PA: [7, 8] };
+
 (function applyForm() {
   const root = document.getElementById("apply-form");
   if (!root) return;
@@ -40,19 +43,60 @@ const APPLY_COUNTRIES = "US1 CA1 GB44 AU61 NZ64 IE353 ZA27 AE971 SA966 QA974 KW9
   const valid = (q) => {
     if (q.type === "contact") {
       const c = answers.contact;
-      return !!c.first_name.trim() && c.phone.replace(/\D/g, "").length >= 7 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c.email.trim());
+      return !!c.first_name.trim() && !!c.phone.trim() && !phoneProblem() && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c.email.trim());
     }
     return !!q.optional || !!(answers[q.id] || "").trim();
   };
+  // ---- Phone: formatting and checks ----
+  const onlyDigits = (v) => v.replace(/\D/g, "");
+  const dialOf = (iso) => (APPLY_COUNTRIES.find((x) => x[0] === iso) || ["", ""])[1];
+  const nanp = (iso) => iso === "US" || iso === "CA"; // (201) 555-0123 numbering
+  // digits after the country code, without the leading 0 people dial at home
+  const national = (digits, iso) => {
+    if (nanp(iso)) return digits.replace(/^1/, "");
+    if (iso === "HU") return digits.replace(/^06/, "");
+    return iso === "IT" ? digits : digits.replace(/^0/, "");
+  };
+  const phoneProblem = () => {
+    const raw = answers.contact.phone.trim(), digits = onlyDigits(raw), iso = answers.contact.country;
+    const wrong = "This phone number looks incorrect. ";
+    if (iso === "other") {
+      if (!raw.startsWith("+")) return wrong + "Start with + and your country code.";
+      return digits.length < 8 ? wrong + "It’s missing some digits." : digits.length > 15 ? wrong + "It has too many digits." : "";
+    }
+    let body = digits;
+    if (raw.startsWith("+")) {
+      if (!digits.startsWith(dialOf(iso))) return wrong + "It doesn’t match the country you picked.";
+      body = digits.slice(dialOf(iso).length);
+    }
+    const n = national(body, iso), [min, max] = APPLY_PHONE_DIGITS[iso];
+    if (n.length < min) return wrong + "It’s missing some digits.";
+    if (n.length > max) return wrong + "It has too many digits.";
+    if (nanp(iso) && !/^[2-9]\d\d[2-9]/.test(n)) return wrong + "Please check the area code.";
+    if (/^(\d)\1+$/.test(n)) return wrong + "Please check it.";
+    return "";
+  };
   const fullPhone = () => {
-    const c = answers.contact, raw = c.phone.trim();
-    if (raw.startsWith("+")) return "+" + raw.replace(/\D/g, "");
-    let digits = raw.replace(/\D/g, "");
-    const dial = (APPLY_COUNTRIES.find((x) => x[0] === c.country) || ["", ""])[1];
-    if (!dial) return digits;
-    if (dial === "1" && digits.length === 11 && digits[0] === "1") digits = digits.slice(1);
-    if (c.country !== "IT") digits = digits.replace(/^0/, "");
-    return "+" + dial + digits;
+    const raw = answers.contact.phone.trim(), digits = onlyDigits(raw), iso = answers.contact.country;
+    if (raw.startsWith("+") || iso === "other") return "+" + digits;
+    return "+" + dialOf(iso) + national(digits, iso);
+  };
+  const prettyPhone = (v, iso) => {
+    const d = onlyDigits(v);
+    if (v.trim().startsWith("+")) return "+" + d;
+    if (nanp(iso)) {
+      const n = d.replace(/^1/, "");
+      if (n.length < 4) return n ? "(" + n : "";
+      return "(" + n.slice(0, 3) + ") " + n.slice(3, 6) + (n.length > 6 ? "-" + n.slice(6) : "");
+    }
+    // UK mobiles 07700 900123, Australian mobiles 0412 345 678
+    const own = iso === "GB" && d[0] === "0" ? [5, 11] : iso === "AU" && d[0] === "0" ? [4, 7] : null;
+    if (own) return [d.slice(0, own[0]), d.slice(own[0], own[1]), d.slice(own[1])].filter(Boolean).join(" ");
+    // everyone else: groups of 3, then whatever is left (up to 4)
+    const out = []; let rest = d;
+    while (rest.length > 4) { out.push(rest.slice(0, 3)); rest = rest.slice(3); }
+    if (rest) out.push(rest);
+    return out.join(" ");
   };
 
   function choiceField(q, sync, go) {
@@ -92,10 +136,47 @@ const APPLY_COUNTRIES = "US1 CA1 GB44 AU61 NZ64 IE353 ZA27 AE971 SA966 QA974 KW9
     });
     const other = el("option", "", "Other (type + and code)"); other.value = "other"; sel.append(other);
     sel.value = c.country;
-    sel.addEventListener("change", () => { c.country = sel.value; });
     const phone = text("phone", "tel", "(201) 555-0123", "tel"); phone.setAttribute("aria-label", "Phone number");
+    const bad = el("p", "apply__bad"); bad.id = "apply-phone-error"; bad.setAttribute("role", "alert"); bad.hidden = true;
+    const showProblem = (msg) => {
+      bad.textContent = msg; bad.hidden = !msg;
+      phone.classList.toggle("is-bad", !!msg); phone.setAttribute("aria-invalid", msg ? "true" : "false");
+      if (msg) phone.setAttribute("aria-describedby", bad.id); else phone.removeAttribute("aria-describedby");
+    };
+    const problem = () => (c.phone.trim() ? phoneProblem() : "");
+    const setPhone = (v) => { phone.value = c.phone = v; };
+    const placeholder = () => { phone.placeholder = nanp(c.country) ? "(201) 555-0123" : c.country === "other" ? "+ country code and number" : "Phone number"; };
+    // A full international number (typed, pasted or autofilled) picks its own country
+    const tidy = () => {
+      const raw = c.phone.trim();
+      if (raw.startsWith("+")) {
+        const d = onlyDigits(raw);
+        const keep = dialOf(c.country) && d.startsWith(dialOf(c.country)) ? c.country : "";
+        const hit = keep || (APPLY_COUNTRIES.filter((x) => d.startsWith(x[1])).sort((x, y) => y[1].length - x[1].length)[0] || [""])[0];
+        if (hit) { c.country = sel.value = hit; placeholder(); const rest = d.slice(dialOf(hit).length); setPhone(prettyPhone(rest, hit)); return; }
+      }
+      setPhone(prettyPhone(raw, c.country));
+    };
+    // Add ( ) - and spaces while typing without moving the cursor; leave the text alone while deleting
+    phone.addEventListener("input", (e) => {
+      const kind = e.inputType || "";
+      if (!kind.startsWith("delete") && !e.isComposing) {
+        const atEnd = phone.selectionStart === phone.value.length;
+        const before = phone.value.slice(0, phone.selectionStart).replace(/[^\d+]/g, "").length;
+        if (!kind || kind === "insertFromPaste" || kind === "insertReplacementText") tidy(); else setPhone(prettyPhone(phone.value, c.country));
+        let pos = phone.value.length;
+        if (!atEnd) { pos = 0; for (let n = 0; pos < phone.value.length && n < before; pos++) if (/[\d+]/.test(phone.value[pos])) n++; }
+        if (document.activeElement === phone) phone.setSelectionRange(pos, pos);
+      }
+      const msg = problem();
+      if (!msg || msg.includes("too many") || !bad.hidden) showProblem(msg); // don't nag about missing digits mid-typing
+      sync();
+    });
+    phone.addEventListener("blur", () => { if (c.phone.trim()) tidy(); showProblem(problem()); sync(); });
+    sel.addEventListener("change", () => { c.country = sel.value; placeholder(); if (c.phone.trim()) setPhone(prettyPhone(c.phone, c.country)); showProblem(problem()); sync(); });
+    placeholder(); showProblem(problem());
     const phoneRow = el("div", "apply__phone"); phoneRow.append(sel, phone);
-    const phoneWrap = el("div", "apply__field"); phoneWrap.append(el("span", "apply__label", "Phone Number*"), phoneRow);
+    const phoneWrap = el("div", "apply__field"); phoneWrap.append(el("span", "apply__label", "Phone Number*"), phoneRow, bad);
     const legal = el("p", "apply__legal"); legal.innerHTML = APPLY_CONSENT_HTML;
     const agree = el("label", "apply__agree"), box = el("input"); box.type = "checkbox"; box.name = "sms_consent"; box.checked = c.sms;
     box.addEventListener("change", () => { c.sms = box.checked; });

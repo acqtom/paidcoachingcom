@@ -83,3 +83,6 @@ textarea.apply__input { display: block; resize: vertical; line-height: 1.45; }
   .apply__hint { display: none; }
   .apply__calendar { height: 640px; }
 }
+.apply__input.is-bad, .apply__input.is-bad:focus { border-color: #c81e25; box-shadow: 0 0 0 4px rgba(200, 30, 37, 0.1); }
+.apply__bad { margin: 7px 0 0; color: #b3171d; font: 600 13.5px/1.4 var(--body); }
+.apply__bad[hidden] { display: none; }
