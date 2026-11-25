@@ -8,7 +8,7 @@ const APPLY_QUESTIONS = [
   { id: "contact", type: "contact", label: "How Can We Reach You?" },
   { id: "monthly_revenue", type: "choice", label: "What Is Your Estimated Monthly Revenue?", note: "This is 100% confidential. We only ask to help us prepare a strategy for your call.", options: ["$0 - $10k/mo", "$10k - $20k/mo", "$20k - $50k/mo", "$50k - $150k/mo", "$150k - $500k/mo", "$500k - $1M/mo"] },
 ];
-const APPLY_CALENDLY_URL = ""; // e.g. "https://calendly.com/name/event". Shown after the last question.
+const APPLY_CALENDLY_URL = "https://calendly.com/staff-paidcoaching/30min?hide_event_type_details=1&hide_gdpr_banner=1"; // calendar shown after Submit
 const APPLY_WEBHOOK_URL = "";  // where answers are saved. Empty = answers are not saved anywhere.
 const APPLY_BOOKED_URL = "";   // page to open once a call is booked, e.g. "/confirmation"
 const APPLY_START_PERCENT = 50; // progress bar starts here and reaches 100 at the booking step
@@ -107,8 +107,8 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
       key.setAttribute("aria-hidden", "true");
       input.type = "radio"; input.name = q.id; input.value = opt; input.checked = answers[q.id] === opt;
       input.addEventListener("change", () => { answers[q.id] = opt; sync(); });
-      // tapping an answer moves on by itself; keyboard users press Continue
-      box.addEventListener("click", () => { const at = step; setTimeout(() => { if (step === at) go(); }, 280); });
+      // tapping an answer moves on by itself (except on the last question, which needs Submit)
+      if (step < total - 1) box.addEventListener("click", () => { const at = step; setTimeout(() => { if (step === at) go(); }, 280); });
       box.append(key, el("em", "", opt)); lab.append(input, box); group.append(lab);
     });
     return group;
@@ -193,7 +193,7 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
     const title = el("h3", "apply__q", q.label); title.id = "apply-q"; title.tabIndex = -1;
     form.append(title);
     if (q.note) form.append(el("p", "apply__note", q.note));
-    const next = el("button", "cta apply__next", "Continue "); next.type = "submit"; next.append(el("span", "cta__arrow", "→"));
+    const next = el("button", "cta apply__next", step === total - 1 ? "Submit " : "Continue "); next.type = "submit"; next.append(el("span", "cta__arrow", "→"));
     const sync = () => { next.disabled = !valid(q); };
     const go = () => {
       if (busy || !valid(q)) return;
@@ -247,11 +247,11 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
     if (!APPLY_CALENDLY_URL) { num.textContent = "Done"; stage.replaceChildren(el("h3", "apply__q", "Got It, Thanks!"), el("p", "apply__note", "We’ve received your application and will be in touch shortly.")); return; }
     num.textContent = "Last Step";
     const url = new URL(APPLY_CALENDLY_URL);
-    url.searchParams.set("name", payload.first_name); url.searchParams.set("email", payload.email);
+    url.searchParams.set("name", payload.first_name); url.searchParams.set("email", payload.email); url.searchParams.set("a1", payload.phone); // a1 = the event’s first question, phone number
     url.searchParams.set("hide_gdpr_banner", "1"); url.searchParams.set("embed_type", "Inline"); url.searchParams.set("embed_domain", location.hostname);
     ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach((k) => { if (payload[k]) url.searchParams.set(k, payload[k]); });
     const frame = el("iframe", "apply__calendar"); frame.src = url.href; frame.title = "Pick a time for your call";
-    stage.replaceChildren(el("h3", "apply__q", "Book Your Call"), frame);
+    stage.replaceChildren(el("h3", "apply__q", "Book Your Mentorship Planning Call"), frame);
     root.scrollIntoView({ behavior: "smooth", block: "start" });
   }
   window.addEventListener("message", (e) => {
