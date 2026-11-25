@@ -261,9 +261,29 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
     stage.replaceChildren(el("h3", "apply__q", "Book Your Mentorship Planning Call"), frame);
     root.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+  // Tell /api/dropoff where someone left (for the Slack drop-off channel). Contact details are never sent from here.
+  let reported = false, booked = false, startedAt = 0;
+  root.addEventListener("click", () => { startedAt = startedAt || Date.now(); }, { once: true });
+  addEventListener("pagehide", () => {
+    if (reported || booked) return;
+    const q = APPLY_QUESTIONS[step], given = {};
+    ["has_high_ticket_offer", "situation", "niche", "monthly_revenue"].forEach((k) => { if (typeof answers[k] === "string" && answers[k].trim()) given[k] = answers[k]; });
+    let data;
+    if (sent) data = { step: "calendar", id: leadId };
+    else if (step > 0 && !busy) data = { step: q.id, answers: given };
+    if (!data) return;
+    reported = true;
+    const p = new URLSearchParams(location.search);
+    data.d = matchMedia("(max-width: 760px)").matches ? "m" : "d";
+    data.s = p.get("utm_content") || p.get("utm_campaign") || p.get("utm_source") || "";
+    if (startedAt) data.secs = (Date.now() - startedAt) / 1000;
+    const json = JSON.stringify(data);
+    if (!(navigator.sendBeacon && navigator.sendBeacon("/api/dropoff", new Blob([json], { type: "application/json" })))) fetch("/api/dropoff", { method: "POST", headers: { "Content-Type": "application/json" }, body: json, keepalive: true }).catch(() => {});
+  });
   window.addEventListener("message", (e) => {
     if (e.origin !== "https://calendly.com" || !e.data || e.data.event !== "calendly.event_scheduled") return;
     tell("booked");
+    booked = true;
     if (sent) fetch(APPLY_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: leadId, booked: true }), keepalive: true }).catch(() => {});
     if (APPLY_BOOKED_URL) location.href = APPLY_BOOKED_URL;
   });

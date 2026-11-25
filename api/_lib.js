@@ -1,6 +1,6 @@
 // Shared helpers for the API (files starting with _ are not routes)
 const crypto = require("crypto");
-const TZ = process.env.DASHBOARD_TZ || "Pacific/Auckland"; // when a "day" starts on the dashboard
+const TZ = process.env.DASHBOARD_TZ || "America/New_York"; // when a "day" starts on the dashboard
 
 async function redis(cmds) {
   const url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;

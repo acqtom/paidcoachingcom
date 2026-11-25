@@ -254,6 +254,17 @@ $("logout").addEventListener("click", async () => {
   $("leads").replaceChildren(); $("stats").replaceChildren();
   show(false);
 });
+async function action(btn, path, done) {
+  btn.disabled = true;
+  try {
+    const r = await api(path, { method: "POST" });
+    const j = await r.json().catch(() => ({}));
+    alert(r.ok ? done(j) : "That didn’t work. " + (j.error || ""));
+  } catch (e) { if (e.message !== "logged out") alert("Couldn’t reach the server."); }
+  btn.disabled = false;
+}
+$("slack-test").addEventListener("click", (e) => action(e.target, "/api/slack-test", (j) => Object.entries(j).map(([k, v]) => k + ": " + v).join("\n")));
+$("daily-now").addEventListener("click", (e) => action(e.target, "/api/daily", (j) => (j.sent ? "Sent to the daily metrics channel." : "Not sent. Is SLACK_METRICS_WEBHOOK_URL set in Vercel?")));
 try { $("ignore").checked = localStorage.getItem("pc_ignore") === "1"; } catch (e) {}
 $("ignore").addEventListener("change", (e) => {
   try { if (e.target.checked) localStorage.setItem("pc_ignore", "1"); else localStorage.removeItem("pc_ignore"); } catch (err) {}
