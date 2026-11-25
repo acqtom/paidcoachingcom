@@ -9,7 +9,7 @@ const APPLY_QUESTIONS = [
   { id: "monthly_revenue", type: "choice", label: "What Is Your Estimated Monthly Revenue?", note: "This is 100% confidential. We only ask to help us prepare a strategy for your call.", options: ["$0 - $10k/mo", "$10k - $20k/mo", "$20k - $50k/mo", "$50k - $150k/mo", "$150k - $500k/mo", "$500k - $1M/mo"] },
 ];
 const APPLY_CALENDLY_URL = "https://calendly.com/staff-paidcoaching/30min?hide_event_type_details=1&hide_gdpr_banner=1"; // calendar shown after Submit
-const APPLY_WEBHOOK_URL = "";  // where answers are saved. Empty = answers are not saved anywhere.
+const APPLY_WEBHOOK_URL = "/api/apply"; // saves answers for /dashboard → Form answers
 const APPLY_BOOKED_URL = "";   // page to open once a call is booked, e.g. "/confirmation"
 const APPLY_START_PERCENT = 50; // progress bar starts here and reaches 100 at the booking step
 const APPLY_CONSENT_HTML = 'You agree to receive automated follow-up and reminder SMS messages with varying frequency from Helmbury LLC (Paidcoaching.com). Txt and data rates may apply. Reply STOP to end. Text HELP for help. Click for <a href="/tos" target="_blank" rel="noopener">Terms of Service</a>, <a href="/pp" target="_blank" rel="noopener">Privacy Policy</a>.';
@@ -27,6 +27,8 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
   const answers = { contact: { country: APPLY_COUNTRIES[0][0], first_name: "", phone: "", email: "", sms: false } };
   const total = APPLY_QUESTIONS.length;
   let step = 0, busy = false, sent = false;
+  const leadId = crypto.randomUUID ? crypto.randomUUID() : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) => (+c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (+c / 4)))).toString(16));
+  const tell = (name, detail) => document.dispatchEvent(new CustomEvent("apply:" + name, { detail })); // for track.js
 
   // Every application button on the page scrolls here
   document.addEventListener("click", (e) => {
@@ -197,6 +199,7 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
     const sync = () => { next.disabled = !valid(q); };
     const go = () => {
       if (busy || !valid(q)) return;
+      tell("answered", q.id);
       if (step < total - 1) { step++; render(true); } else finish(next, error);
     };
     const error = el("p", "apply__error"); error.setAttribute("role", "alert"); error.hidden = true;
@@ -230,18 +233,22 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
     }
     busy = true; btn.disabled = true;
     const c = answers.contact, params = new URLSearchParams(location.search);
-    const payload = { has_high_ticket_offer: answers.has_high_ticket_offer, situation: answers.situation, niche: answers.niche || "", first_name: c.first_name.trim(), phone: fullPhone(), email: c.email.trim(), sms_consent: c.sms, monthly_revenue: answers.monthly_revenue, page: location.href, submitted_at: new Date().toISOString() };
+    const payload = { id: leadId, has_high_ticket_offer: answers.has_high_ticket_offer, situation: answers.situation, niche: answers.niche || "", first_name: c.first_name.trim(), phone: fullPhone(), email: c.email.trim(), sms_consent: c.sms, monthly_revenue: answers.monthly_revenue, page: location.href, submitted_at: new Date().toISOString() };
     ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "ad_id", "fbclid"].forEach((k) => { if (params.get(k)) payload[k] = params.get(k); });
     if (APPLY_WEBHOOK_URL && !sent) {
-      try {
-        const res = await fetch(APPLY_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      const save = async () => {
+        const res = await fetch(APPLY_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), keepalive: true, signal: AbortSignal.timeout ? AbortSignal.timeout(4000) : undefined });
         if (!res.ok) throw new Error("HTTP " + res.status);
+      };
+      try {
+        await save().catch(save); // one retry; the same id is never saved twice
         sent = true;
       } catch (err) {
         if (!APPLY_CALENDLY_URL) { busy = false; btn.disabled = false; error.textContent = "Something went wrong sending your answers. Please try again."; error.hidden = false; return; }
         console.error("[apply] answers not saved:", err); // still let them book
       }
     }
+    tell("submitted");
     if (typeof fbq === "function") fbq("track", "Lead");
     progress(total);
     if (!APPLY_CALENDLY_URL) { num.textContent = "Done"; stage.replaceChildren(el("h3", "apply__q", "Got It, Thanks!"), el("p", "apply__note", "We’ve received your application and will be in touch shortly.")); return; }
@@ -256,6 +263,8 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
   }
   window.addEventListener("message", (e) => {
     if (e.origin !== "https://calendly.com" || !e.data || e.data.event !== "calendly.event_scheduled") return;
+    tell("booked");
+    if (sent) fetch(APPLY_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: leadId, booked: true }), keepalive: true }).catch(() => {});
     if (APPLY_BOOKED_URL) location.href = APPLY_BOOKED_URL;
   });
 

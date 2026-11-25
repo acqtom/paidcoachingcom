@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'self'" />
+  <title>Dashboard | Paidcoaching.com</title>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard/dashboard.css" />
+</head>
+<body>
+  <main class="login" id="login" hidden>
+    <form class="login__card" id="login-form">
+      <h1>Dashboard</h1>
+      <label for="pw">Password</label>
+      <input id="pw" type="password" autocomplete="current-password" required />
+      <button type="submit">Log in</button>
+      <p class="err" id="login-err" role="alert" hidden></p>
+    </form>
+  </main>
+
+  <div class="app" id="app" hidden>
+    <aside class="side">
+      <p class="side__brand">Paidcoaching</p>
+      <nav>
+        <a href="#dashboard" data-tab="dashboard">Dashboard</a>
+        <a href="#answers" data-tab="answers">Form answers</a>
+      </nav>
+      <div class="side__foot">
+        <label><input type="checkbox" id="ignore" /> Don’t count my visits on this browser</label>
+        <button type="button" id="logout">Log out</button>
+      </div>
+    </aside>
+    <div class="main">
+      <p class="err" id="app-err" role="alert" hidden></p>
+      <section id="tab-dashboard">
+        <header class="top">
+          <h1>Dashboard</h1>
+          <div class="filters">
+            <label>Period <select id="f-days"><option value="1">Today</option><option value="7" selected>Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="365">Last 12 months</option></select></label>
+            <label>Device <select id="f-dev"><option value="">All</option><option value="d">Desktop</option><option value="m">Phone</option></select></label>
+            <label>Ad / source <select id="f-src"><option value="">All</option></select></label>
+            <button type="button" id="refresh">Refresh</button>
+          </div>
+        </header>
+        <div id="stats"></div>
+      </section>
+      <section id="tab-answers" hidden>
+        <header class="top">
+          <h1>Form answers</h1>
+          <div class="filters"><input id="search" type="search" placeholder="Search name, email, niche…" aria-label="Search answers" /><button type="button" id="csv">Download CSV</button></div>
+        </header>
+        <div id="leads"></div>
+      </section>
+    </div>
+  </div>
+  <script src="/dashboard/dashboard.js"></script>
+</body>
+</html>
