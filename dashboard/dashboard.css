@@ -103,3 +103,13 @@ td button { padding: 4px 10px; font-size: 13px; }
 .line__dot { fill: #b4531f; stroke: #fffdfa; stroke-width: 2; }
 .line rect:focus { outline: none; }
 .line:has(rect:focus-visible) { outline: 3px solid rgba(180, 83, 31, 0.35); border-radius: 6px; }
+.tile { position: relative; }
+.tile__goal { position: absolute; top: 12px; right: 12px; padding: 3px 9px; border-radius: 99px; background: #e4f3e6; border: 1px solid #a9d3af; color: #1e5c2a; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.tile .tile__k { padding-right: 64px; }
+.line-wrap { overflow-x: auto; }
+@media (max-width: 800px) {
+  .tile__goal { position: static; display: inline-block; margin-bottom: 6px; }
+  .tile .tile__k { padding-right: 0; }
+  .line { min-width: 640px; }
+}
+.tile--key .tile__goal { background: #ffffff; border-color: #ffffff; }

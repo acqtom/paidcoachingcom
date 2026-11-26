@@ -129,17 +129,21 @@ function renderStats() {
   const t = sum((d, s) => (!dev || d === dev) && (!src || s === src));
   const out = $("stats");
   out.replaceChildren();
-  const tile = (k, v, d) => el("div", "tile", el("p", "tile__k", k), el("p", "tile__v", v), el("p", "tile__d", d));
+  const tile = (k, v, d, goal) => {
+    const n = el("div", "tile", el("p", "tile__k", k), el("p", "tile__v", v), el("p", "tile__d", d));
+    if (goal) n.append(el("span", "tile__goal", "🎯 " + goal)), n.querySelector(".tile__goal").setAttribute("aria-label", "Target: " + goal);
+    return n;
+  };
   const started = t["a_" + QUESTIONS[0][0]];
-  const key = tile("Page visit → booked call", pct2(t.book, t.view), t.book + " of " + t.view + " visits booked a call");
+  const key = tile("Page visit → booked call", pct2(t.book, t.view), t.book + " of " + t.view + " visits booked a call", "3–5%");
   key.classList.add("tile--key");
   out.append(el("div", "tiles", key,
     tile("Page visits", t.view.toLocaleString(), "One per browser visit"),
-    tile("VSL play rate", pct(t.play, t.view), t.play + " of " + t.view + " pressed play"),
-    tile("VSL engagement", engagement(t), "Average share watched by players"),
+    tile("VSL play rate", pct(t.play, t.view), t.play + " of " + t.view + " pressed play", "50%"),
+    tile("VSL engagement", engagement(t), "Average share watched by players", "50%"),
     tile("Button click rate", pct(t.click, t.view), t.click + " of " + t.view + " clicked a button"),
     tile("Form completion", pct(t.sub, started), t.sub + " of " + started + " who started it"),
-    tile("Calls booked", t.book.toLocaleString(), pct(t.book, t.sub) + " of submits")));
+    tile("Calls booked", t.book.toLocaleString(), pct(t.book, t.sub) + " of submits booked", "84%")));
   if (!t.view) out.append(el("div", "card empty", "No visits recorded for this selection yet."));
 
   // Question drop-off
@@ -166,7 +170,7 @@ function renderStats() {
   const w = watch(t);
   const vsl = el("div", "card", el("h2", "", "How much of the VSL gets watched"),
     el("p", "", w.total ? `Of the ${w.total} visits that pressed play, the share still watching at each second.${data.vslDuration ? " Video length " + clock(data.vslDuration) + "." : ""} Average watched: ${clock(w.avg)}.` : "Of everyone who pressed play, the share still watching at each second."));
-  if (w.total) vsl.append(retentionChart(w));
+  if (w.total) vsl.append(el("div", "line-wrap", retentionChart(w)));
   else vsl.append(el("div", "empty", "No plays with second-by-second tracking in this period yet. It started on Nov 27, 2026."));
   out.append(vsl);
   out.append(el("div", "card", el("h2", "", "Button clicks"), el("p", "", "Visits that clicked each button. One visit can click more than one."), table(["Button", "Visits", "Rate"], BUTTONS.map(([id, l]) => [l, t[id], pct(t[id], t.view)]))));
