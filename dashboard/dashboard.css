@@ -121,3 +121,6 @@ td button { padding: 4px 10px; font-size: 13px; }
 .group .wrap td:first-child { min-width: 150px; }
 .custom { display: inline-flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--muted); font-size: 13px; font-weight: 600; }
 .custom input { padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); }
+.tile--key-1 { grid-column: span 1; }
+.tile.tile--key-1 .tile__v { font-size: 34px; }
+@media (max-width: 800px) { .tile.tile--key-1 .tile__v { font-size: 28px; } }
