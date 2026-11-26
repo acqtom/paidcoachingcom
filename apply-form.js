@@ -201,7 +201,7 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
     const go = () => {
       if (busy || !valid(q)) return;
       tell("answered", q.id);
-      if (step < total - 1) { step++; render(true); } else finish(next, error);
+      if (step < total - 1) { step++; savePartial(); render(true); } else finish(next, error);
     };
     const error = el("p", "apply__error"); error.setAttribute("role", "alert"); error.hidden = true;
     form.append(q.type === "choice" ? choiceField(q, sync, go) : q.type === "long" ? longField(q, sync, go) : contactField(sync));
@@ -221,6 +221,15 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
     }
   }
 
+  // Save progress after each answer so partial fills show on the dashboard (replaced by the full submit)
+  function savePartial() {
+    if (!APPLY_WEBHOOK_URL || sent) return;
+    const c = answers.contact, params = new URLSearchParams(location.search), p = { id: leadId, partial: true, stopped_at: APPLY_QUESTIONS[step].id };
+    ["has_high_ticket_offer", "situation", "niche", "monthly_revenue", "capital"].forEach((k) => { if (typeof answers[k] === "string" && answers[k].trim()) p[k] = answers[k]; });
+    if (APPLY_QUESTIONS.findIndex((x) => x.type === "contact") < step) Object.assign(p, { first_name: c.first_name.trim(), email: c.email.trim(), phone: fullPhone(), sms_consent: c.sms });
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "ad_id", "fbclid"].forEach((k) => { if (params.get(k)) p[k] = params.get(k); });
+    fetch(APPLY_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(p), keepalive: true }).catch(() => {});
+  }
   async function finish(btn, error) {
     if (!APPLY_CALENDLY_URL && !APPLY_WEBHOOK_URL) {
       // Until booking is connected, hand over to the Typeform popup so no applicant is lost

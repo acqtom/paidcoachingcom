@@ -244,14 +244,17 @@ async function loadStats() {
 }
 
 // ---- Form answers
-const COLS = [["at", "Submitted"], ["first_name", "Name"], ["email", "Email"], ["phone", "Phone"], ["booked_at", "Booked"], ["monthly_revenue", "Revenue"], ["capital", "Capital"], ["has_high_ticket_offer", "High-ticket offer"], ["situation", "Situation"], ["niche", "Niche"], ["sms_consent", "SMS consent"], ["utm_source", "Source"], ["utm_campaign", "Campaign"], ["utm_content", "Ad"]];
+const STEP_NAMES = Object.fromEntries(QUESTIONS.map(([id], i) => [id, "Q" + (i + 1)]));
+const COLS = [["at", "Last activity"], ["status", "Status"], ["first_name", "Name"], ["email", "Email"], ["phone", "Phone"], ["booked_at", "Booked"], ["monthly_revenue", "Revenue"], ["capital", "Capital"], ["has_high_ticket_offer", "High-ticket offer"], ["situation", "Situation"], ["niche", "Niche"], ["sms_consent", "SMS consent"], ["utm_source", "Source"], ["utm_campaign", "Campaign"], ["utm_content", "Ad"]];
 const when = (s) => (s ? new Date(s).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) : "");
 function found() {
   const q = $("search").value.trim().toLowerCase();
-  return q ? leads.filter((l) => Object.values(l).join(" ").toLowerCase().includes(q)) : leads;
+  const st = $("f-status").value;
+  const list = st ? leads.filter((l) => (st === "partial") === !!l.partial) : leads;
+  return q ? list.filter((l) => Object.values(l).join(" ").toLowerCase().includes(q)) : list;
 }
 async function remove(l) {
-  if (!confirm("Permanently delete " + l.first_name + "’s answers?")) return;
+  if (!confirm("Permanently delete " + (l.first_name || "this partial fill") + "’s answers?")) return;
   try {
     const r = await api("/api/leads", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: l.id }) });
     if (!r.ok) throw new Error();
@@ -273,6 +276,8 @@ function renderLeads() {
       const cls = ["at", "phone", "first_name", "monthly_revenue", "capital"].includes(k) ? "nw" : ["niche", "situation"].includes(k) ? "long" : "";
       let v = l[k] || "";
       if (k === "at") v = when(v);
+      else if (k === "status") v = el("span", l.partial ? "tag tag--part" : "tag tag--yes", l.partial ? "Partial: stopped at " + (STEP_NAMES[l.stopped_at] || "?") : "Submitted");
+      else if (k === "booked_at" && l.partial) v = "";
       else if (k === "booked_at") v = el("span", v ? "tag tag--yes" : "tag", v ? "✓ Booked" : "Not booked");
       else if (k === "sms_consent") v = v ? "Yes" : "No";
       else if (k === "email" || k === "phone") {
@@ -313,7 +318,7 @@ $("csv").addEventListener("click", () => {
     if (/^[=+\-@\t\r]/.test(v)) v = "'" + v; // stops spreadsheets running text as a formula
     return '"' + v.replace(/"/g, '""') + '"';
   };
-  const lines = [COLS.map((c) => cell(c[1]))].concat(found().map((l) => COLS.map(([k]) => cell(k === "sms_consent" ? (l[k] ? "Yes" : "No") : l[k]))));
+  const lines = [COLS.map((c) => cell(c[1]))].concat(found().map((l) => COLS.map(([k]) => cell(k === "sms_consent" ? (l[k] ? "Yes" : "No") : k === "status" ? (l.partial ? "Partial: stopped at " + (STEP_NAMES[l.stopped_at] || "?") : "Submitted") : l[k]))));
   const a = el("a");
   a.href = URL.createObjectURL(new Blob(["﻿" + lines.map((r) => r.join(",")).join("\r\n")], { type: "text/csv" }));
   a.download = "form-answers.csv";
@@ -321,6 +326,7 @@ $("csv").addEventListener("click", () => {
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
 });
 $("search").addEventListener("input", renderLeads);
+$("f-status").addEventListener("change", renderLeads);
 
 // ---- Tabs and login
 function tab() {

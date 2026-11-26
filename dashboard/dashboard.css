@@ -124,3 +124,4 @@ td button { padding: 4px 10px; font-size: 13px; }
 .tile--key-1 { grid-column: span 1; }
 .tile.tile--key-1 .tile__v { font-size: 34px; }
 @media (max-width: 800px) { .tile.tile--key-1 .tile__v { font-size: 28px; } }
+.tag--part { background: #fdf1e3; border-color: #f0d3b4; color: #8a4512; }
