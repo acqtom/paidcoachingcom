@@ -142,7 +142,7 @@ function adSection(tile) {
     tile("Ad retention rate", pct(a.thruplays, a.views3s), "ThruPlays ÷ 3-second views"),
     tile("Cost per lead", per(a.spend, s.sub), s.sub + " form submits"),
     tile("Cost per call", per(a.spend, s.book), s.book + " calls booked"),
-    tile("Cost per qualified call", per(a.spend, s.qualified), s.qualified + " booked with $3k+ capital")));
+    tile("Cost per qualified call", per(a.spend, s.qualified), s.qualified + " booked with $1k+ capital")));
   if (m.ads.length) {
     box.append(el("div", "card", el("h2", "", "By ad"), el("p", "", "Leads and calls are matched to an ad by its name in utm_content."),
       table(["Ad", "Spend", "CTR", "CPC", "Hook", "Retention", "Leads", "Cost / lead", "Calls", "Cost / call", "Qualified", "Cost / qualified"],

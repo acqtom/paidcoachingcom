@@ -35,8 +35,8 @@ const context = (md) => ({ type: "context", elements: [{ type: "mrkdwn", text: c
 const source = (l) => [l.utm_content && "Ad: " + l.utm_content, l.utm_campaign && "Campaign: " + l.utm_campaign, l.utm_source && "Source: " + l.utm_source].filter(Boolean).map(esc).join("  ·  ") || "No UTM tags (direct or untagged link)";
 
 // ---- Lead scoring (out of 10). Edit the points here.
-// A "qualified call" = a booked call from someone with $3k+ capital (see qualified()).
-const qualified = (l) => /^\$(3k|6k|10k)/.test(l.capital || "");
+// A "qualified call" = a booked call from someone with more than $1k capital. "0 - $1k" is disqualified.
+const qualified = (l) => /^\$(1k|3k|6k|10k)/.test(l.capital || "");
 function score(l) {
   const why = [];
   let s = 0;

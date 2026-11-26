@@ -53,7 +53,7 @@ module.exports = async (req, res) => {
         if (m === "sub" || m === "book") { site[m] += Number(v); addAd(src, m, Number(v)); }
       }
     });
-    // qualified calls: bookings in this period from leads with $3k+ capital
+    // qualified calls: bookings in this period from leads with $1k+ capital (0 - $1k is disqualified)
     const booked = {};
     if (Array.isArray(bookedAll)) for (let j = 0; j < bookedAll.length; j += 2) booked[bookedAll[j]] = bookedAll[j + 1]; else Object.assign(booked, bookedAll || {});
     const ids = Object.entries(booked).filter(([, at]) => { const d = day(new Date(at)); return d >= since && d <= until; }).map(([id]) => id);
