@@ -119,3 +119,5 @@ td button { padding: 4px 10px; font-size: 13px; }
 .group__h { margin: 0 0 14px; font-size: 22px; }
 .group + .group__h, #stats > .group__h { margin-top: 6px; }
 .group .wrap td:first-child { min-width: 150px; }
+.custom { display: inline-flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--muted); font-size: 13px; font-weight: 600; }
+.custom input { padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); }

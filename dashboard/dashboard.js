@@ -10,6 +10,14 @@ const el = (tag, cls, ...kids) => {
 };
 const pct = (a, b) => (b ? (Math.round(Math.min(1, a / b) * 1000) / 10).toFixed(1).replace(/\.0$/, "") + "%" : "–");
 const pct2 = (a, b) => (b ? (Math.min(1, a / b) * 100).toFixed(2) + "%" : "–"); // small rates need two decimals
+// Period → query string. Dates are New York days, like the rest of the dashboard.
+const nyDay = (offset = 0) => new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(Date.now() - offset * 864e5));
+function period() {
+  const v = $("f-days").value;
+  if (v === "yesterday") return "from=" + nyDay(1) + "&to=" + nyDay(1);
+  if (v === "custom") return "from=" + $("f-from").value + "&to=" + ($("f-to").value || $("f-from").value);
+  return "days=" + v;
+}
 let data = null, leads = [], leadTotal = 0, meta = { state: "loading" };
 
 const fail = (msg) => { $("app-err").textContent = msg; $("app-err").hidden = !msg; };
@@ -154,7 +162,7 @@ function adSection(tile) {
 async function loadMeta() {
   meta = { state: "loading" };
   try {
-    const r = await api("/api/meta?days=" + $("f-days").value);
+    const r = await api("/api/meta?" + period());
     meta = r.ok ? await r.json() : { connected: true, error: "Couldn’t load Meta ads." };
   } catch (e) { if (e.message === "logged out") return; meta = { connected: true, error: "Couldn’t reach the server." }; }
   if (data) renderStats();
@@ -224,7 +232,7 @@ async function loadStats() {
   fail("");
   loadMeta();
   try {
-    const r = await api("/api/stats?days=" + $("f-days").value);
+    const r = await api("/api/stats?" + period());
     if (!r.ok) throw new Error((await r.json()).error);
     data = await r.json();
     const keep = $("f-src").value, all = sources();
@@ -321,7 +329,20 @@ function tab() {
   if (t === "answers") loadLeads(); else loadStats();
 }
 addEventListener("hashchange", () => { if (!$("app").hidden) tab(); });
-$("f-days").addEventListener("change", loadStats);
+$("f-days").addEventListener("change", () => {
+  const custom = $("f-days").value === "custom";
+  $("custom").hidden = !custom;
+  if (!custom) return loadStats();
+  if (!$("f-from").value) { $("f-from").value = nyDay(6); $("f-to").value = nyDay(); }
+  $("f-from").max = $("f-to").max = nyDay();
+  $("f-from").focus();
+});
+$("f-apply").addEventListener("click", () => {
+  if (!$("f-from").value) { $("f-from").focus(); return; }
+  if (!$("f-to").value) $("f-to").value = $("f-from").value;
+  if ($("f-to").value < $("f-from").value) [$("f-from").value, $("f-to").value] = [$("f-to").value, $("f-from").value];
+  loadStats();
+});
 $("reset").addEventListener("click", async (e) => {
   const typed = prompt("This permanently deletes ALL dashboard numbers (visits, VSL, buttons, form steps, bookings) for every date. Saved form answers are kept.\n\nType RESET to confirm.");
   if (typed === null) return;

@@ -1,6 +1,6 @@
 // Ad metrics for the dashboard: Meta Ads numbers + this site's submits/bookings for the same days.
 // Needs META_ACCESS_TOKEN (read-only, ads_read) and META_AD_ACCOUNT_ID ("act_123…") in Vercel.
-const { redis, day, send, authed, TZ } = require("./_lib");
+const { redis, day, range, send, authed, TZ } = require("./_lib");
 const { qualified } = require("./_slack");
 const GRAPH = "https://graph.facebook.com/v21.0/";
 
@@ -25,8 +25,7 @@ module.exports = async (req, res) => {
   let account = String(process.env.META_AD_ACCOUNT_ID || "").trim();
   if (!process.env.META_ACCESS_TOKEN || !account) return send(res, 200, { connected: false });
   if (!account.startsWith("act_")) account = "act_" + account.replace(/\D/g, "");
-  const n = Math.min(365, Math.max(1, parseInt(req.query.days, 10) || 7));
-  const until = day(), since = new Date(new Date(until + "T12:00:00Z").getTime() - (n - 1) * 864e5).toISOString().slice(0, 10);
+  const { since, until, dates } = range(req.query, 7);
   const cacheKey = `meta:${account}:${since}:${until}`;
   try {
     const [cached] = await redis([["GET", cacheKey]]);
@@ -41,8 +40,6 @@ module.exports = async (req, res) => {
     ]);
 
     // This site's submits and bookings for the same days (all devices and sources)
-    const dates = [];
-    for (let i = 0; i < n; i++) dates.push(new Date(new Date(since + "T12:00:00Z").getTime() + i * 864e5).toISOString().slice(0, 10));
     const [rows, bookedAll] = await Promise.all([redis(dates.map((d) => ["HGETALL", "d:" + d])), redis([["HGETALL", "leads:booked"]]).then((r) => r[0])]);
     const site = { sub: 0, book: 0, qualified: 0, byAd: {} };
     const addAd = (ad, k, v) => { if (!ad) return; site.byAd[ad] = site.byAd[ad] || { sub: 0, book: 0, qualified: 0 }; site.byAd[ad][k] += v; };

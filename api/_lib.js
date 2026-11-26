@@ -40,4 +40,22 @@ function authed(req) {
   const m = /(?:^|;\s*)pc_dash=([0-9]+)\.([0-9a-f]{64})/.exec(req.headers.cookie || "");
   return !!m && Number(m[1]) > Date.now() && same(m[2], sign(m[1]));
 }
-module.exports = { redis, day, ipKey, body, sameOrigin, send, same, session, authed, TZ };
+// Date range from the dashboard: ?from=YYYY-MM-DD&to=YYYY-MM-DD, or ?days=N (ending today). Max 366 days, never past today.
+function range(q, fallback = 7) {
+  const today = day(), ok = (s) => /^\d{4}-\d{2}-\d{2}$/.test(s || "") && !isNaN(Date.parse(s + "T12:00:00Z"));
+  const shift = (s, n) => new Date(new Date(s + "T12:00:00Z").getTime() + n * 864e5).toISOString().slice(0, 10);
+  let since, until;
+  if (ok(q.from) && ok(q.to)) {
+    until = q.to < q.from ? q.from : q.to; since = q.to < q.from ? q.to : q.from;
+    if (until > today) until = today;
+    if (since > until) since = until;
+    if (shift(since, 365) < until) since = shift(until, -365);
+  } else {
+    const n = Math.min(365, Math.max(1, parseInt(q.days, 10) || fallback));
+    until = today; since = shift(today, -(n - 1));
+  }
+  const dates = [];
+  for (let d = since; d <= until; d = shift(d, 1)) dates.push(d);
+  return { since, until, dates };
+}
+module.exports = { range, redis, day, ipKey, body, sameOrigin, send, same, session, authed, TZ };

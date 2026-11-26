@@ -42,7 +42,8 @@
         <header class="top">
           <h1>Dashboard</h1>
           <div class="filters">
-            <label>Period <select id="f-days"><option value="1">Today</option><option value="7" selected>Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="365">Last 12 months</option></select></label>
+            <label>Period <select id="f-days"><option value="1">Today</option><option value="yesterday">Yesterday</option><option value="7" selected>Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="365">Last 12 months</option><option value="custom">Custom…</option></select></label>
+            <span class="custom" id="custom" hidden><input type="date" id="f-from" aria-label="From date" /> <span aria-hidden="true">to</span> <input type="date" id="f-to" aria-label="To date" /><button type="button" id="f-apply">Apply</button></span>
             <label>Device <select id="f-dev"><option value="">All</option><option value="d">Desktop</option><option value="m">Phone</option></select></label>
             <label>Ad / source <select id="f-src"><option value="">All</option></select></label>
             <button type="button" id="reset" class="btn-danger">Reset data</button>
