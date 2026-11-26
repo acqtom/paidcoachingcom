@@ -9,6 +9,8 @@ button, select, input { font: inherit; color: inherit; }
 button, select, input[type="search"], input[type="password"] { padding: 9px 13px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
 button { font-weight: 600; cursor: pointer; }
 button:hover { border-color: var(--bar); }
+.btn-danger { color: #a3161c; border-color: #f0b8b8; }
+.btn-danger:hover { background: #fdecec; border-color: #a3161c; }
 :focus-visible { outline: 3px solid rgba(180, 83, 31, 0.35); outline-offset: 1px; }
 .err { margin: 0 0 16px; padding: 10px 14px; border-radius: 10px; background: #fdecec; color: #a3161c; font-weight: 600; }
 .login { display: grid; place-items: center; min-height: 100vh; padding: 16px; }

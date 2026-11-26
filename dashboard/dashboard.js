@@ -284,7 +284,19 @@ function tab() {
 }
 addEventListener("hashchange", () => { if (!$("app").hidden) tab(); });
 $("f-days").addEventListener("change", loadStats);
-$("refresh").addEventListener("click", loadStats);
+$("reset").addEventListener("click", async (e) => {
+  const typed = prompt("This permanently deletes ALL dashboard numbers (visits, VSL, buttons, form steps, bookings) for every date. Saved form answers are kept.\n\nType RESET to confirm.");
+  if (typed === null) return;
+  if (typed.trim() !== "RESET") { alert("Nothing was deleted. You need to type RESET exactly."); return; }
+  e.target.disabled = true;
+  try {
+    const r = await api("/api/reset", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ confirm: "RESET" }) });
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || "");
+    await loadStats();
+    alert("Done. The dashboard numbers have been reset to zero.");
+  } catch (err) { if (err.message !== "logged out") fail("Couldn’t reset the data. " + err.message); }
+  e.target.disabled = false;
+});
 ["f-dev", "f-src"].forEach((i) => $(i).addEventListener("change", () => data && renderStats()));
 $("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
