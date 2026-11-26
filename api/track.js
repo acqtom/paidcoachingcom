@@ -13,14 +13,20 @@ module.exports = async (req, res) => {
   if (h && now - h.t < 60000) { if (++h.n > 60) return send(res, 429); } else hits.set(who, { t: now, n: 1 });
 
   const b = body(req);
-  const events = [...new Set(Array.isArray(b.e) ? b.e.slice(0, 40) : [])].filter((e) => typeof e === "string" && OK.test(e));
-  if (!events.length) return send(res, 204);
+  const all = [...new Set(Array.isArray(b.e) ? b.e.slice(0, 40) : [])].filter((e) => typeof e === "string");
+  const events = all.filter((e) => OK.test(e));
+  const secs = all.filter((e) => /^[su]\d{1,5}$/.test(e) && Number(e.slice(1)) <= 36000); // VSL: s = furthest second watched, u = undo an earlier one
+  if (!events.length && !secs.length) return send(res, 204);
   const dev = b.d === "m" ? "m" : "d";
   let src = String(b.s || "").replace(/[^\w .-]/g, "").trim().slice(0, 50) || "Direct / none";
   const k = "d:" + day();
   try {
     if (src !== "Direct / none" && (await redis([["HLEN", k]]))[0] > 4000) src = "Other";
-    await redis(events.map((e) => ["HINCRBY", k, dev + "|" + src + "|" + e, 1]));
+    const cmds = events.map((e) => ["HINCRBY", k, dev + "|" + src + "|" + e, 1]);
+    secs.forEach((e) => cmds.push(["HINCRBY", "v:" + day(), dev + "|" + src + "|" + e.slice(1), e[0] === "s" ? 1 : -1]));
+    const dur = Math.round(Number(b.dur));
+    if (secs.length && dur > 30 && dur <= 36000) cmds.push(["SET", "vsl:dur", dur]);
+    await redis(cmds);
     return send(res, 204);
   } catch (e) { console.error(e); return send(res, 503); }
 };

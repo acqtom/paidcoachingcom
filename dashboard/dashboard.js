@@ -60,14 +60,70 @@ function sum(filter) {
     const [dev, src, m] = k.split("|");
     if (filter(dev, src)) t[m] = (t[m] || 0) + v;
   }));
+  const h = {}; // VSL: how many visits got furthest to each second
+  data.days.forEach((d) => Object.entries(d.v || {}).forEach(([k, v]) => {
+    const [dev, src, sec] = k.split("|");
+    if (filter(dev, src)) h[sec] = (h[sec] || 0) + v;
+  }));
+  t.__h = h;
   return new Proxy(t, { get: (o, k) => o[k] || 0 });
 }
 const sources = () => [...new Set(data.days.flatMap((d) => Object.keys(d.f).map((k) => k.split("|")[1])))].sort();
+// Second-by-second watch data: retention[s] = viewers who got to second s or further
+function watch(t) {
+  const h = t.__h, counts = Object.entries(h).map(([s, n]) => [Number(s), Math.max(0, n)]).filter(([, n]) => n);
+  const total = counts.reduce((a, [, n]) => a + n, 0);
+  const far = counts.reduce((a, [s]) => Math.max(a, s), 0);
+  const len = Math.max(data.vslDuration || 0, far + 1);
+  const at = new Array(len + 1).fill(0);
+  counts.forEach(([s, n]) => { at[Math.min(s, len)] += n; });
+  for (let i = len - 1; i >= 0; i--) at[i] += at[i + 1];
+  const avg = total ? counts.reduce((a, [s, n]) => a + s * n, 0) / total : 0;
+  return { total, len, at, avg };
+}
 const engagement = (t) => {
-  let w = 0;
-  for (let i = 0; i < 10; i++) w += t["w" + i];
-  return pct(w, t.play * 10);
+  const w = watch(t);
+  if (w.total && data.vslDuration) return pct(w.avg, data.vslDuration);
+  let x = 0; // older visits: tenths of the video
+  for (let i = 0; i < 10; i++) x += t["w" + i];
+  return pct(x, t.play * 10);
 };
+const clock = (sec) => Math.floor(sec / 60) + ":" + String(Math.floor(sec % 60)).padStart(2, "0");
+function retentionChart(w) {
+  const NS = "http://www.w3.org/2000/svg", W = 1000, H = 260, L = 44, B = 26, T = 10, R = 12;
+  const svg = document.createElementNS(NS, "svg"), mk = (tag, attrs) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("class", "line");
+  const x = (sec) => L + (sec / w.len) * (W - L - R), y = (share) => T + (1 - share) * (H - T - B);
+  [0, 0.25, 0.5, 0.75, 1].forEach((v) => {
+    svg.append(mk("line", { x1: L, x2: W - R, y1: y(v), y2: y(v), class: v ? "line__grid" : "line__axis" }));
+    const lab = mk("text", { x: L - 8, y: y(v) + 4, class: "line__lab", "text-anchor": "end" }); lab.textContent = v * 100 + "%"; svg.append(lab);
+  });
+  const step = [5, 10, 15, 30, 60, 120, 300, 600, 900].find((s) => w.len / s <= 10) || 1800;
+  for (let s = 0; s <= w.len; s += step) { const lab = mk("text", { x: x(s), y: H - 6, class: "line__lab", "text-anchor": "middle" }); lab.textContent = clock(s); svg.append(lab); }
+  let d = "";
+  for (let s = 0; s <= w.len; s++) d += (s ? "L" : "M") + x(s).toFixed(1) + " " + y(w.at[s] / w.total).toFixed(1);
+  svg.append(mk("path", { d: d + `L${x(w.len)} ${y(0)}L${x(0)} ${y(0)}Z`, class: "line__area" }), mk("path", { d, class: "line__stroke" }));
+  const guide = mk("line", { y1: T, y2: H - B, class: "line__guide", visibility: "hidden" }), dot = mk("circle", { r: 6, class: "line__dot", visibility: "hidden" });
+  const hit = mk("rect", { x: L, y: T, width: W - L - R, height: H - T - B, fill: "transparent", tabindex: 0, role: "img", "aria-label": "Viewers still watching each second of the VSL. Use left and right arrow keys to move." });
+  svg.append(guide, dot, hit);
+  let cur = 0;
+  const showAt = (sec, cx, cy) => {
+    cur = Math.max(0, Math.min(w.len, Math.round(sec)));
+    const px = x(cur), py = y(w.at[cur] / w.total);
+    [["x1", px], ["x2", px]].forEach(([k, v]) => guide.setAttribute(k, v)); guide.setAttribute("visibility", "visible");
+    dot.setAttribute("cx", px); dot.setAttribute("cy", py); dot.setAttribute("visibility", "visible");
+    tip.textContent = `${clock(cur)}: ${pct(w.at[cur], w.total)} still watching (${w.at[cur]} of ${w.total})`; tip.hidden = false;
+    const box = svg.getBoundingClientRect(), sx = cx ?? box.left + (px / W) * box.width, sy = cy ?? box.top + (py / H) * box.height;
+    tip.style.left = Math.max(8, Math.min(sx + 14, innerWidth - tip.offsetWidth - 10)) + "px"; tip.style.top = Math.max(8, sy - tip.offsetHeight - 12) + "px";
+  };
+  const fromPointer = (e) => { const box = svg.getBoundingClientRect(); showAt((((e.clientX - box.left) / box.width) * W - L) / (W - L - R) * w.len, e.clientX, e.clientY); };
+  hit.addEventListener("pointermove", fromPointer); hit.addEventListener("pointerdown", fromPointer);
+  hit.addEventListener("focus", () => showAt(cur));
+  hit.addEventListener("keydown", (e) => { const k = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (k) { e.preventDefault(); showAt(cur + k * (e.shiftKey ? 30 : 5)); } });
+  const hide = () => { tip.hidden = true; guide.setAttribute("visibility", "hidden"); dot.setAttribute("visibility", "hidden"); };
+  hit.addEventListener("pointerleave", hide); hit.addEventListener("blur", hide);
+  return svg;
+}
 function renderStats() {
   const dev = $("f-dev").value, src = $("f-src").value;
   const t = sum((d, s) => (!dev || d === dev) && (!src || s === src));
@@ -106,24 +162,14 @@ function renderStats() {
   card.append(drop);
   out.append(card);
 
-  // VSL watch chart + buttons
-  const vsl = el("div", "card", el("h2", "", "How much of the VSL gets watched"), el("p", "", "Of everyone who pressed play, the share who watched each tenth of the video."));
-  const cols = el("div", "cols"), xs = el("div", "cols__x");
-  [0, 25, 50, 75, 100].forEach((y) => {
-    const l = el("span", "cols__y", y + "%");
-    l.style.bottom = y + "%";
-    cols.append(l);
-    if (y) { const g = el("span", "cols__g"); g.style.bottom = y + "%"; cols.append(g); }
-  });
-  for (let i = 0; i < 10; i++) {
-    const n = t["w" + i], bar = el("i");
-    bar.style.height = (t.play ? Math.min(1, n / t.play) : 0) * 100 + "%";
-    cols.append(hint(el("div", "col", bar), i * 10 + "–" + (i * 10 + 10) + "% of the video: watched by " + pct(n, t.play) + " of players (" + n + " of " + t.play + ")"));
-    xs.append(el("span", "", i * 10 + "%"));
-  }
-  vsl.append(cols, xs);
-  const btn = el("div", "card", el("h2", "", "Button clicks"), el("p", "", "Visits that clicked each button. One visit can click more than one."), table(["Button", "Visits", "Rate"], BUTTONS.map(([id, l]) => [l, t[id], pct(t[id], t.view)])));
-  out.append(el("div", "grid", vsl, btn));
+  // VSL second-by-second retention
+  const w = watch(t);
+  const vsl = el("div", "card", el("h2", "", "How much of the VSL gets watched"),
+    el("p", "", w.total ? `Of the ${w.total} visits that pressed play, the share still watching at each second.${data.vslDuration ? " Video length " + clock(data.vslDuration) + "." : ""} Average watched: ${clock(w.avg)}.` : "Of everyone who pressed play, the share still watching at each second."));
+  if (w.total) vsl.append(retentionChart(w));
+  else vsl.append(el("div", "empty", "No plays with second-by-second tracking in this period yet. It started on Nov 27, 2026."));
+  out.append(vsl);
+  out.append(el("div", "card", el("h2", "", "Button clicks"), el("p", "", "Visits that clicked each button. One visit can click more than one."), table(["Button", "Visits", "Rate"], BUTTONS.map(([id, l]) => [l, t[id], pct(t[id], t.view)]))));
 
   // By ad / source
   const rows = sources().map((s) => [s, sum((d, x) => x === s && (!dev || d === dev))]).filter((r) => r[1].view || r[1].sub).sort((a, b) => b[1].view - a[1].view).slice(0, 50);

@@ -16,11 +16,18 @@ function totals(f) {
   return { t: new Proxy(t, { get: (o, k) => o[k] || 0 }), bySrc };
 }
 const parse = (r) => { const f = {}; if (Array.isArray(r)) for (let j = 0; j < r.length; j += 2) f[r[j]] = Number(r[j + 1]); else for (const k in r || {}) f[k] = Number(r[k]); return f; };
-const engagement = (t) => { let w = 0; for (let i = 0; i < 10; i++) w += t["w" + i]; return t.play ? w / (t.play * 10) : 0; };
+// Engagement: average furthest second watched ÷ video length (falls back to tenths of the video for older data)
+function engagement(t, v, dur) {
+  let n = 0, total = 0;
+  for (const [k, c] of Object.entries(v)) { const x = Math.max(0, c); n += x; total += x * Number(k.split("|")[2]); }
+  if (n && dur) return Math.min(1, total / n / dur);
+  let w = 0; for (let i = 0; i < 10; i++) w += t["w" + i]; return t.play ? w / (t.play * 10) : 0;
+}
 
 async function report(date) {
   const prev = new Date(new Date(date + "T12:00:00Z").getTime() - 864e5).toISOString().slice(0, 10);
-  const [a, b] = await redis([["HGETALL", "d:" + date], ["HGETALL", "d:" + prev]]);
+  const [a, b, va, vb, durRaw] = await redis([["HGETALL", "d:" + date], ["HGETALL", "d:" + prev], ["HGETALL", "v:" + date], ["HGETALL", "v:" + prev], ["GET", "vsl:dur"]]);
+  const dur = Number(durRaw) || 0, eT = engagement(totals(parse(a)).t, parse(va), dur), eY = engagement(totals(parse(b)).t, parse(vb), dur);
   const { t, bySrc } = totals(parse(a)), y = totals(parse(b)).t;
   const change = (now, before, isRate) => {
     if (before === null || before === undefined) return "";
@@ -37,7 +44,7 @@ async function report(date) {
     line("Calls booked", t.book, t.book, y.book),
     line("Applications submitted", t.sub, t.sub, y.sub),
     line("VSL play rate", pct(t.play, t.view), r(t.play, t.view), r(y.play, y.view), true),
-    line("VSL engagement", (engagement(t) * 100).toFixed(1) + "%", engagement(t), engagement(y), true),
+    line("VSL engagement", (eT * 100).toFixed(1) + "%", eT, eY, true),
     line("Button click rate", pct(t.click, t.view), r(t.click, t.view), r(y.click, y.view), true),
     line("Form completion", pct(t.sub, started) + ` (${t.sub} of ${started} who started)`, r(t.sub, started), r(y.sub, started ? y["a_" + QUESTIONS[0][0]] : 0) && r(y.sub, y["a_" + QUESTIONS[0][0]]), true),
   ];

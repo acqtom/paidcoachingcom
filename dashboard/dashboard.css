@@ -93,3 +93,13 @@ td button { padding: 4px 10px; font-size: 13px; }
   .drop__row .bar { grid-column: 1 / -1; grid-row: 2; }
   .card { padding: 18px 16px; }
 }
+.line { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+.line__grid { stroke: #f0e1d0; stroke-width: 1; }
+.line__axis { stroke: #d8c2ab; stroke-width: 1; }
+.line__lab { fill: #73604f; font: 500 12px "Inter", sans-serif; }
+.line__area { fill: rgba(180, 83, 31, 0.1); }
+.line__stroke { fill: none; stroke: #b4531f; stroke-width: 2.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.line__guide { stroke: #73604f; stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.line__dot { fill: #b4531f; stroke: #fffdfa; stroke-width: 2; }
+.line rect:focus { outline: none; }
+.line:has(rect:focus-visible) { outline: 3px solid rgba(180, 83, 31, 0.35); border-radius: 6px; }
