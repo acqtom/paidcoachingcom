@@ -115,3 +115,7 @@ td button { padding: 4px 10px; font-size: 13px; }
   .line { min-width: 640px; }
 }
 .tile--key .tile__goal { background: #ffffff; border-color: #ffffff; }
+.group { margin-bottom: 34px; }
+.group__h { margin: 0 0 14px; font-size: 22px; }
+.group + .group__h, #stats > .group__h { margin-top: 6px; }
+.group .wrap td:first-child { min-width: 150px; }

@@ -10,7 +10,7 @@ const el = (tag, cls, ...kids) => {
 };
 const pct = (a, b) => (b ? (Math.round(Math.min(1, a / b) * 1000) / 10).toFixed(1).replace(/\.0$/, "") + "%" : "–");
 const pct2 = (a, b) => (b ? (Math.min(1, a / b) * 100).toFixed(2) + "%" : "–"); // small rates need two decimals
-let data = null, leads = [], leadTotal = 0;
+let data = null, leads = [], leadTotal = 0, meta = { state: "loading" };
 
 const fail = (msg) => { $("app-err").textContent = msg; $("app-err").hidden = !msg; };
 function show(inside) {
@@ -124,6 +124,41 @@ function retentionChart(w) {
   hit.addEventListener("pointerleave", hide); hit.addEventListener("blur", hide);
   return svg;
 }
+// ---- Ad metrics (Meta)
+function adSection(tile) {
+  const box = el("section", "group", el("h2", "group__h", "Ad metrics"));
+  const m = meta;
+  if (m.state === "loading") { box.append(el("div", "card empty", "Loading Meta ads…")); return box; }
+  if (!m.connected) { box.append(el("div", "card empty", "Meta isn’t connected yet. Add META_ACCESS_TOKEN and META_AD_ACCOUNT_ID in Vercel, then tell Claude to update the site.")); return box; }
+  if (m.error) { box.append(el("div", "card empty", m.error)); return box; }
+  const money = (v, dp = 2) => (v == null || !isFinite(v) ? "–" : new Intl.NumberFormat("en-US", { style: "currency", currency: m.currency, minimumFractionDigits: dp, maximumFractionDigits: dp }).format(v));
+  const per = (spend, n) => (n ? money(spend / n) : "–");
+  const a = m.total, s = m.site;
+  box.append(el("div", "tiles",
+    tile("Ad spend", money(a.spend, 0), a.impressions.toLocaleString() + " impressions"),
+    tile("Cost per click", per(a.spend, a.clicks), a.clicks.toLocaleString() + " link clicks"),
+    tile("Ad CTR", pct(a.clicks, a.impressions), "Link clicks ÷ impressions"),
+    tile("Ad hook rate", pct(a.views3s, a.impressions), "3-second views ÷ impressions"),
+    tile("Ad retention rate", pct(a.thruplays, a.views3s), "ThruPlays ÷ 3-second views"),
+    tile("Cost per lead", per(a.spend, s.sub), s.sub + " form submits"),
+    tile("Cost per call", per(a.spend, s.book), s.book + " calls booked"),
+    tile("Cost per qualified call", per(a.spend, s.qualified), s.qualified + " booked by Warm or Hot leads")));
+  if (m.ads.length) {
+    box.append(el("div", "card", el("h2", "", "By ad"), el("p", "", "Leads and calls are matched to an ad by its name in utm_content."),
+      table(["Ad", "Spend", "CTR", "CPC", "Hook", "Retention", "Leads", "Cost / lead", "Calls", "Cost / call", "Qualified", "Cost / qualified"],
+        m.ads.map((x) => [x.name, money(x.spend, 0), pct(x.clicks, x.impressions), per(x.spend, x.clicks), pct(x.views3s, x.impressions), pct(x.thruplays, x.views3s), x.site.sub, per(x.spend, x.site.sub), x.site.book, per(x.spend, x.site.book), x.site.qualified, per(x.spend, x.site.qualified)]))));
+  }
+  box.append(el("p", "note", "Ad metrics cover every device and source for " + m.since + " to " + m.until + " (Meta uses the ad account’s time zone" + (m.accountTz ? ", " + m.accountTz : "") + "). The device and ad filters above apply to funnel metrics only. Meta numbers refresh every 10 minutes."));
+  return box;
+}
+async function loadMeta() {
+  meta = { state: "loading" };
+  try {
+    const r = await api("/api/meta?days=" + $("f-days").value);
+    meta = r.ok ? await r.json() : { connected: true, error: "Couldn’t load Meta ads." };
+  } catch (e) { if (e.message === "logged out") return; meta = { connected: true, error: "Couldn’t reach the server." }; }
+  if (data) renderStats();
+}
 function renderStats() {
   const dev = $("f-dev").value, src = $("f-src").value;
   const t = sum((d, s) => (!dev || d === dev) && (!src || s === src));
@@ -134,6 +169,8 @@ function renderStats() {
     if (goal) n.append(el("span", "tile__goal", "🎯 " + goal)), n.querySelector(".tile__goal").setAttribute("aria-label", "Target: " + goal);
     return n;
   };
+  out.append(adSection(tile));
+  out.append(el("h2", "group__h", "Funnel metrics"));
   const started = t["a_" + QUESTIONS[0][0]];
   const key = tile("Page visit → booked call", pct2(t.book, t.view), t.book + " of " + t.view + " visits booked a call", "3–5%");
   key.classList.add("tile--key");
@@ -185,6 +222,7 @@ function renderStats() {
 }
 async function loadStats() {
   fail("");
+  loadMeta();
   try {
     const r = await api("/api/stats?days=" + $("f-days").value);
     if (!r.ok) throw new Error((await r.json()).error);
