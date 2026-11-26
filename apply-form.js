@@ -7,6 +7,7 @@ const APPLY_QUESTIONS = [
   { id: "niche", type: "long", optional: true, label: "What Niche Are You In, And What Do You Do?" },
   { id: "contact", type: "contact", label: "How Can We Reach You?" },
   { id: "monthly_revenue", type: "choice", label: "What Is Your Estimated Monthly Revenue?", note: "This is 100% confidential. We only ask to help us prepare a strategy for your call.", options: ["$0 - $10k/mo", "$10k - $20k/mo", "$20k - $50k/mo", "$50k - $150k/mo", "$150k - $500k/mo", "$500k - $1M/mo"] },
+  { id: "capital", type: "choice", label: "How Much Capital Do You Have To Build Your Mentorship And Sign Your First 5 Clients?", options: ["0 - $1k", "$1k - $3k", "$3k - $6k", "$6k - $10k", "$10k+"] },
 ];
 const APPLY_CALENDLY_URL = "https://calendly.com/staff-paidcoaching/30min?hide_event_type_details=1&hide_gdpr_banner=1"; // calendar shown after Submit
 const APPLY_WEBHOOK_URL = "/api/apply"; // saves answers for /dashboard → Form answers
@@ -233,7 +234,7 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
     }
     busy = true; btn.disabled = true;
     const c = answers.contact, params = new URLSearchParams(location.search);
-    const payload = { id: leadId, has_high_ticket_offer: answers.has_high_ticket_offer, situation: answers.situation, niche: answers.niche || "", first_name: c.first_name.trim(), phone: fullPhone(), email: c.email.trim(), sms_consent: c.sms, monthly_revenue: answers.monthly_revenue, page: location.href, submitted_at: new Date().toISOString() };
+    const payload = { id: leadId, has_high_ticket_offer: answers.has_high_ticket_offer, situation: answers.situation, niche: answers.niche || "", first_name: c.first_name.trim(), phone: fullPhone(), email: c.email.trim(), sms_consent: c.sms, monthly_revenue: answers.monthly_revenue, capital: answers.capital, page: location.href, submitted_at: new Date().toISOString() };
     ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "ad_id", "fbclid"].forEach((k) => { if (params.get(k)) payload[k] = params.get(k); });
     if (APPLY_WEBHOOK_URL && !sent) {
       const save = async () => {
@@ -267,7 +268,7 @@ const APPLY_PHONE_DIGITS = { US: [10, 10], CA: [10, 10], GB: [9, 10], AU: [9, 9]
   addEventListener("pagehide", () => {
     if (reported || booked) return;
     const q = APPLY_QUESTIONS[step], given = {};
-    ["has_high_ticket_offer", "situation", "niche", "monthly_revenue"].forEach((k) => { if (typeof answers[k] === "string" && answers[k].trim()) given[k] = answers[k]; });
+    ["has_high_ticket_offer", "situation", "niche", "monthly_revenue", "capital"].forEach((k) => { if (typeof answers[k] === "string" && answers[k].trim()) given[k] = answers[k]; });
     let data;
     if (sent) data = { step: "calendar", id: leadId };
     else if (step > 0 && !busy) data = { step: q.id, answers: given };

@@ -1,5 +1,5 @@
 // Same ids and order as APPLY_QUESTIONS in /apply-form.js
-const QUESTIONS = [["has_high_ticket_offer", "High-ticket offer right now?"], ["situation", "Current situation"], ["niche", "Niche and what they do (optional)"], ["contact", "Name, phone and email"], ["monthly_revenue", "Monthly revenue + Submit"]];
+const QUESTIONS = [["has_high_ticket_offer", "High-ticket offer right now?"], ["situation", "Current situation"], ["niche", "Niche and what they do (optional)"], ["contact", "Name, phone and email"], ["monthly_revenue", "Monthly revenue"], ["capital", "Capital + Submit"]];
 const BUTTONS = [["click_hero", "Under the video"], ["click_proof", "Under the proof cards"], ["click_framework", "Under the 3-part framework"]];
 const $ = (id) => document.getElementById(id);
 const el = (tag, cls, ...kids) => {
@@ -142,7 +142,7 @@ function adSection(tile) {
     tile("Ad retention rate", pct(a.thruplays, a.views3s), "ThruPlays ÷ 3-second views"),
     tile("Cost per lead", per(a.spend, s.sub), s.sub + " form submits"),
     tile("Cost per call", per(a.spend, s.book), s.book + " calls booked"),
-    tile("Cost per qualified call", per(a.spend, s.qualified), s.qualified + " booked by Warm or Hot leads")));
+    tile("Cost per qualified call", per(a.spend, s.qualified), s.qualified + " booked with $3k+ capital")));
   if (m.ads.length) {
     box.append(el("div", "card", el("h2", "", "By ad"), el("p", "", "Leads and calls are matched to an ad by its name in utm_content."),
       table(["Ad", "Spend", "CTR", "CPC", "Hook", "Retention", "Leads", "Cost / lead", "Calls", "Cost / call", "Qualified", "Cost / qualified"],
@@ -235,7 +235,7 @@ async function loadStats() {
 }
 
 // ---- Form answers
-const COLS = [["at", "Submitted"], ["first_name", "Name"], ["email", "Email"], ["phone", "Phone"], ["booked_at", "Booked"], ["monthly_revenue", "Revenue"], ["has_high_ticket_offer", "High-ticket offer"], ["situation", "Situation"], ["niche", "Niche"], ["sms_consent", "SMS consent"], ["utm_source", "Source"], ["utm_campaign", "Campaign"], ["utm_content", "Ad"]];
+const COLS = [["at", "Submitted"], ["first_name", "Name"], ["email", "Email"], ["phone", "Phone"], ["booked_at", "Booked"], ["monthly_revenue", "Revenue"], ["capital", "Capital"], ["has_high_ticket_offer", "High-ticket offer"], ["situation", "Situation"], ["niche", "Niche"], ["sms_consent", "SMS consent"], ["utm_source", "Source"], ["utm_campaign", "Campaign"], ["utm_content", "Ad"]];
 const when = (s) => (s ? new Date(s).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) : "");
 function found() {
   const q = $("search").value.trim().toLowerCase();
@@ -261,7 +261,7 @@ function renderLeads() {
   rows.forEach((l) => {
     const tr = el("tr");
     COLS.forEach(([k]) => {
-      const cls = ["at", "phone", "first_name", "monthly_revenue"].includes(k) ? "nw" : ["niche", "situation"].includes(k) ? "long" : "";
+      const cls = ["at", "phone", "first_name", "monthly_revenue", "capital"].includes(k) ? "nw" : ["niche", "situation"].includes(k) ? "long" : "";
       let v = l[k] || "";
       if (k === "at") v = when(v);
       else if (k === "booked_at") v = el("span", v ? "tag tag--yes" : "tag", v ? "✓ Booked" : "Not booked");

@@ -2,7 +2,7 @@
 const { redis, ipKey, body, sameOrigin, send } = require("./_lib");
 const slack = require("./_slack");
 const UUID = /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/;
-const FIELDS = { first_name: 100, email: 200, phone: 30, has_high_ticket_offer: 200, situation: 200, niche: 2000, monthly_revenue: 100, utm_source: 200, utm_medium: 200, utm_campaign: 200, utm_content: 200, utm_term: 200, ad_id: 100, fbclid: 500 };
+const FIELDS = { first_name: 100, email: 200, phone: 30, has_high_ticket_offer: 200, situation: 200, niche: 2000, monthly_revenue: 100, capital: 100, utm_source: 200, utm_medium: 200, utm_campaign: 200, utm_content: 200, utm_term: 200, ad_id: 100, fbclid: 500 };
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") return send(res, 405);

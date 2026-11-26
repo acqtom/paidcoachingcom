@@ -1,9 +1,8 @@
 // Ad metrics for the dashboard: Meta Ads numbers + this site's submits/bookings for the same days.
 // Needs META_ACCESS_TOKEN (read-only, ads_read) and META_AD_ACCOUNT_ID ("act_123…") in Vercel.
 const { redis, day, send, authed, TZ } = require("./_lib");
-const { score } = require("./_slack");
+const { qualified } = require("./_slack");
 const GRAPH = "https://graph.facebook.com/v21.0/";
-const QUALIFIED = 3; // a "qualified call" = booked by a lead scoring at least this (Warm or Hot, out of 7)
 
 const num = (v) => Number(v) || 0;
 const act = (list, type) => num((list || []).find((a) => a.action_type === type)?.value);
@@ -54,7 +53,7 @@ module.exports = async (req, res) => {
         if (m === "sub" || m === "book") { site[m] += Number(v); addAd(src, m, Number(v)); }
       }
     });
-    // qualified calls: bookings in this period from leads scoring Warm or Hot
+    // qualified calls: bookings in this period from leads with $3k+ capital
     const booked = {};
     if (Array.isArray(bookedAll)) for (let j = 0; j < bookedAll.length; j += 2) booked[bookedAll[j]] = bookedAll[j + 1]; else Object.assign(booked, bookedAll || {});
     const ids = Object.entries(booked).filter(([, at]) => { const d = day(new Date(at)); return d >= since && d <= until; }).map(([id]) => id);
@@ -63,7 +62,7 @@ module.exports = async (req, res) => {
       leads.forEach((raw) => {
         if (!raw) return;
         const l = typeof raw === "string" ? JSON.parse(raw) : raw;
-        if (score(l).score >= QUALIFIED) { site.qualified++; addAd(l.utm_content || l.utm_campaign || l.utm_source, "qualified", 1); }
+        if (qualified(l)) { site.qualified++; addAd(l.utm_content || l.utm_campaign || l.utm_source, "qualified", 1); }
       });
     }
 

@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
       const l = typeof raw === "string" ? JSON.parse(raw) : raw;
       await post("dropoff", `Dropped off at the calendar: ${l.first_name}`, [
         section(`:door: *Dropped off at: the booking calendar*\n${esc(l.first_name)} submitted the form but didn’t book a call.`),
-        fields([["Email", l.email], ["Phone", l.phone], ["Monthly revenue", l.monthly_revenue]]),
+        fields([["Email", l.email], ["Phone", l.phone], ["Monthly revenue", l.monthly_revenue], ["Capital", l.capital]]),
         context(where),
       ]);
       return send(res, 204);
